@@ -3,7 +3,10 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
+const mongoose = require('mongoose');
 const port = process.env.PORT || 3000;
+const Service = require('./models/Service');
+const Review = require('./models/Review');
 const app = express();
 
 app.use(cors());
@@ -13,87 +16,134 @@ app.get('/', (req, res) => {
   res.send('Server running...');
 });
 
-const client = new MongoClient(process.env.DB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  serverApi: ServerApiVersion.v1,
+app.get('/services', async (req, res) => {
+  try {
+    const { limit } = req.query;
+    const services = await Service.find({}).limit(parseInt(limit) || 0);
+
+    if (!services) res.status(404).json({ message: 'No services found.' });
+
+    res.status(200).json(services);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 });
 
-const run = async () => {
-  const servicesCollection = client.db('remedics').collection('services');
-  const blogCollection = client.db('remedics').collection('blog');
-  const reviewsCollection = client.db('remedics').collection('reviews');
+app.post('/services', async (req, res) => {
+  const { body } = req;
+
+  if (!body) res.status(400).json({ message: 'Data in missing.' });
 
   try {
-    app.get('/services', async (req, res) => {
-      const query = {};
-      const limit = parseInt(req.query.limit) || 0;
-      const services = await servicesCollection
-        .find(query)
-        .limit(limit)
-        .toArray();
-      res.json(services);
+    const response = await Service.create(body);
+    res.status(201).json(response);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.get('/services/:serviceId', async (req, res) => {
+  const { serviceId } = req.params;
+
+  if (!serviceId) res.status(400).json({ message: 'No id provided.' });
+
+  try {
+    const service = await Service.findOne({
+      _id: ObjectId(serviceId),
     });
 
-    app.post('/services', async (req, res) => {
-      const response = await servicesCollection.insertOne(req.body);
-      res.json(response);
+    if (!service) res.status(404).json({ message: 'Service not found.' });
+
+    res.status(200).json(service);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.post('/reviews/:serviceId', async (req, res) => {
+  const { body } = req;
+
+  if (!body) res.status(400).json({ message: 'Body not provided.' });
+
+  try {
+    const response = await Review.create(body);
+    res.status(201).json(response);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.get('/reviews/:serviceId', async (req, res) => {
+  const { serviceId } = req.params;
+
+  try {
+    const reviews = await Review.find({ service: serviceId });
+
+    if (!reviews) res.status(400).json({ message: 'Reviews not found.' });
+
+    res.status(200).json(reviews);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+app.delete('/reviews/:reviewId', async (req, res) => {
+  const { reviewId } = req.params;
+
+  try {
+    const response = await Review.deleteOne({
+      _id: ObjectId(reviewId),
     });
 
-    app.get('/services/:serviceId', async (req, res) => {
-      const query = { _id: ObjectId(req.params.serviceId) };
-      const service = await servicesCollection.findOne(query);
-      res.json(service);
-    });
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
-    app.get('/blog', async (req, res) => {
-      const query = {};
-      const blog = await blogCollection.find(query).toArray();
-      res.json(blog);
-    });
+app.get('/reviews/user/:userEmail', async (req, res) => {
+  const { userEmail } = req.params;
 
-    app.post('/reviews/:serviceId', async (req, res) => {
-      const response = await reviewsCollection.insertOne(req.body);
-      res.json(response);
-    });
+  try {
+    const response = await Review.find({ email: userEmail });
 
-    app.get('/reviews/:serviceId', async (req, res) => {
-      const query = { service: req.params.serviceId };
-      const reviews = await reviewsCollection.find(query).toArray();
-      res.json(reviews);
-    });
+    if (!response) res.status(404).json({ message: 'Reviews not found.' });
 
-    app.delete('/reviews/:reviewId', async (req, res) => {
-      const reviewId = req.params.reviewId;
-      const query = { _id: ObjectId(reviewId) };
-      const response = await reviewsCollection.deleteOne(query);
-      res.json(response);
-    });
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 
-    app.get('/reviews/user/:userEmail', async (req, res) => {
-      const userEmail = req.params.userEmail;
-      const query = { email: userEmail };
-      const response = await reviewsCollection.find(query).toArray();
-      res.json(response);
-    });
-
-    app.patch('/reviews/:reviewId', async (req, res) => {
-      const reviewId = req.params.reviewId;
-      const query = { _id: ObjectId(reviewId) };
-      const updateDoc = {
+app.patch('/reviews/:reviewId', async (req, res) => {
+  const { reviewId } = req.params;
+  try {
+    const response = await Review.updateOne(
+      { _id: ObjectId(reviewId) },
+      {
         $set: {
           review: req.body.newReview,
         },
-      };
-      const response = await reviewsCollection.updateOne(query, updateDoc);
-      res.json(response);
-    });
-  } finally {
+      },
+      {
+        upsert: true,
+      }
+    );
+
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
-};
-
-run().catch((error) => console.error(error));
-
-app.listen(port, () => {
-  console.log(`server is running on port ${port}`);
 });
+
+mongoose
+  .connect(process.env.DB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`server is running on port ${port}`);
+    });
+  })
+  .catch((error) => console.log(error));
