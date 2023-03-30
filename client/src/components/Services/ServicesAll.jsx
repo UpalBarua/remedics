@@ -2,30 +2,44 @@ import { useState, useEffect } from 'react';
 import ServiceCard from './ServiceCard';
 import { useSpinner } from '../../contexts/SpinnerContext';
 import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 import styles from './Services.module.css';
 
 const ServicesAll = () => {
   const { setIsSpinnerVisible } = useSpinner();
-  const [servicesData, setServicesData] = useState([]);
 
-  useEffect(() => {
+  const {
+    data: allServices = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['allServices'],
+    queryFn: async () => {
+      const res = await axios.get('http://localhost:3000/services');
+      return res.data;
+    },
+  });
+
+  if (isLoading) {
     setIsSpinnerVisible(true);
+  } else {
+    setIsSpinnerVisible(false);
+  }
 
-    const fetchAllServices = async () => {
-      const response = await axios.get('http://localhost:3000/services');
-      setServicesData(response.data);
-      setIsSpinnerVisible(false);
-    };
-
-    fetchAllServices();
-  }, []);
+  if (isError) {
+    return (
+      <div>
+        <p>Failed to load data.</p>
+      </div>
+    );
+  }
 
   return (
     <section className={`container ${styles.services}`}>
       <h2 className="secondary-title text-accent-secondary">services</h2>
       <p className="primary-title">Lorem ipsum dolor sit amet consectetur</p>
       <div className={styles.grid}>
-        {servicesData.map((service) => (
+        {allServices?.map((service) => (
           <ServiceCard key={service._id} service={service} />
         ))}
       </div>

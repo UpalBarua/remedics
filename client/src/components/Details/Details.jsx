@@ -8,26 +8,40 @@ import { AiOutlineStar } from 'react-icons/ai';
 import { BiDollar } from 'react-icons/bi';
 import { FiFlag } from 'react-icons/fi';
 import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 
 const Details = () => {
   const { user } = useAuth();
   const { setIsSpinnerVisible } = useSpinner();
   const { serviceId } = useParams();
-  const [serviceData, setServiceData] = useState({});
 
-  useEffect(() => {
-    setIsSpinnerVisible(true);
-
-    const fetchServiceDetails = async () => {
-      const response = await axios.get(
+  const {
+    data: serviceData = {},
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['serviceDetails'],
+    queryFn: async () => {
+      const res = await axios.get(
         `http://localhost:3000/services/${serviceId}`
       );
-      setServiceData(response.data);
-      setIsSpinnerVisible(false);
-    };
+      return res.data;
+    },
+  });
 
-    fetchServiceDetails();
-  }, []);
+  if (isLoading) {
+    setIsSpinnerVisible(true);
+  } else {
+    setIsSpinnerVisible(false);
+  }
+
+  if (isError) {
+    return (
+      <div>
+        <p>Failed to load data.</p>
+      </div>
+    );
+  }
 
   const { name, img, description, ratings, fees, specialized, country } =
     serviceData;
