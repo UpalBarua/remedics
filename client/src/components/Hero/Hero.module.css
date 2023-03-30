@@ -1,0 +1,49 @@
+.grid {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: var(--spacing-400);
+  margin-block: var(--spacing-900);
+}
+
+.title {
+  font-size: var(--fs-800);
+  font-weight: var(--fw-bold);
+  font-family: var(--ff-secondary);
+  background-image: var(--gradient);
+  background-position: 0 0;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.text {
+  font-size: var(--fs-600);
+}
+
+.btnGroup {
+  margin-block: var(--spacing-200);
+  display: flex;
+  gap: var(--spacing-200);
+}
+
+.column:first-child {
+  display: grid;
+  gap: var(--spacing-300);
+}
+
+@media screen and (min-width: 48em) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    text-align: start;
+    align-items: center;
+  }
+
+  .title {
+    font-size: var(--fs-900);
+  }
+
+  .img {
+    width: 25rem;
+  }
+}

@@ -1,0 +1,48 @@
+/* ==================== */
+/* SIGN UP              */
+/* ==================== */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-500);
+  background-color: var(--clr-dark-400);
+  margin-block: var(--spacing-800);
+  border-radius: var(--border-radius);
+}
+
+.column:first-child {
+  padding: var(--spacing-400);
+  display: grid;
+  gap: var(--spacing-400);
+  text-align: center;
+}
+
+.column:first-child a {
+  font-weight: var(--fw-semibold);
+  color: var(--clr-accent-primary-400);
+}
+
+.column:last-child {
+  padding: var(--spacing-400);
+  background-color: var(--clr-dark-300);
+  display: grid;
+  gap: var(--spacing-400);
+}
+
+.img {
+  display: none;
+}
+
+@media screen and (min-width: 48em) {
+  .img {
+    display: block;
+  }
+
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .column:first-child {
+    text-align: start;
+  }
+}

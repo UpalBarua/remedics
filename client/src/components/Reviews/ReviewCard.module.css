@@ -1,0 +1,66 @@
+.card {
+  display: grid;
+  gap: var(--spacing-100);
+  background-color: var(--clr-dark-300);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-500);
+  text-align: start;
+}
+
+.img {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  margin-bottom: var(--spacing-300);
+}
+
+.name {
+  font-size: var(--fs-600);
+  font-weight: var(--fw-bold);
+}
+
+.email {
+  font-size: var(--fs-500);
+  font-weight: var(--fw-semibold);
+  font-style: italic;
+}
+
+.btnGroup {
+  margin-left: auto;
+}
+
+.btn {
+  background-color: transparent;
+  border: 0;
+  font-weight: var(--fw-bold);
+  padding: var(--spacing-300);
+  cursor: pointer;
+}
+
+.btn:first-child {
+  color: var(--clr-success-400);
+}
+
+.btn:last-child {
+  color: var(--clr-warning-400);
+}
+
+.textarea {
+  background-color: var(--clr-dark-300);
+  color: var(--clr-light-400);
+  padding: var(--spacing-100);
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.textarea:hover,
+.textarea:focus {
+  outline: 0;
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-400);
+  margin-bottom: var(--spacing-300);
+}

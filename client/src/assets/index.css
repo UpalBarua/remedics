@@ -1,0 +1,121 @@
+/* ==================== */
+/* CUSTOM PROPERTIES    */
+/* ==================== */
+:root {
+  /* TYPOGRAPHY */
+  --ff-primary: 'Roboto', sans-serif;
+  --ff-secondary: 'Outfit', sans-serif;
+
+  --fs-200: 0.5rem;
+  --fs-300: 0.875rem;
+  --fs-400: 1rem;
+  --fs-500: 1.125rem;
+  --fs-600: 1.25rem;
+  --fs-700: 1.5rem;
+  --fs-800: 1.875rem;
+  --fs-900: 3.5rem;
+
+  --fw-regular: 400;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  --letter-spacing-400: 1px;
+  --letter-spacing-500: 2px;
+  --letter-spacing-600: 3px;
+
+  /* COLORS */
+  --clr-dark-300: #202020;
+  --clr-dark-400: #171717;
+  --clr-dark-500: #000000;
+
+  --clr-light-300: #ffffff;
+  --clr-light-400: #ffffff;
+  --clr-light-500: #ffffff;
+
+  --clr-accent-primary-300: lightblue;
+  --clr-accent-primary-400: #875ae1;
+  --clr-accent-primary-500: lightblue;
+
+  --clr-accent-secondary-300: lightgreen;
+  --clr-accent-secondary-400: #f681c5;
+  --clr-accent-secondary-500: lightgreen;
+
+  --clr-warning-400: rgb(221, 75, 75);
+  --clr-success-400: rgb(107, 226, 71);
+
+  /* SPACING */
+  --spacing-100: 0.25rem;
+  --spacing-200: 0.5rem;
+  --spacing-300: 0.75rem;
+  --spacing-400: 1rem;
+  --spacing-500: 1.25rem;
+  --spacing-600: 1.875rem;
+  --spacing-700: 2.25rem;
+  --spacing-800: 3rem;
+  /* --spacing-900: 4.5rem; */
+  --spacing-900: 6rem;
+
+  /* MISCELLANEOUS */
+  --box-shadow: ;
+  --border-radius: 10px;
+  --gradient: linear-gradient(150deg, #875ae1 29.29%, #f681c5 96.65%);
+}
+
+/* ==================== */
+/* GLOBAL RESETS        */
+/* ==================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  font-family: var(--ff-primary);
+  font-size: var(--fs-400);
+  font-weight: var(--fw-regular);
+  line-height: 1.6;
+  color: var(--clr-light-400);
+  background-color: var(--clr-dark-500);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.1;
+}
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* body::before {
+  content: '';
+  background-color: var(--clr-accent-primary-400);
+  height: 50rem;
+  width: 50rem;
+  position: fixed;
+  border-radius: 50%;
+  left: -50%;
+  z-index: -1;
+  filter: blur(5rem);
+  opacity: 0.25;
+} */

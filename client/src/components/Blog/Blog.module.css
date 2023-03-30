@@ -1,0 +1,13 @@
+.blog {
+  padding: var(--spacing-900);
+}
+
+.title {
+  font-size: var(--fs-800);
+  font-weight: var(--fw-semibold);
+  margin-bottom: var(--spacing-300);
+}
+
+.text {
+  margin-bottom: var(--spacing-600);
+}

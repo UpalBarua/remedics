@@ -1,0 +1,21 @@
+.column:last-child {
+  display: grid;
+  gap: var(--spacing-400);
+}
+
+.textarea {
+  min-width: 100%;
+  min-height: 10rem;
+  background-color: var(--clr-dark-300);
+  color: var(--clr-light-400);
+  border-radius: var(--border-radius);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: var(--spacing-300);
+  margin-block: var(--spacing-400);
+}
+
+.textarea:focus,
+.textarea:hover {
+  border-color: var(--clr-accent-primary-400);
+  outline: 0;
+}

@@ -1,0 +1,33 @@
+/* ******************** */
+/* SPINNER              */
+/* ******************** */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  z-index: 10;
+}
+
+.overlay[data-visible='true'] {
+  display: flex;
+}
+
+.spinner {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  border: 8px solid rgb(49, 38, 38);
+  border-top-color: var(--clr-accent-primary-400);
+  border-right-color: var(--clr-accent-primary-400);
+  animation: spin 800ms ease infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}

@@ -1,0 +1,56 @@
+[
+  {
+    "img": "https://familydoctor.org/wp-content/uploads/2018/02/41808433_l-705x470.jpg",
+    "name": "Dr. Clements Patrick",
+    "description": "Allergies happen when your immune system overreacts to an allergen (such as food, dust, or pollen). They can be brought on by something you've inhaled, ingested, or touched. mptoms of allergies include coughing, sneezing, an itchy throat, or watery eyes. Severe allergic eactions lead to skin inflammation, creating hives and eczema. They may cause low blood pressure, asthma ttacks , and even death. Common allergens include foods like peanuts and shellfish, pet dander (tiny particles of skin shed by animals), mold spores, and dust mites. Along with seeing patients, immunologists conduct research to understand why the immune system doesn’t always work properly. Clinical immunologists evaluate and diagnose children and adults, helping them manage and treat disorders. Doctors who practice general medicine or other medical specialties can become immunologists as well. For autoimmune disorders, when your immune system isn’t functioning correctly to protect your body, multiple organ systems may be affected. You might see an immunologist, but they are likely to work closely with or refer you to other specialists, like a rheumatologist.",
+    "ratings": 4.5,
+    "specialized": "Immunologists",
+    "fees": 199,
+    "country": "USA"
+  },
+  {
+    "img": "https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name": "Dr. Peck Tran",
+    "description": "Anesthesiologists help ensure the safety of patients undergoing surgery. The anesthesiologist provides care for the patient to prevent the pain and distress they would otherwise experience. This may involve general anesthesia (“putting the patient to sleep”), sedation (intravenous medications to make the patient calm and/or unaware) or regional anesthesia (injections of local anesthetic near nerves to “numb up” the part of the body being operated on (i.e. nerve blocks or spinal/epidural injections)). Many types of orthopedic operations are well suited to regional anesthesia, most often with sedation as well. Each HSS anesthesiologist specializes in regional anesthesia. Before the procedure, your anesthesiologist will talk with you and establish an anesthetic plan in coordination with your surgeon. At this time, your anesthesiologist will also ensure you are ready for the operation. The first priority is getting the patient safely through the procedure.",
+    "ratings": 4.6,
+    "specialized": "Anesthesiologists",
+    "fees": 259,
+    "country": "UK"
+  },
+  {
+    "img": "https://images.pexels.com/photos/4033148/pexels-photo-4033148.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name": "Dr. Mamie Head",
+    "description": "A cardiologist is a doctor who’s an expert in heart and blood vessel diseases. They can treat heart diseases and help keep you from getting heart diseases. After completing four years of medical school, cardiologists spend three years learning general internal medicine as a resident, plus at least three more years of specialized training after that. After 10 years of training, a cardiologist can take an American Board of Internal Medicine exam. Even after achieving board certification, cardiologists keep learning for as long as they practice. They must keep up with the latest advances in how to treat patients to provide the best care. A cardiologist is a healthcare provider who can treat chest pain, high blood pressure and heart failure, as well as problems with your heart valves, blood vessels and other heart and vascular issues. They can order tests like electrocardiograms, echocardiograms and CTs (computed tomography) to find out what’s wrong. With their diagnosis.",
+    "ratings": 4.8,
+    "specialized": "Cardiologists",
+    "fees": 249,
+    "country": "USA"
+  },
+  {
+    "img": "https://images.pexels.com/photos/5327921/pexels-photo-5327921.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name": "Dr. Tay Lester",
+    "description": "Everyone’s skin is unique. No one understands your skin better than a board-certified dermatologist. When you partner with this expert, you get the best care. A board-certified dermatologist knows how to accurately diagnose and properly treat a wide variety of skin conditions from deadly skin cancers to warts. They have expertise in caring for conditions ranging from long-term diseases caused by problems with your immune system and allergic reactions to hair loss and infections caused by bacteria or viruses. Dermatologists understand the interaction between the skin and the rest of the body. What seems like a simple rash might be a sign of an underlying disease. For example, that itchy rash could be hives, scabies, or a skin reaction called contact dermatitis. Each of these diseases requires different treatment. When you’re under a dermatologist’s care for a skin condition, your dermatologist can monitor you for other medical conditions.",
+    "ratings": 4.4,
+    "specialized": "Dermatologists",
+    "fees": 289,
+    "country": "BD"
+  },
+  {
+    "img": "https://images.pexels.com/photos/4225880/pexels-photo-4225880.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name": "Dr. Althea Petersen",
+    "description": "Endocrinologists specialize in treating disorders of the endocrine system, the network of hormone-producing glands in your body. Endocrinologists are qualified to diagnose and treat conditions like diabetes, thyroid diseases, infertility, growth issues, metabolic disorders, osteoporosis, some cancers, and disorders in the hormone-producing adrenal glands and pituitary glands. Disorders and diseases that originate elsewhere can also end up causing symptoms in your endocrine system. When problems in other systems or body parts impact your endocrine system, an endocrinologist will work in tandem with your primary care doctor or other specialists to come up with a treatment plan. Endocrinology is a subspecialty of internal medicine. Endocrinologists are medical doctors who have specifically trained in the tools and techniques needed to diagnose and treat endocrine disorders. After completing four years of college, endocrinologists go through medical school.",
+    "ratings": 4.9,
+    "specialized": "Endocrinologists",
+    "fees": 299,
+    "country": "UAE"
+  },
+  {
+    "img": "https://images.pexels.com/photos/5452293/pexels-photo-5452293.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "name": "Dr. Sheldon Cooper",
+    "description": "A neurologist is a medical doctor with specialized training in diagnosing, treating, and managing disorders of the brain and nervous system including, but not limited to, Alzheimer’s disease, amyotrophic lateral sclerosis (ALS), concussion, epilepsy, migraine, multiple sclerosis, Parkinson’s disease, and stroke. A child or pediatric, neurologist specializes in the diagnosis and treatment of neurologic disorders in children from the neonatal period through adolescence. Some of the conditions overlap with those seen by adult neurologists, and others are unique to this younger population. Child neurologists treat many of the same common conditions found in adults such as migraine, epilepsy, stroke, and Tourette’s and are also trained in conditions related to neurogenetics and developmental problems. Neurologists are highly trained clinicians capable of diagnosing complex conditions through detailed history and physical examination",
+    "ratings": 4.8,
+    "specialized": "Neurologists",
+    "fees": 289,
+    "country": "FR"
+  }
+]

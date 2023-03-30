@@ -1,0 +1,11 @@
+.footer {
+  display: flex;
+  text-align: center;
+  padding-block: var(--spacing-800);
+  background-color: var(--clr-dark-400);
+}
+
+.gradient {
+  height: 1rem;
+  background: var(--gradient);
+}
