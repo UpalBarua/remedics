@@ -17,6 +17,10 @@ app.use(express.json());
 app.use('/services', servicesRoutes);
 app.use('/reviews', reviewsRoutes);
 
+app.get('/', (req, res) => {
+  res.send('server is running...');
+});
+
 mongoose
   .connect(uri, {
     useNewUrlParser: true,

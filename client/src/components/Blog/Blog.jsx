@@ -12,7 +12,7 @@ const Blog = () => {
     setIsSpinnerVisible(true);
 
     (async () => {
-      const response = await fetch('https://remedics.vercel.app/blog');
+      const response = await fetch('http://localhost:3000/blog');
       const data = await response.json();
       setBlogsData(data);
       setIsSpinnerVisible(false);
@@ -21,7 +21,7 @@ const Blog = () => {
 
   return (
     <section className={`container ${styles.blog}`}>
-      {blogsData.map(data => (
+      {blogsData.map((data) => (
         <div key={data._id}>
           <h3 className={styles.title}>{data.question}</h3>
           <p className={styles.text}>{data.answer}</p>

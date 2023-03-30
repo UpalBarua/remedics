@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       { path: '/details/:serviceId', element: <Details /> },
       { path: '/signup', element: <SignUp /> },
       { path: '/login', element: <LogIn /> },
-      { path: '/blog', element: <Blog /> },
+      // { path: '/blog', element: <Blog /> },
       {
         path: '/add',
         element: (

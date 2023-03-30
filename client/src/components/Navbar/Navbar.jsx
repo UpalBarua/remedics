@@ -11,7 +11,7 @@ const Navbar = () => {
   const { user, logOut } = useAuth();
 
   const handleNavToggle = () => {
-    setIsNavVisible(prevIsNavVisible => !prevIsNavVisible);
+    setIsNavVisible((prevIsNavVisible) => !prevIsNavVisible);
 
     document.body.style.overflow === ''
       ? (document.body.style.overflow = 'hidden')
@@ -31,9 +31,9 @@ const Navbar = () => {
             <li className={styles.menuItem}>
               <NavLink to="/">Home</NavLink>
             </li>
-            <li className={styles.menuItem}>
+            {/* <li className={styles.menuItem}>
               <NavLink to="/blog">Blog</NavLink>
-            </li>
+            </li> */}
             {user ? (
               <>
                 <li className={styles.menuItem}>

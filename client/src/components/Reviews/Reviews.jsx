@@ -16,14 +16,14 @@ const Reviews = () => {
   useEffect(() => {
     (async () => {
       const response = await fetch(
-        `https://remedics.vercel.app/reviews/${serviceId}`
+        `http://localhost:3000/reviews/${serviceId}`
       );
       const data = await response.json();
       setReviewsData(data);
     })();
   }, []);
 
-  const handleReviewSubmit = event => {
+  const handleReviewSubmit = (event) => {
     event.preventDefault();
     setIsSpinnerVisible(true);
 
@@ -34,17 +34,17 @@ const Reviews = () => {
       review: reviewRef.current.value,
     };
 
-    fetch(`https://remedics.vercel.app/reviews/${serviceId}`, {
+    fetch(`http://localhost:3000/reviews/${serviceId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(review),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.acknowledged) {
-          setReviewsData(prevReviewsData => [review, ...prevReviewsData]);
+          setReviewsData((prevReviewsData) => [review, ...prevReviewsData]);
           toast('Review Added', {
             icon: '✅',
             style: {
@@ -60,16 +60,16 @@ const Reviews = () => {
       });
   };
 
-  const deleteReview = id => {
-    setReviewsData(prevReviewsData =>
-      prevReviewsData.filter(data => data._id !== id)
+  const deleteReview = (id) => {
+    setReviewsData((prevReviewsData) =>
+      prevReviewsData.filter((data) => data._id !== id)
     );
   };
 
   const editReview = (id, review) => {
-    setReviewsData(prevReviewsData => {
-      const remaining = prevReviewsData.filter(data => data._id !== id);
-      const modified = prevReviewsData.find(data => data._id === id);
+    setReviewsData((prevReviewsData) => {
+      const remaining = prevReviewsData.filter((data) => data._id !== id);
+      const modified = prevReviewsData.find((data) => data._id === id);
       modified.review = review;
       return [modified, ...remaining];
     });
@@ -87,7 +87,7 @@ const Reviews = () => {
         </form>
       </div>
       <div className={styles.column}>
-        {reviewsData.map(data => (
+        {reviewsData.map((data) => (
           <ReviewCard
             key={data._id}
             data={data}

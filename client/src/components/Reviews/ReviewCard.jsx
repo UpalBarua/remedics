@@ -8,11 +8,11 @@ const ReviewCard = ({ data, deleteReview, editReview }) => {
   const reviewRef = useRef();
 
   const handleDelete = () => {
-    fetch(`https://remedics.vercel.app/reviews/${_id}`, {
+    fetch(`http://localhost:3000/reviews/${_id}`, {
       method: 'DELETE',
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.deletedCount > 0) {
           deleteReview(_id);
           toast('Review Deleted', {
@@ -36,15 +36,15 @@ const ReviewCard = ({ data, deleteReview, editReview }) => {
   const handleSave = () => {
     const newReview = reviewRef.current.value;
 
-    fetch(`https://remedics.vercel.app/reviews/${_id}`, {
+    fetch(`http://localhost:3000/reviews/${_id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ newReview }),
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         editReview(_id, newReview);
         if (data.modifiedCount > 0) {
           toast('Review Edited', {

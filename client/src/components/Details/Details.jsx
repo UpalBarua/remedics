@@ -7,6 +7,7 @@ import styles from './Details.module.css';
 import { AiOutlineStar } from 'react-icons/ai';
 import { BiDollar } from 'react-icons/bi';
 import { FiFlag } from 'react-icons/fi';
+import axios from 'axios';
 
 const Details = () => {
   const { user } = useAuth();
@@ -17,14 +18,15 @@ const Details = () => {
   useEffect(() => {
     setIsSpinnerVisible(true);
 
-    (async () => {
-      const response = await fetch(
-        `https://remedics.vercel.app/services/${serviceId}`
+    const fetchServiceDetails = async () => {
+      const response = await axios.get(
+        `http://localhost:3000/services/${serviceId}`
       );
-      const data = await response.json();
-      setServiceData(data);
+      setServiceData(response.data);
       setIsSpinnerVisible(false);
-    })();
+    };
+
+    fetchServiceDetails();
   }, []);
 
   const { name, img, description, ratings, fees, specialized, country } =
@@ -47,7 +49,6 @@ const Details = () => {
           </p>
           <p>
             <FiFlag className="text-accent-primary" />
-
             {country}
           </p>
         </div>

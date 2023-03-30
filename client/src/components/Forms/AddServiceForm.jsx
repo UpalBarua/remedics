@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import styles from './Form.module.css';
 import { toast } from 'react-hot-toast';
 import { useSpinner } from '../../contexts/SpinnerContext';
+import axios from 'axios';
 
 const AddServiceForm = () => {
   const { setIsSpinnerVisible } = useSpinner();
@@ -14,7 +15,7 @@ const AddServiceForm = () => {
   const countryRef = useRef();
   const imgRef = useRef();
 
-  const handleServiceSubmit = event => {
+  const handleServiceSubmit = (event) => {
     event.preventDefault();
     setIsSpinnerVisible(true);
 
@@ -28,15 +29,10 @@ const AddServiceForm = () => {
       img: imgRef.current.value,
     };
 
-    fetch('https://remedics.vercel.app/services', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(newService),
-    })
-      .then(response => response.json())
-      .then(data => {
+    axios
+      .post('http://localhost:3000/services', newService)
+      .then((response) => response.json())
+      .then((data) => {
         if (data.acknowledged) {
           toast('Doctor Added', {
             icon: '✅',

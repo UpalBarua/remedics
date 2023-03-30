@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import ServiceCard from './ServiceCard';
 import { useSpinner } from '../../contexts/SpinnerContext';
+import axios from 'axios';
 import styles from './Services.module.css';
 
 const ServicesAll = () => {
@@ -10,12 +11,13 @@ const ServicesAll = () => {
   useEffect(() => {
     setIsSpinnerVisible(true);
 
-    (async () => {
-      const response = await fetch('https://remedics.vercel.app/services');
-      const data = await response.json();
-      setServicesData(data);
+    const fetchAllServices = async () => {
+      const response = await axios.get('http://localhost:3000/services');
+      setServicesData(response.data);
       setIsSpinnerVisible(false);
-    })();
+    };
+
+    fetchAllServices();
   }, []);
 
   return (
@@ -23,7 +25,7 @@ const ServicesAll = () => {
       <h2 className="secondary-title text-accent-secondary">services</h2>
       <p className="primary-title">Lorem ipsum dolor sit amet consectetur</p>
       <div className={styles.grid}>
-        {servicesData.map(service => (
+        {servicesData.map((service) => (
           <ServiceCard key={service._id} service={service} />
         ))}
       </div>

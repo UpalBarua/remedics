@@ -13,7 +13,7 @@ const Services = () => {
 
     (async () => {
       const response = await fetch(
-        'https://remedics.vercel.app/services?limit=3'
+        'http://localhost:3000/services?limit=3'
       );
       const data = await response.json();
       setServicesData(data);

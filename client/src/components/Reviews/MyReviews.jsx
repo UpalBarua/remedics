@@ -18,7 +18,7 @@ const MyReviews = () => {
 
     (async () => {
       const response = await fetch(
-        `https://remedics.vercel.app/reviews/user/${user.email}`
+        `http://localhost:3000/reviews/user/${user.email}`
       );
       const data = await response.json();
       setReviewsData(data);
@@ -26,16 +26,16 @@ const MyReviews = () => {
     })();
   }, []);
 
-  const deleteReview = id => {
-    setReviewsData(prevReviewsData =>
-      prevReviewsData.filter(data => data._id !== id)
+  const deleteReview = (id) => {
+    setReviewsData((prevReviewsData) =>
+      prevReviewsData.filter((data) => data._id !== id)
     );
   };
 
   const editReview = (id, review) => {
-    setReviewsData(prevReviewsData => {
-      const remaining = prevReviewsData.filter(data => data._id !== id);
-      const modified = prevReviewsData.find(data => data._id === id);
+    setReviewsData((prevReviewsData) => {
+      const remaining = prevReviewsData.filter((data) => data._id !== id);
+      const modified = prevReviewsData.find((data) => data._id === id);
       modified.review = review;
       return [modified, ...remaining];
     });
@@ -47,7 +47,7 @@ const MyReviews = () => {
       <p className="primary-title">see all of the reviews that you submitted</p>
       <div className={styles.grid}>
         {reviewsData.length > 0 ? (
-          reviewsData.map(data => (
+          reviewsData.map((data) => (
             <ReviewCard
               key={data._id}
               data={data}
