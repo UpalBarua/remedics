@@ -1,6 +1,6 @@
-const express = require('express');
-const { ObjectId } = require('mongodb');
-const Service = require('../models/Service');
+import express from 'express';
+import { ObjectId } from 'mongodb';
+import Service from '../models/Service.js';
 
 const router = express.Router();
 
@@ -48,4 +48,4 @@ router.post('/', async (req, res) => {
   }
 });
 
-module.exports = router;
+export { router as servicesRoutes };

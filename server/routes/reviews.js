@@ -1,6 +1,6 @@
-const express = require('express');
-const Review = require('../models/Review');
-const { ObjectId } = require('mongodb');
+import express from 'express';
+import Review from '../models/Review.js';
+import { ObjectId } from 'mongodb';
 
 const router = express.Router();
 
@@ -80,4 +80,4 @@ router.patch('/:id', async (req, res) => {
   }
 });
 
-module.exports = router;
+export { router as reviewsRoutes };

@@ -1,11 +1,14 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import mongoose from 'mongoose';
+import { servicesRoutes } from './routes/services.js';
+import { reviewsRoutes } from './routes/reviews.js';
 
-const express = require('express');
-const cors = require('cors');
-const mongoose = require('mongoose');
+dotenv.config();
+
 const port = process.env.PORT || 3000;
-const servicesRoutes = require('./routes/services');
-const reviewsRoutes = require('./routes/reviews');
+const uri = process.env.DB_URI || '';
 const app = express();
 
 app.use(cors());
@@ -15,7 +18,7 @@ app.use('/services', servicesRoutes);
 app.use('/reviews', reviewsRoutes);
 
 mongoose
-  .connect(process.env.DB_URI, {
+  .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
