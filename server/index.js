@@ -1,10 +1,11 @@
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const port = process.env.PORT || 3000;
-require('dotenv').config();
-
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
@@ -12,9 +13,7 @@ app.get('/', (req, res) => {
   res.send('Server running...');
 });
 
-const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.4w0vbzl.mongodb.net/?retryWrites=true&w=majority`;
-
-const client = new MongoClient(uri, {
+const client = new MongoClient(process.env.DB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
@@ -93,6 +92,8 @@ const run = async () => {
   }
 };
 
-run().catch(error => console.error(error));
+run().catch((error) => console.error(error));
 
-app.listen(port);
+app.listen(port, () => {
+  console.log(`server is running on port ${port}`);
+});
