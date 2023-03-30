@@ -52,20 +52,20 @@ const AddServiceForm = () => {
 
   return (
     <form className={styles.form} onSubmit={handleServiceSubmit}>
-      <div className={styles.wrapper}>
+      <div className={styles.field}>
         <label className={styles.label}>Name</label>
         <input className={styles.input} type="text" ref={nameRef} />
       </div>
-      <div className={styles.wrapper}>
+      <div className={styles.field}>
         <label className={styles.label}>Picture</label>
         <input className={styles.input} type="text" ref={imgRef} />
       </div>
-      <div className={styles.wrapper}>
+      <div className={styles.field}>
         <label className={styles.label}>specialized</label>
         <input className={styles.input} type="text" ref={specializedRef} />
       </div>
       <div className={styles.stats}>
-        <div className={styles.wrapper}>
+        <div className={styles.field}>
           <label className={styles.label}>Ratings</label>
           <input
             className={styles.input}
@@ -74,16 +74,16 @@ const AddServiceForm = () => {
             max="5"
           />
         </div>
-        <div className={styles.wrapper}>
+        <div className={styles.field}>
           <label className={styles.label}>Fees</label>
           <input className={styles.input} type="number" ref={feesRef} />
         </div>
-        <div className={styles.wrapper}>
+        <div className={styles.field}>
           <label className={styles.label}>Country</label>
           <input className={styles.input} type="text" ref={countryRef} />
         </div>
       </div>
-      <div className={styles.wrapper}>
+      <div className={styles.field}>
         <label className={styles.label}>Description</label>
         <textarea className={styles.textarea} ref={descriptionRef}></textarea>
       </div>

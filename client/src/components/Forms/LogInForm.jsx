@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { redirect, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import useTitle from '../../hooks/useTitle';
 import styles from './Form.module.css';
 import { useSpinner } from '../../contexts/SpinnerContext';
 
@@ -51,18 +50,22 @@ const LogInForm = () => {
 
   return (
     <form className={styles.form} onSubmit={handleLogIn}>
-      <div className={styles.wrapper}>
+      <div className={styles.field}>
         <label className={styles.label}>Email</label>
         <input className={styles.input} type="text" ref={emailRef} />
       </div>
-      <div className={styles.wrapper}>
+      <div className={styles.field}>
         <label className={styles.label}>Password</label>
         <input className={styles.input} type="password" ref={passwordRef} />
       </div>
       <button className="btn btn-primary" type="submit">
         Log In
       </button>
-      {loginError && <p>{loginError}</p>}
+      {loginError && <p className={styles.errorMessage}>{loginError}</p>}
+      {/* <p className={styles.errorMessage}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
+        quos. Lorem, ipsum.
+      </p> */}
     </form>
   );
 };

@@ -33,7 +33,7 @@ const SignUpForm = () => {
     handleInputTouched: handleePasswordTouched,
   } = useFormValidation(validatePassword);
 
-  const handleSignUp = async event => {
+  const handleSignUp = async (event) => {
     event.preventDefault();
     setIsSpinnerVisible(true);
 
@@ -60,7 +60,7 @@ const SignUpForm = () => {
 
   return (
     <form className={styles.form} onSubmit={handleSignUp}>
-      <div className={styles.wrapper}>
+      <div className={styles.field}>
         <label className={styles.label}>Name</label>
         <input
           className={styles.input}
@@ -71,12 +71,12 @@ const SignUpForm = () => {
         {nameError && <p className={styles.message}>{nameError}</p>}
       </div>
 
-      <div className={styles.wrapper}>
+      <div className={styles.field}>
         <label className={styles.label}>Picture</label>
         <input className={styles.input} type="text" ref={imgRef} />
       </div>
 
-      <div className={styles.wrapper}>
+      <div className={styles.field}>
         <label className={styles.label}>Email</label>
         <input
           className={styles.input}
@@ -87,7 +87,7 @@ const SignUpForm = () => {
         {emailError && <p className={styles.message}>{emailError}</p>}
       </div>
 
-      <div className={styles.wrapper}>
+      <div className={styles.field}>
         <label className={styles.label}>Password</label>
         <input
           className={styles.input}

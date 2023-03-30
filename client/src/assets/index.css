@@ -57,7 +57,7 @@
 
   /* MISCELLANEOUS */
   --box-shadow: ;
-  --border-radius: 10px;
+  --border-radius: 8px;
   --gradient: linear-gradient(150deg, #875ae1 29.29%, #f681c5 96.65%);
 }
 
