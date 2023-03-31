@@ -1,4 +1,4 @@
-const validateName = name => {
+const validateName = (name) => {
   const validationRegex = /^[a-z ,.'-]+$/i;
 
   if (name === '') {

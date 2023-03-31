@@ -11,7 +11,7 @@
   font-size: var(--fs-500);
   font-weight: var(--fw-semibold);
   padding: var(--spacing-200) var(--spacing-500);
-  letter-spacing: var(--letter-spacing-400);
+  /* letter-spacing: var(--letter-spacing-400); */
   border: 2px solid transparent;
   border-radius: 100vmax;
   cursor: pointer;

@@ -1,47 +1,31 @@
-import useFormValidation from '../../hooks/useFormValidation';
-import validateName from '../../utils/validateName';
-import validateEmail from '../../utils/validateEmail';
-import validatePassword from '../../utils/validatePassword';
 import { useAuth } from '../../contexts/AuthContext';
 import { useSpinner } from '../../contexts/SpinnerContext';
 import styles from './Form.module.css';
-import { useRef } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
+import { useForm } from 'react-hook-form';
 
 const SignupForm = () => {
   const { signUp, updateUserProfile } = useAuth();
   const { setIsSpinnerVisible } = useSpinner();
-  const imgRef = useRef();
+  // const imgRef = useRef();
 
   const {
-    inputValue: nameValue,
-    inputError: nameError,
-    handleInputChange: handleNameChange,
-    handleInputTouched: handleNameTouched,
-  } = useFormValidation(validateName);
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  const {
-    inputValue: emailValue,
-    inputError: emailError,
-    handleInputChange: handleEmailChange,
-    handleInputTouched: handleEmailTouched,
-  } = useFormValidation(validateEmail);
-
-  const {
-    inputValue: passwordValue,
-    inputError: passwordError,
-    handleInputChange: handlePasswordChange,
-    handleInputTouched: handleePasswordTouched,
-  } = useFormValidation(validatePassword);
-
-  const handleSignUp = async (event) => {
-    event.preventDefault();
+  const handleSignup = async ({ name, email, password }) => {
+    // event.preventDefault();
     setIsSpinnerVisible(true);
+    // ! img is a dummy. needs to be removed.
+    const img = '';
 
     try {
-      const result = await signUp(emailValue, passwordValue);
-      updateUserProfile(nameValue, imgRef.current.value);
+      const result = await signUp(email, password);
+      updateUserProfile(name, img);
 
+      console.log(result);
       navigate(-1);
     } catch (error) {
       console.error(error);
@@ -51,7 +35,7 @@ const SignupForm = () => {
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSignUp}>
+    <form className={styles.form} onSubmit={handleSubmit(handleSignup)}>
       <div className={styles.picture}>
         <AiOutlineUser />
       </div>
@@ -61,10 +45,26 @@ const SignupForm = () => {
         <input
           className={styles.input}
           type="text"
-          onChange={handleNameChange}
-          onBlur={handleNameTouched}
+          {...register('name', {
+            required: {
+              value: true,
+              message: 'Name is required.',
+            },
+            pattern: {
+              value: /^[a-z ,.'-]+$/i,
+              message: 'Not a valid name',
+            },
+            maxLength: {
+              value: 50,
+              message: 'Name is too long',
+            },
+            minLength: {
+              value: 2,
+              message: 'Name is too short',
+            },
+          })}
         />
-        {nameError && <p className={styles.message}>{nameError}</p>}
+        {errors.name && <p className={styles.message}>{errors.name.message}</p>}
       </div>
 
       <div className={styles.field}>
@@ -72,10 +72,21 @@ const SignupForm = () => {
         <input
           className={styles.input}
           type="text"
-          onChange={handleEmailChange}
-          onBlur={handleEmailTouched}
+          {...register('email', {
+            required: {
+              value: true,
+              message: 'Email is required.',
+            },
+            pattern: {
+              value:
+                /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+              message: 'Not a valid email',
+            },
+          })}
         />
-        {emailError && <p className={styles.message}>{emailError}</p>}
+        {errors.email && (
+          <p className={styles.message}>{errors.email.message}</p>
+        )}
       </div>
 
       <div className={styles.field}>
@@ -83,10 +94,40 @@ const SignupForm = () => {
         <input
           className={styles.input}
           type="password"
-          onChange={handlePasswordChange}
-          onBlur={handleePasswordTouched}
+          {...register('password', {
+            required: {
+              value: true,
+              message: 'Password is required.',
+            },
+            // minLength: {
+            //   value: 8,
+            //   message: 'Password to short',
+            // },
+            // maxLength: {
+            //   value: 64,
+            //   message: 'Password to long',
+            // },
+            // pattern: {
+            //   value: /(?=.*?[A-Z])/,
+            //   message: 'Password needs at least one upper case letter.',
+            // },
+            // pattern: {
+            //   value: /(?=.*?[a-z])/,
+            //   message: 'Password needs at least one lower case letter.',
+            // },
+            // pattern: {
+            //   value: /(?=.*?[0-9])/,
+            //   message: 'Password needs at least one digit.',
+            // },
+            // pattern: {
+            //   value: /(?=.*?[#?!@$%^&*-])/,
+            //   message: 'Password needs at least one special character.',
+            // },
+          })}
         />
-        {passwordError && <p className={styles.message}>{passwordError}</p>}
+        {errors.password && (
+          <p className={styles.message}>{errors.password.message}</p>
+        )}
       </div>
 
       <button className="btn btn-primary" type="submit">

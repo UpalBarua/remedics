@@ -50,11 +50,8 @@ const Navbar = () => {
             ) : (
               <>
                 <li className={styles.menuItem}>
-                  <NavLink to="/signup">Sign Up</NavLink>
-                </li>
-                <li className={styles.menuItem}>
-                  <NavLink to="/login" className="btn btn-primary">
-                    Log In
+                  <NavLink to="/authentication" className="btn btn-primary">
+                    Login / Sign Up
                   </NavLink>
                 </li>
               </>

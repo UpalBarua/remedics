@@ -1,6 +1,3 @@
-/* ==================== */
-/* NAVBAR               */
-/* ==================== */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -9,9 +6,13 @@
 }
 
 .header {
-  position: sticky;
+  position: fixed;
+  /* border: 2px solid lime; */
+  width: 100%;
+  z-index: 10;
   top: 0;
   background-color: var(--clr-dark-500);
+  background-color: transparent;
 }
 
 .menu {
