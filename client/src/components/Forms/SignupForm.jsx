@@ -3,11 +3,13 @@ import { useSpinner } from '../../contexts/SpinnerContext';
 import { AiOutlineUser } from 'react-icons/ai';
 import { useForm } from 'react-hook-form';
 import styles from './Form.module.css';
+import { useState } from 'react';
+import axios from 'axios';
 
 const SignupForm = ({ setAuthError }) => {
   const { signUp, updateUserProfile } = useAuth();
   const { setIsSpinnerVisible } = useSpinner();
-  // const imgRef = useRef();
+  const [userImg, setUserImg] = useState();
 
   const {
     register,
@@ -17,9 +19,23 @@ const SignupForm = ({ setAuthError }) => {
 
   const handleSignup = async ({ name, email, password }) => {
     setIsSpinnerVisible(true);
+    let img = '';
 
-    // ! img is a dummy. needs to be removed.
-    const img = '';
+    const formData = new FormData();
+    formData.append('image', userImg);
+
+    try {
+      const res = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`,
+        formData
+      );
+
+      if (res.data.data.display_url) {
+        img = res.data.data.display_url;
+      }
+    } catch (error) {
+      console.log(error);
+    }
 
     try {
       const res = await signUp(email, password);
@@ -40,10 +56,10 @@ const SignupForm = ({ setAuthError }) => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(handleSignup)}>
-      <div className={styles.picture}>
-        <AiOutlineUser />
-      </div>
-
+      <input
+        type="file"
+        onChange={(event) => setUserImg(event.target.files[0])}
+      />
       <div className={styles.field}>
         <label className={styles.label}>Name</label>
         <input
@@ -70,7 +86,6 @@ const SignupForm = ({ setAuthError }) => {
         />
         {errors.name && <p className={styles.message}>{errors.name.message}</p>}
       </div>
-
       <div className={styles.field}>
         <label className={styles.label}>Email</label>
         <input
@@ -92,7 +107,6 @@ const SignupForm = ({ setAuthError }) => {
           <p className={styles.message}>{errors.email.message}</p>
         )}
       </div>
-
       <div className={styles.field}>
         <label className={styles.label}>Password</label>
         <input
@@ -133,7 +147,6 @@ const SignupForm = ({ setAuthError }) => {
           <p className={styles.message}>{errors.password.message}</p>
         )}
       </div>
-
       <button className="btn btn-primary" type="submit">
         Sign Up
       </button>

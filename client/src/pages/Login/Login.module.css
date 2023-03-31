@@ -72,6 +72,7 @@
   color: var(--clr-accent-primary-400);
   background-color: transparent;
   border: 0;
+  cursor: pointer;
 }
 
 .errorMessage {
