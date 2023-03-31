@@ -54,3 +54,13 @@
   border-radius: 8px;
   padding: var(--spacing-300);
 }
+
+.picture {
+  background-color: var(--clr-dark-300);
+  font-size: var(--fs-900);
+  display: grid;
+  place-items: center;
+  width: max-content;
+  border-radius: 50%;
+  padding: var(--spacing-300);
+}

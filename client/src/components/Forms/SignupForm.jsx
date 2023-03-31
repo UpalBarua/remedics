@@ -6,9 +6,10 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useSpinner } from '../../contexts/SpinnerContext';
 import styles from './Form.module.css';
 import { useRef } from 'react';
+import { AiOutlineUser } from 'react-icons/ai';
 
-const SignUpForm = () => {
-  const { signUp, googleSignIn, updateUserProfile } = useAuth();
+const SignupForm = () => {
+  const { signUp, updateUserProfile } = useAuth();
   const { setIsSpinnerVisible } = useSpinner();
   const imgRef = useRef();
 
@@ -49,17 +50,12 @@ const SignUpForm = () => {
     setIsSpinnerVisible(false);
   };
 
-  const handleGoogleSignIn = async () => {
-    try {
-      const response = await googleSignIn();
-      navigate(-1);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   return (
     <form className={styles.form} onSubmit={handleSignUp}>
+      <div className={styles.picture}>
+        <AiOutlineUser />
+      </div>
+
       <div className={styles.field}>
         <label className={styles.label}>Name</label>
         <input
@@ -69,11 +65,6 @@ const SignUpForm = () => {
           onBlur={handleNameTouched}
         />
         {nameError && <p className={styles.message}>{nameError}</p>}
-      </div>
-
-      <div className={styles.field}>
-        <label className={styles.label}>Picture</label>
-        <input className={styles.input} type="text" ref={imgRef} />
       </div>
 
       <div className={styles.field}>
@@ -101,11 +92,8 @@ const SignUpForm = () => {
       <button className="btn btn-primary" type="submit">
         Sign Up
       </button>
-      <button className="btn btn-ghost" onClick={handleGoogleSignIn}>
-        Sign Up with Google
-      </button>
     </form>
   );
 };
 
-export default SignUpForm;
+export default SignupForm;

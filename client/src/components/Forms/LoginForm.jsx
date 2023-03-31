@@ -15,7 +15,7 @@ const ERROR_MESSAGES = {
   UNKNOWN: 'An unexpected error occurred. Please try again later.',
 };
 
-const LogInForm = () => {
+const LoginForm = () => {
   const [loginError, setLoginError] = useState('');
   const { setIsSpinnerVisible } = useSpinner();
   const navigate = useNavigate();
@@ -70,4 +70,4 @@ const LogInForm = () => {
   );
 };
 
-export default LogInForm;
+export default LoginForm;

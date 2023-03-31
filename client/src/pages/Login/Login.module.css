@@ -16,36 +16,45 @@
   background-color: black;
   height: 100%;
   width: 100%;
-  opacity: 0.85;
+  opacity: 0.65;
 }
 
 .login {
   display: grid;
   align-content: center;
-  gap: var(--spacing-400);
+  gap: var(--spacing-200);
   text-align: center;
   background-color: var(--clr-dark-500);
   /* background-color: lime; */
-  padding: var(--spacing-400);
+  padding: var(--spacing-600) var(--spacing-400);
   border-radius: 12px;
-  z-index: 10;
+  z-index: 5;
 }
 
 .title {
-  font-size: var(--fs-700);
+  font-size: var(--fs-800);
   font-weight: var(--fw-bold);
   text-transform: capitalize;
 }
 
 .text {
   font-size: var(--fs-400);
-  padding-inline: var(--spacing-600);
+  color: rgba(255, 255, 255, 0.75);
+  width: 80%;
+  margin-inline: auto;
+  padding-bottom: var(--spacing-200);
+}
+
+.altLoginText {
+  padding-top: var(--spacing-500);
+  padding-bottom: var(--spacing-300);
 }
 
 .buttonGroup {
   display: flex;
   justify-content: center;
   gap: var(--spacing-300);
+  padding-bottom: var(--spacing-500);
 }
 
 .altLoginButton {
@@ -61,9 +70,11 @@
   border-radius: var(--border-radius);
 }
 
-.registerText > a {
+.registerText > button {
   font-weight: var(--fw-bold);
   color: var(--clr-accent-primary-400);
+  background-color: transparent;
+  border: 0;
 }
 
 @media screen and (min-width: 22em) {

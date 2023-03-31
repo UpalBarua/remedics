@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import SignUpForm from '../Forms/SignUpForm';
+import SignupForm from '../Forms/SignupForm';
 import useTitle from '../../hooks/useTitle';
 import styles from './SignUp.module.css';
 import img from '../../assets/signup.svg';
@@ -19,7 +19,7 @@ const SignUp = () => {
         <img className={styles.img} src={img} alt="" />
       </div>
       <div className={styles.column}>
-        <SignUpForm />
+        <SignupForm />
       </div>
     </section>
   );
