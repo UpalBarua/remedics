@@ -1,8 +1,5 @@
 .loginContainer {
   display: grid;
-  align-content: start;
-  /* place-content: center; */
-  /* background-image: url('../../assets/images/login-bg.jpg'); */
   background-color: var(--clr-dark-500);
   background-position: center;
   background-size: cover;
@@ -20,12 +17,12 @@
 }
 
 .login {
+  margin-top: var(--spacing-900);
   display: grid;
   align-content: center;
   gap: var(--spacing-200);
   text-align: center;
   background-color: var(--clr-dark-500);
-  /* background-color: lime; */
   padding: var(--spacing-600) var(--spacing-400);
   border-radius: 12px;
   z-index: 5;
@@ -77,6 +74,15 @@
   border: 0;
 }
 
+.errorMessage {
+  background-color: hsla(0, 100%, 50%, 0.25);
+  border: 2px solid hsla(0, 100%, 50%, 0.75);
+  border-radius: 8px;
+  padding: var(--spacing-300);
+  text-align: start;
+  margin-top: var(--spacing-300);
+}
+
 @media screen and (min-width: 22em) {
   .loginContainer {
     place-content: center;
@@ -86,6 +92,6 @@
 
   .login {
     max-width: 30rem;
-    padding: var(--spacing-800) var(--spacing-600);
+    padding: var(--spacing-800) var(--spacing-800);
   }
 }

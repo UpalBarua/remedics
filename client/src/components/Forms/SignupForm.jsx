@@ -1,10 +1,10 @@
 import { useAuth } from '../../contexts/AuthContext';
 import { useSpinner } from '../../contexts/SpinnerContext';
-import styles from './Form.module.css';
 import { AiOutlineUser } from 'react-icons/ai';
 import { useForm } from 'react-hook-form';
+import styles from './Form.module.css';
 
-const SignupForm = () => {
+const SignupForm = ({ setAuthError }) => {
   const { signUp, updateUserProfile } = useAuth();
   const { setIsSpinnerVisible } = useSpinner();
   // const imgRef = useRef();
@@ -16,22 +16,26 @@ const SignupForm = () => {
   } = useForm();
 
   const handleSignup = async ({ name, email, password }) => {
-    // event.preventDefault();
     setIsSpinnerVisible(true);
+
     // ! img is a dummy. needs to be removed.
     const img = '';
 
     try {
-      const result = await signUp(email, password);
-      updateUserProfile(name, img);
+      const res = await signUp(email, password);
 
-      console.log(result);
-      navigate(-1);
+      if (res?.user?.uid) {
+        updateUserProfile(name, img);
+        navigate(-1);
+      }
     } catch (error) {
-      console.error(error);
-    }
+      const errorCode = error.code;
+      console.log(`Login failed with error code: ${errorCode}`);
 
-    setIsSpinnerVisible(false);
+      setAuthError(errorCode);
+    } finally {
+      setIsSpinnerVisible(false);
+    }
   };
 
   return (

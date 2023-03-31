@@ -5,19 +5,7 @@ import styles from './Form.module.css';
 import { useSpinner } from '../../contexts/SpinnerContext';
 import { useForm } from 'react-hook-form';
 
-const ERROR_MESSAGES = {
-  'auth/wrong-password':
-    'The password you entered is incorrect. Please try again.',
-  'auth/user-not-found':
-    'No account found with this email address. Please sign up first.',
-  'auth/invalid-email': 'Please enter a valid email address.',
-  'auth/user-disabled':
-    'Your account has been disabled. Please contact support.',
-  UNKNOWN: 'An unexpected error occurred. Please try again later.',
-};
-
-const LoginForm = () => {
-  const [loginError, setLoginError] = useState('');
+const LoginForm = ({ setAuthError }) => {
   const { setIsSpinnerVisible } = useSpinner();
   const navigate = useNavigate();
 
@@ -41,8 +29,8 @@ const LoginForm = () => {
     } catch (error) {
       const errorCode = error.code;
       console.log(`Login failed with error code: ${errorCode}`);
-      const errorMessage = ERROR_MESSAGES[errorCode] || ERROR_MESSAGES.UNKNOWN;
-      setLoginError(errorMessage);
+
+      setAuthError(errorCode);
     } finally {
       setIsSpinnerVisible(false);
     }
@@ -83,18 +71,11 @@ const LoginForm = () => {
             },
           })}
         />
-        {errors.password && (
-          <p className={styles.message}>{errors.password.message}</p>
-        )}
+        <p className={styles.message}>{errors.password?.message || ''}</p>
       </div>
       <button className="btn btn-primary" type="submit">
         Log In
       </button>
-      {loginError && <p className={styles.errorMessage}>{loginError}</p>}
-      {/* <p className={styles.errorMessage}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
-        quos. Lorem, ipsum.
-      </p> */}
     </form>
   );
 };
