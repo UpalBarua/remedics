@@ -1,9 +1,9 @@
 .card {
   display: grid;
-  gap: var(--spacing-100);
-  background-color: var(--clr-dark-300);
+  gap: var(--spacing-sm);
+  background-color: var(--color-dark-300);
   border-radius: var(--border-radius);
-  padding: var(--spacing-500);
+  padding: var(--spacing-2xl);
   text-align: start;
 }
 
@@ -11,17 +11,17 @@
   height: 4rem;
   width: 4rem;
   border-radius: 50%;
-  margin-bottom: var(--spacing-300);
+  margin-bottom: var(--spacing-lg);
 }
 
 .name {
-  font-size: var(--fs-600);
-  font-weight: var(--fw-bold);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
 }
 
 .email {
-  font-size: var(--fs-500);
-  font-weight: var(--fw-semibold);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
   font-style: italic;
 }
 
@@ -32,23 +32,23 @@
 .btn {
   background-color: transparent;
   border: 0;
-  font-weight: var(--fw-bold);
-  padding: var(--spacing-300);
+  font-weight: var(--font-weight-bold);
+  padding: var(--spacing-lg);
   cursor: pointer;
 }
 
 .btn:first-child {
-  color: var(--clr-success-400);
+  color: var(--color-success-400);
 }
 
 .btn:last-child {
-  color: var(--clr-warning-400);
+  color: var(--color-warning-400);
 }
 
 .textarea {
-  background-color: var(--clr-dark-300);
-  color: var(--clr-light-400);
-  padding: var(--spacing-100);
+  background-color: var(--color-dark-300);
+  color: var(--color-light-400);
+  padding: var(--spacing-sm);
   border-radius: var(--border-radius);
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -61,6 +61,6 @@
 .user {
   display: flex;
   align-items: center;
-  gap: var(--spacing-400);
-  margin-bottom: var(--spacing-300);
+  gap: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
 }

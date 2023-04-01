@@ -7,10 +7,10 @@
 }
 
 .btn {
-  font-family: var(--ff-primary);
-  font-size: var(--fs-500);
-  font-weight: var(--fw-semibold);
-  padding: var(--spacing-200) var(--spacing-500);
+  font-family: var(--font-primary);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  padding: var(--spacing-md) var(--spacing-2xl);
   /* letter-spacing: var(--letter-spacing-400); */
   border: 2px solid transparent;
   border-radius: 100vmax;
@@ -18,20 +18,20 @@
 }
 
 .btn-primary {
-  background-color: var(--clr-accent-primary-400);
-  color: var(--clr-light-400);
+  background-color: var(--color-accent-primary-400);
+  color: var(--color-light-400);
 }
 
 .btn-ghost {
   background-color: transparent;
-  color: var(--clr-light-400);
-  border-color: var(--clr-light-400);
+  color: var(--color-light-400);
+  border-color: var(--color-light-400);
 }
 
 .primary-title {
-  font-family: var(--ff-secondary);
-  font-size: var(--fs-700);
-  font-weight: var(--fw-bold);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
   text-transform: capitalize;
   line-height: 1.1;
   /* text-align: center; */
@@ -40,21 +40,21 @@
 }
 
 .secondary-title {
-  font-weight: var(--fw-semibold);
+  font-weight: var(--font-weight-semibold);
   letter-spacing: var(--letter-spacing-500);
   text-transform: uppercase;
   /* text-align: center; */
 }
 
 .logo {
-  font-family: var(--ff-secondary);
-  font-size: var(--fs-700);
-  font-weight: var(--fw-bold);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
   letter-spacing: var(--letter-spacing-400);
   display: flex;
   align-items: center;
-  gap: var(--spacing-200);
-  color: var(--clr-accent-primary-400);
+  gap: var(--spacing-md);
+  color: var(--color-accent-primary-400);
 }
 
 .logo > img {
@@ -62,9 +62,9 @@
 }
 
 .text-accent-primary {
-  color: var(--clr-accent-primary-400);
+  color: var(--color-accent-primary-400);
 }
 
 .text-accent-secondary {
-  color: var(--clr-accent-secondary-400);
+  color: var(--color-accent-secondary-400);
 }

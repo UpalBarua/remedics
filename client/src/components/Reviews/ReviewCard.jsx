@@ -19,7 +19,7 @@ const ReviewCard = ({ data, deleteReview, editReview }) => {
             icon: '✅',
             style: {
               borderRadius: '10px',
-              background: 'var(--clr-dark-500)',
+              background: 'var(--color-dark-500)',
               color: '#fff',
               marginTop: '5rem',
               fontSize: '1.125rem',
@@ -51,7 +51,7 @@ const ReviewCard = ({ data, deleteReview, editReview }) => {
             icon: '✅',
             style: {
               borderRadius: '10px',
-              background: 'var(--clr-dark-500)',
+              background: 'var(--color-dark-500)',
               color: '#fff',
               marginTop: '5rem',
               fontSize: '1.125rem',

@@ -1,15 +1,35 @@
-.grid {
+.hero {
+  position: relative;
+  background-image: url('../../assets/images/hero-bg.jpg');
+  background-size: cover;
+  background-position: top;
+  height: 35rem;
+}
+
+.hero::after {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+}
+
+.container {
   display: grid;
   justify-items: center;
   text-align: center;
-  gap: var(--spacing-400);
-  margin-block: var(--spacing-900);
+  gap: var(--spacing-xl);
+  padding-block: var(--spacing-6xl);
+  position: relative;
+  z-index: 10;
 }
 
 .title {
-  font-size: var(--fs-800);
-  font-weight: var(--fw-bold);
-  font-family: var(--ff-secondary);
+  font-size: 2.75rem;
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-secondary);
   background-image: var(--gradient);
   background-position: 0 0;
   color: transparent;
@@ -18,18 +38,26 @@
 }
 
 .text {
-  font-size: var(--fs-600);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: var(--font-size-lg);
 }
 
 .btnGroup {
-  margin-block: var(--spacing-200);
+  margin-block: var(--spacing-md);
   display: flex;
-  gap: var(--spacing-200);
+  gap: var(--spacing-md);
 }
 
 .column:first-child {
   display: grid;
-  gap: var(--spacing-300);
+  gap: var(--spacing-lg);
+}
+
+.welcomeText {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-accent-secondary-400);
+  text-transform: capitalize;
 }
 
 @media screen and (min-width: 48em) {
@@ -40,7 +68,7 @@
   }
 
   .title {
-    font-size: var(--fs-900);
+    font-size: var(--font-size-4xl);
   }
 
   .img {

@@ -2,13 +2,13 @@
   display: grid;
   grid-template-columns: 1fr;
   text-align: center;
-  gap: var(--spacing-600);
-  margin-block: var(--spacing-900);
+  gap: var(--spacing-3xl);
+  margin-block: var(--spacing-6xl);
 }
 
 .column:last-child {
   display: grid;
-  gap: var(--spacing-400);
+  gap: var(--spacing-xl);
   justify-items: center;
 }
 
@@ -18,7 +18,7 @@
   }
 
   .column:last-child {
-    gap: var(--spacing-400);
+    gap: var(--spacing-xl);
     justify-items: start;
     align-content: center;
     text-align: start;

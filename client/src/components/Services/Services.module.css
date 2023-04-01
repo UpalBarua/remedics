@@ -4,20 +4,20 @@
 .services {
   display: grid;
   justify-items: center;
-  gap: var(--spacing-500);
+  gap: var(--spacing-2xl);
   text-align: center;
-  margin-block: var(--spacing-900);
+  margin-block: var(--spacing-6xl);
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-500);
+  gap: var(--spacing-2xl);
 }
 
 .allBtn {
   width: 10rem;
-  margin-top: var(--spacing-600);
+  margin-top: var(--spacing-3xl);
 }
 
 @media screen and (min-width: 48em) {

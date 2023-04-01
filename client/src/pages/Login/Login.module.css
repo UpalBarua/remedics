@@ -1,6 +1,6 @@
 .loginContainer {
   display: grid;
-  background-color: var(--clr-dark-500);
+  background-color: var(--color-dark-500);
   background-position: center;
   background-size: cover;
   min-height: 100vh;
@@ -17,59 +17,59 @@
 }
 
 .login {
-  margin-top: var(--spacing-900);
+  margin-top: var(--spacing-6xl);
   display: grid;
   align-content: center;
-  gap: var(--spacing-200);
+  gap: var(--spacing-md);
   text-align: center;
-  background-color: var(--clr-dark-500);
-  padding: var(--spacing-600) var(--spacing-400);
+  background-color: var(--color-dark-500);
+  padding: var(--spacing-3xl) var(--spacing-xl);
   border-radius: 12px;
   z-index: 5;
 }
 
 .title {
-  font-size: var(--fs-800);
-  font-weight: var(--fw-bold);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
   text-transform: capitalize;
 }
 
 .text {
-  font-size: var(--fs-400);
+  font-size: var(--font-size-400);
   color: rgba(255, 255, 255, 0.75);
   width: 80%;
   margin-inline: auto;
-  padding-bottom: var(--spacing-200);
+  padding-bottom: var(--spacing-md);
 }
 
 .altLoginText {
-  padding-top: var(--spacing-500);
-  padding-bottom: var(--spacing-300);
+  padding-top: var(--spacing-2xl);
+  padding-bottom: var(--spacing-lg);
 }
 
 .buttonGroup {
   display: flex;
   justify-content: center;
-  gap: var(--spacing-300);
-  padding-bottom: var(--spacing-500);
+  gap: var(--spacing-lg);
+  padding-bottom: var(--spacing-2xl);
 }
 
 .altLoginButton {
   display: flex;
   align-items: center;
-  gap: var(--spacing-100);
+  gap: var(--spacing-sm);
   background-color: transparent;
-  color: var(--clr-light-300);
+  color: var(--color-light-300);
   border: 2px solid rgba(255, 255, 255, 0.35);
-  font-size: var(--fs-500);
-  font-weight: var(--fw-bold);
-  padding: var(--spacing-200) var(--spacing-500);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  padding: var(--spacing-md) var(--spacing-2xl);
   border-radius: var(--border-radius);
 }
 
 .registerText > button {
-  font-weight: var(--fw-bold);
-  color: var(--clr-accent-primary-400);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent-primary-400);
   background-color: transparent;
   border: 0;
   cursor: pointer;
@@ -79,20 +79,20 @@
   background-color: hsla(0, 100%, 50%, 0.25);
   border: 2px solid hsla(0, 100%, 50%, 0.75);
   border-radius: 8px;
-  padding: var(--spacing-300);
+  padding: var(--spacing-lg);
   text-align: start;
-  margin-top: var(--spacing-300);
+  margin-top: var(--spacing-lg);
 }
 
 @media screen and (min-width: 22em) {
   .loginContainer {
     place-content: center;
     background-image: url('../../assets/images/login-bg.jpg');
-    background-color: var(--clr-dark-500);
+    background-color: var(--color-dark-500);
   }
 
   .login {
     max-width: 30rem;
-    padding: var(--spacing-800) var(--spacing-800);
+    padding: var(--spacing-5xl) var(--spacing-5xl);
   }
 }

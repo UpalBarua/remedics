@@ -4,9 +4,9 @@
   display: grid;
   justify-content: center;
   text-align: center;
-  gap: var(--spacing-400);
-  padding-block: var(--spacing-800);
-  margin-block: var(--spacing-900);
+  gap: var(--spacing-xl);
+  padding-block: var(--spacing-5xl);
+  margin-block: var(--spacing-6xl);
 }
 
 .form {
@@ -15,7 +15,7 @@
 }
 
 .input {
-  padding: var(--spacing-200);
+  padding: var(--spacing-md);
   border: 0;
   border-top-left-radius: var(--border-radius);
   border-bottom-left-radius: var(--border-radius);
@@ -31,8 +31,8 @@
   border-top-right-radius: var(--border-radius);
   border-bottom-right-radius: var(--border-radius);
   border: 0;
-  padding: var(--spacing-200) var(--spacing-400);
-  font-weight: var(--fw-semibold);
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-400);
 }

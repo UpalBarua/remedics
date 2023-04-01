@@ -3,63 +3,63 @@
 /* ==================== */
 .form {
   display: grid;
-  gap: var(--spacing-500);
+  gap: var(--spacing-2xl);
   text-align: start;
 }
 
 .field {
   display: grid;
-  gap: var(--spacing-200);
+  gap: var(--spacing-md);
 }
 
 .label {
-  font-weight: var(--fw-semibold);
-  font-size: var(--fs-400);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-400);
 }
 
 .input {
-  color: var(--clr-light-400);
-  padding: var(--spacing-300);
+  color: var(--color-light-400);
+  padding: var(--spacing-lg);
   border-radius: var(--border-radius);
-  background-color: var(--clr-dark-400);
+  background-color: var(--color-dark-400);
   border: 2px solid rgba(255, 255, 255, 0.25);
 }
 
 .input:hover,
 .input:focus {
   outline: 0;
-  border-color: var(--clr-accent-primary-400);
+  border-color: var(--color-accent-primary-400);
 }
 
 .message {
   color: rgba(255, 0, 0, 0.9);
-  font-size: var(--fs-300);
+  font-size: var(--font-size-300);
 }
 
 .textarea {
   min-width: 100%;
   min-height: 10rem;
-  background-color: var(--clr-dark-400);
-  color: var(--clr-light-400);
+  background-color: var(--color-dark-400);
+  color: var(--color-light-400);
   border-radius: var(--border-radius);
   border: 2px solid rgba(255, 255, 255, 0.3);
-  padding: var(--spacing-300);
-  margin-block: var(--spacing-400);
+  padding: var(--spacing-lg);
+  margin-block: var(--spacing-xl);
 }
 
 .textarea:focus,
 .textarea:hover {
-  border-color: var(--clr-accent-primary-400);
+  border-color: var(--color-accent-primary-400);
   outline: 0;
 }
 
 .picture {
-  background-color: var(--clr-dark-300);
-  font-size: var(--fs-900);
+  background-color: var(--color-dark-300);
+  font-size: var(--font-size-4xl);
   display: grid;
   place-items: center;
   width: max-content;
   border-radius: 50%;
-  padding: var(--spacing-300);
+  padding: var(--spacing-lg);
   margin-inline: auto;
 }

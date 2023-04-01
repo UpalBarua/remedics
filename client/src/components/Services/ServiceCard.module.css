@@ -2,10 +2,10 @@
 /* SERVICES CARD       */
 /* =================== */
 .card {
-  background-color: var(--clr-dark-400);
-  padding: var(--spacing-400);
+  background-color: var(--color-dark-400);
+  padding: var(--spacing-xl);
   display: grid;
-  gap: var(--spacing-400);
+  gap: var(--spacing-xl);
   border-radius: var(--border-radius);
   text-align: start;
 }
@@ -23,28 +23,28 @@
 }
 
 .title {
-  font-size: var(--fs-700);
-  font-weight: var(--fw-bold);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
 }
 
 .footer {
   display: flex;
   align-items: center;
-  gap: var(--spacing-300);
+  gap: var(--spacing-lg);
   justify-content: space-between;
 }
 
 .stats {
-  font-size: var(--fs-700);
-  font-weight: var(--fw-semibold);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
   display: flex;
   justify-content: space-around;
-  gap: var(--spacing-200);
+  gap: var(--spacing-md);
   width: 100%;
 }
 
 .stats > p {
   display: flex;
   align-items: center;
-  gap: var(--spacing-100);
+  gap: var(--spacing-sm);
 }

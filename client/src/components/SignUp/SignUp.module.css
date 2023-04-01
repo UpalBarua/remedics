@@ -4,29 +4,29 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-500);
-  background-color: var(--clr-dark-400);
-  margin-block: var(--spacing-800);
+  gap: var(--spacing-2xl);
+  background-color: var(--color-dark-400);
+  margin-block: var(--spacing-5xl);
   border-radius: var(--border-radius);
 }
 
 .column:first-child {
-  padding: var(--spacing-400);
+  padding: var(--spacing-xl);
   display: grid;
-  gap: var(--spacing-400);
+  gap: var(--spacing-xl);
   text-align: center;
 }
 
 .column:first-child a {
-  font-weight: var(--fw-semibold);
-  color: var(--clr-accent-primary-400);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-accent-primary-400);
 }
 
 .column:last-child {
-  padding: var(--spacing-400);
-  background-color: var(--clr-dark-300);
+  padding: var(--spacing-xl);
+  background-color: var(--color-dark-300);
   display: grid;
-  gap: var(--spacing-400);
+  gap: var(--spacing-xl);
 }
 
 .img {

@@ -1,22 +1,22 @@
 .myReviews {
   display: grid;
-  gap: var(--spacing-400);
+  gap: var(--spacing-xl);
   justify-items: center;
   text-align: center;
-  margin-block: var(--spacing-800);
+  margin-block: var(--spacing-5xl);
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
-  gap: var(--spacing-400);
+  gap: var(--spacing-xl);
 }
 
 .text {
   font-size: 1.5rem;
   margin-block: 2rem;
-  font-weight: var(--fw-semibold);
+  font-weight: var(--font-weight-semibold);
 }
 
 @media screen and (min-width: 40em) {

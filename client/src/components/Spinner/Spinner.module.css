@@ -21,8 +21,8 @@
   width: 5rem;
   border-radius: 50%;
   border: 8px solid rgb(49, 38, 38);
-  border-top-color: var(--clr-accent-primary-400);
-  border-right-color: var(--clr-accent-primary-400);
+  border-top-color: var(--color-accent-primary-400);
+  border-right-color: var(--color-accent-primary-400);
   animation: spin 800ms ease infinite;
 }
 
