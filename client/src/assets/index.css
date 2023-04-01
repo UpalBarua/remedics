@@ -56,9 +56,15 @@
   --box-shadow: ;
   --border-radius: 8px;
   --gradient: linear-gradient(150deg, #875ae1 29.29%, #f681c5 96.65%);
+  --background-gradient: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.85) 50%,
+    rgba(0, 0, 0, 0.7994047960981268) 75%,
+    rgba(0, 0, 0, 0.6985644599636729) 100%
+  );
 }
 
-/* GLOBAL RESETS        */
+/* GLOBAL RESETS */
 *,
 *::before,
 *::after {

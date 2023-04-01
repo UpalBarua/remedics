@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';
 import { HiMenuAlt1 } from 'react-icons/hi';
 import { IoMdClose } from 'react-icons/io';
-import { useAuth } from '../../contexts/AuthContext';
+import { TbStethoscope } from 'react-icons/tb';
 import styles from './Navbar.module.css';
-import logo from '../../assets/logo.png';
 
 const Navbar = () => {
   const [isNavVisible, setIsNavVisible] = useState(false);
@@ -12,20 +12,16 @@ const Navbar = () => {
 
   const handleNavToggle = () => {
     setIsNavVisible((prevIsNavVisible) => !prevIsNavVisible);
-
-    document.body.style.overflow === ''
-      ? (document.body.style.overflow = 'hidden')
-      : (document.body.style.overflow = '');
+    document.body.style.overflow = isNavVisible ? 'unset' : 'hidden';
   };
 
   return (
     <header className={styles.header}>
       <nav className={`${styles.navbar} container`}>
-        <Link className="logo" to="/">
-          <img className={styles.logoImg} src={logo} alt="" />
-          ReMedics
+        <Link className={styles.logo} to="/">
+          <TbStethoscope />
+          <span>Remedics</span>
         </Link>
-
         <div className={styles.column}>
           <ul className={styles.menu} data-visible={isNavVisible}>
             <li className={styles.menuItem}>
@@ -48,16 +44,13 @@ const Navbar = () => {
                 </li>
               </>
             ) : (
-              <>
-                <li className={styles.menuItem}>
-                  <NavLink to="/authentication" className="btn btn-primary">
-                    Login / Sign Up
-                  </NavLink>
-                </li>
-              </>
+              <li className={styles.menuItem}>
+                <NavLink to="/authentication" className="btn btn-primary">
+                  Login / Sign Up
+                </NavLink>
+              </li>
             )}
           </ul>
-
           <button className={styles.toggle} onClick={handleNavToggle}>
             {isNavVisible ? <IoMdClose /> : <HiMenuAlt1 />}
           </button>
