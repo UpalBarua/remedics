@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { HiMenuAlt1 } from 'react-icons/hi';
@@ -8,6 +8,7 @@ import styles from './Navbar.module.css';
 
 const Navbar = () => {
   const [isNavVisible, setIsNavVisible] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { user, logOut } = useAuth();
 
   const handleNavToggle = () => {
@@ -15,8 +16,22 @@ const Navbar = () => {
     document.body.style.overflow = isNavVisible ? 'unset' : 'hidden';
   };
 
+  useEffect(() => {
+    const toggleNavBg = () => {
+      if (window.scrollY > 40) {
+        return setIsScrolled(true);
+      }
+
+      setIsScrolled(false);
+    };
+
+    document.addEventListener('scroll', toggleNavBg);
+
+    return () => document.removeEventListener('scroll', toggleNavBg);
+  }, []);
+
   return (
-    <header className={styles.header}>
+    <header className={styles.header} data-scrolled={isScrolled}>
       <nav className={`${styles.navbar} container`}>
         <Link className={styles.logo} to="/">
           <TbStethoscope />

@@ -5,6 +5,11 @@
   width: 100%;
   background-color: var(--color-dark-500);
   background-color: transparent;
+  transition: background-color 350ms ease-out;
+}
+
+.header[data-scrolled='true'] {
+  background-color: var(--color-dark-500);
 }
 
 .navbar {
