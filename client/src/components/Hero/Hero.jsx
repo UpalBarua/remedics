@@ -13,7 +13,7 @@ const Hero = () => {
           streamlines the process and connects you with the right one in no time
         </p>
         <form className={styles.searchBar}>
-          <input type="text" />
+          <input type="text" placeholder="Search..." />
           <button>
             <BsSearch />
           </button>

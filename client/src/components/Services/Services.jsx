@@ -12,9 +12,7 @@ const Services = () => {
     setIsSpinnerVisible(true);
 
     (async () => {
-      const response = await fetch(
-        'http://localhost:3000/services?limit=3'
-      );
+      const response = await fetch('http://localhost:3000/services?limit=3');
       const data = await response.json();
       setServicesData(data);
       setIsSpinnerVisible(false);
@@ -23,18 +21,18 @@ const Services = () => {
 
   return (
     <section className={`container ${styles.services}`}>
-      <h2 className="secondary-title text-accent-secondary">services</h2>
-      <p className="primary-title">Lorem ipsum dolor sit amet consectetur</p>
+      <h2 className={styles.titleSm}>Doctors</h2>
+      <p className="primary-title">Find top doctors for your medical needs. </p>
 
       <div className={styles.grid}>
-        {servicesData.map(service => (
+        {servicesData.map((service) => (
           <ServiceCard key={service._id} service={service} />
         ))}
       </div>
 
-      <Link className={`btn btn-ghost ${styles.allBtn}`} to="/services">
+      {/* <Link className={`btn btn-ghost ${styles.allBtn}`} to="/services">
         View All
-      </Link>
+      </Link> */}
     </section>
   );
 };

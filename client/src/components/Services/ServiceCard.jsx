@@ -19,32 +19,25 @@ const ServiceCard = ({ service }) => {
         <div className={styles.body}>
           <p className={styles.titleSm}>{specialized}</p>
           <h3 className={styles.title}>{name}</h3>
+          <div className={styles.stats}>
+            <p>
+              <AiOutlineStar className="text-accent-primary" />
+              {ratings}
+            </p>
+            <p>
+              <BiDollar className="text-accent-primary" />
+              {fees}
+            </p>
+          </div>
           <p className={styles.text}>{description.slice(0, 150) + '...'}</p>
           <div className={styles.actions}>
-            <button className={styles.book}>
-              <AiOutlineCalendar />
-            </button>
             <Link className={styles.profile} to={`/details/${_id}`}>
               View Profile
             </Link>
+            <button className={styles.book}>
+              <AiOutlineCalendar />
+            </button>
           </div>
-
-          {/* <div className={styles.footer}>
-            <div className={styles.stats}>
-              <p>
-                <AiOutlineStar className="text-accent-primary" />
-                {ratings}
-              </p>
-              <p>
-                <BiDollar className="text-accent-primary" />
-                {fees}
-              </p>
-              <p>
-                <FiFlag className="text-accent-primary" />
-                {country}
-              </p>
-            </div>
-          </div> */}
         </div>
       </div>
     </PhotoProvider>
