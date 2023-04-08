@@ -16,6 +16,8 @@
   --font-size-3xl: 1.875rem;
   --font-size-4xl: 2.5rem;
 
+  --font-size-title: clamp(2.5rem, 0.5rem + 5vw, 4rem);
+
   --font-weight-regular: 400;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;

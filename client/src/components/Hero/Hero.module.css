@@ -1,51 +1,50 @@
 .hero {
+  position: relative;
   display: grid;
   place-content: center;
-  position: relative;
+  height: 100vh;
   background-image: url('../../assets/images/hero-bg.jpg');
   background-size: cover;
   background-position: top;
-  height: 100vh;
 }
 
 .hero::after {
   content: '';
+  position: absolute;
+  top: 0;
   display: block;
   width: 100%;
   height: 100%;
-  position: absolute;
-  top: 0;
   background: var(--background-gradient);
 }
 
 .container {
+  position: relative;
+  z-index: 5;
   display: grid;
   justify-items: center;
   gap: var(--spacing-lg);
-  position: relative;
-  z-index: 5;
   padding-block: var(--spacing-6xl);
   text-align: center;
 }
 
 .title {
-  font-size: clamp(2.5rem, 0.5rem + 5vw, 4rem);
-  /* font-size: 4rem; */
-  text-transform: capitalize;
-  font-weight: var(--font-weight-bold);
-  font-family: var(--font-secondary);
-  color: transparent;
+  max-width: min(35rem, 100%);
   background-image: var(--gradient);
   background-position: 0 0;
   background-clip: text;
   -webkit-background-clip: text;
-  max-width: min(35rem, 100%);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-bold);
+  color: transparent;
+  text-transform: capitalize;
 }
 
 .text {
-  color: var(--color-light-500);
-  font-size: var(--font-size-md);
   max-width: min(30rem, 100%);
+  font-size: var(--font-size-md);
+  color: var(--color-light-500);
 }
 
 .welcomeText {
@@ -55,24 +54,24 @@
 }
 
 .btnGroup {
-  margin-block: var(--spacing-md);
   display: flex;
   gap: var(--spacing-md);
+  margin-block: var(--spacing-md);
 }
 
 .searchBar {
-  display: flex;
   position: relative;
+  display: flex;
   max-width: calc(100% - 2rem);
   margin-top: var(--spacing-lg);
 }
 
 .searchBar > input {
-  border: 0;
+  width: 100%;
   background-color: var(--color-dark-400);
   background-color: var(--color-light-500);
-  width: 100%;
   padding: var(--spacing-md);
+  border: 0;
   border-radius: 100vmax;
   opacity: 0.8;
 }
@@ -83,7 +82,6 @@
 }
 
 .searchBar > button {
-  border-radius: 50%;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -92,10 +90,11 @@
   place-content: center;
   height: 100%;
   aspect-ratio: 1;
-  background-color: var(--color-accent-primary-400);
-  color: var(--color-light-400);
   border: 2px solid var(--color-accent-primary-400);
+  border-radius: 50%;
+  background-color: var(--color-accent-primary-400);
   font-size: var(--font-size-md);
+  color: var(--color-light-400);
 }
 
 @media screen and (min-width: 48em) {

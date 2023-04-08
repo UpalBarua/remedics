@@ -3,7 +3,6 @@
   top: 0;
   z-index: 20;
   width: 100%;
-  background-color: var(--color-dark-500);
   background-color: transparent;
   transition: background-color 350ms ease-out;
 }
@@ -34,12 +33,12 @@
 }
 
 .menu {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2xl);
   position: fixed;
   top: 0;
   right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
   height: 100%;
   width: 15rem;
   padding: var(--spacing-3xl);
@@ -53,12 +52,12 @@
 }
 
 .toggle {
+  position: relative;
   display: grid;
   border: 0;
-  position: relative;
+  background-color: transparent;
   font-size: var(--font-size-3xl);
   color: var(--color-light-500);
-  background-color: transparent;
 }
 
 @media screen and (min-width: 48em) {
@@ -68,12 +67,12 @@
 
   .menu {
     position: initial;
-    background-color: transparent;
     flex-direction: row;
     align-items: center;
-    width: 100%;
     gap: var(--spacing-3xl);
+    width: 100%;
     padding: 0;
+    background-color: transparent;
     transform: translateX(0);
     transition: none;
   }
