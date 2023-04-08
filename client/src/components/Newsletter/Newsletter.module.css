@@ -1,17 +1,35 @@
 .newsletter {
   background-image: var(--gradient);
-  border-radius: var(--border-radius);
+  border-radius: 12px;
   display: grid;
   justify-content: center;
   text-align: center;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-lg);
   padding-block: var(--spacing-5xl);
   margin-block: var(--spacing-6xl);
 }
 
+.titleSm {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  text-transform: capitalize;
+  color: var(--color-dark-500);
+}
+
+.title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  max-width: min(25rem, 100%);
+  padding-inline: 0.5rem;
+  margin-inline: auto;
+}
+
 .form {
+  position: relative;
   display: flex;
   justify-content: center;
+  max-width: 16rem;
+  margin-inline: auto;
 }
 
 .input {
@@ -19,7 +37,22 @@
   border: 0;
   border-top-left-radius: var(--border-radius);
   border-bottom-left-radius: var(--border-radius);
-  width: 60%;
+  width: 100%;
+  border-radius: 100vmax;
+  opacity: 0.8;
+}
+
+.btn {
+  position: absolute;
+  right: 0;
+  border: 0;
+  padding-inline: var(--spacing-xl);
+  height: 100%;
+  font-weight: var(--font-weight-semibold);
+  text-transform: capitalize;
+  border-radius: 100vmax;
+  background-color: var(--color-dark-300);
+  color: var(--color-light-300);
 }
 
 .input:hover,
@@ -27,12 +60,8 @@
   outline: 0;
 }
 
-.btn {
-  border-top-right-radius: var(--border-radius);
-  border-bottom-right-radius: var(--border-radius);
-  border: 0;
-  padding: var(--spacing-md) var(--spacing-xl);
-  font-weight: var(--font-weight-semibold);
-  text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-400);
+@media screen and (min-width: 48em) {
+  .form {
+    max-width: 30rem;
+  }
 }
