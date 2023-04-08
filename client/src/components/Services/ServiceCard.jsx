@@ -4,6 +4,7 @@ import { BiDollar } from 'react-icons/bi';
 import { FiFlag } from 'react-icons/fi';
 import styles from './ServiceCard.module.css';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
+import { AiOutlineCalendar } from 'react-icons/ai';
 
 const ServiceCard = ({ service }) => {
   const { _id, name, img, ratings, fees, description, country, specialized } =
@@ -15,29 +16,36 @@ const ServiceCard = ({ service }) => {
         <PhotoView src={img}>
           <img className={styles.img} src={img} alt={name} />
         </PhotoView>
-
-        <p className="secondary-title text-accent-primary">{specialized}</p>
-        <h3 className={styles.title}>{name}</h3>
-        <p className={styles.text}>{description.slice(0, 200) + '...'}</p>
-        <div className={styles.footer}>
-          <div className={styles.stats}>
-            <p>
-              <AiOutlineStar className="text-accent-primary" />
-              {ratings}
-            </p>
-            <p>
-              <BiDollar className="text-accent-primary" />
-              {fees}
-            </p>
-            <p>
-              <FiFlag className="text-accent-primary" />
-              {country}
-            </p>
+        <div className={styles.body}>
+          <p className={styles.titleSm}>{specialized}</p>
+          <h3 className={styles.title}>{name}</h3>
+          <p className={styles.text}>{description.slice(0, 150) + '...'}</p>
+          <div className={styles.actions}>
+            <button className={styles.book}>
+              <AiOutlineCalendar />
+            </button>
+            <Link className={styles.profile} to={`/details/${_id}`}>
+              View Profile
+            </Link>
           </div>
+
+          {/* <div className={styles.footer}>
+            <div className={styles.stats}>
+              <p>
+                <AiOutlineStar className="text-accent-primary" />
+                {ratings}
+              </p>
+              <p>
+                <BiDollar className="text-accent-primary" />
+                {fees}
+              </p>
+              <p>
+                <FiFlag className="text-accent-primary" />
+                {country}
+              </p>
+            </div>
+          </div> */}
         </div>
-        <Link className="btn btn-primary" to={`/details/${_id}`}>
-          Details
-        </Link>
       </div>
     </PhotoProvider>
   );

@@ -84,7 +84,7 @@ body {
   font-weight: var(--font-weight-regular);
   line-height: 1.6;
   color: var(--color-light-400);
-  background-color: var(--color-dark-500);
+  background-color: var(--color-dark-400);
 }
 
 h1,
