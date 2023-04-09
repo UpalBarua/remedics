@@ -83,11 +83,15 @@ const Reviews = () => {
         <h2 className="secondary-title text-accent-secondary">
           Patient Feedback
         </h2>
-        <form onSubmit={handleReviewSubmit}>
-          <textarea ref={reviewRef} className={styles.textarea}></textarea>
-          <button className="btn btn-primary" type="submit">
-            Submit
-          </button>
+        <form className={styles.newReview} onSubmit={handleReviewSubmit}>
+          <textarea
+            ref={reviewRef}
+            className={styles.textarea}
+            placeholder="Enter your feedback"
+          />
+          <div className={styles.footer}>
+            <button type="submit">Submit</button>
+          </div>
         </form>
       </div>
       <div className={styles.column}>
@@ -100,7 +104,6 @@ const Reviews = () => {
           />
         ))}
       </div>
-      <Toaster />
     </section>
   );
 };

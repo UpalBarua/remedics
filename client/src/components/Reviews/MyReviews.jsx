@@ -57,7 +57,6 @@ const MyReviews = () => {
           <h2 className={styles.text}>No Reviews Added</h2>
         )}
       </div>
-      <Toaster />
     </section>
   );
 };

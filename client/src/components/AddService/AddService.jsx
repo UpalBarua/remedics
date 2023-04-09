@@ -15,7 +15,6 @@ const AddService = () => {
         </p>
       </div>
       <AddServiceForm />
-      <Toaster />
     </section>
   );
 };

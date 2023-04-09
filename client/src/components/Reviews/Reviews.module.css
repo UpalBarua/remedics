@@ -7,6 +7,22 @@
   gap: var(--spacing-xl);
 }
 
+.newReview {
+  margin-block: var(--spacing-xl);
+  background-color: var(--color-dark-500);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: var(--spacing-md);
+}
+
+.newReview button {
+  background-color: var(--color-accent-primary-300);
+  border: 0;
+  border-radius: 100vmax;
+  color: var(--color-light-300);
+  padding: var(--spacing-xs) var(--spacing-lg);
+}
+
 .textarea {
   width: 100%;
   min-height: 10rem;
@@ -14,9 +30,8 @@
   resize: none;
   color: var(--color-light-400);
   border-radius: var(--border-radius);
-  border: 2px solid rgba(255, 255, 255, 0.2);
   padding: var(--spacing-lg);
-  margin-block: var(--spacing-xl);
+  border: 0;
 }
 
 .textarea:focus,
