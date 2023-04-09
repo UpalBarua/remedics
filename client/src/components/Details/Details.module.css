@@ -1,43 +1,67 @@
 .grid {
   display: grid;
   grid-template-columns: 1fr;
-  justify-content: center;
   gap: var(--spacing-2xl);
   margin-block: var(--spacing-2xl);
-}
-
-.column {
-  border-radius: var(--border-radius);
+  padding-top: var(--spacing-6xl);
 }
 
 .column:first-child {
-  background-color: var(--color-dark-400);
   display: grid;
-  text-align: center;
   justify-items: center;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-sm);
+
+  /* border: 2px solid lime; */
+}
+
+.information {
+  display: grid;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-lg);
+  color: var(--color-light-500);
+}
+
+.name {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
 }
 
 .img {
-  height: 8rem;
-  width: 8rem;
+  height: 10rem;
+  width: 10rem;
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
+  border: 3px solid var(--color-light-500);
+  margin-bottom: var(--spacing-lg);
 }
 
 .stats {
-  font-size: var(--font-size-2xl);
+  font-size: var(--font-size-xl);
   font-weight: var(--font-weight-semibold);
   display: flex;
-  justify-content: space-between;
-  gap: var(--spacing-2xl);
+  gap: var(--spacing-xl);
 }
 
 .stats > p {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+}
+
+.introduction,
+.education,
+.appointment {
+  padding-top: var(--spacing-2xl);
+}
+
+.introduction > h2,
+.education > h2,
+.appointment > h2 {
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-xl);
+  padding-bottom: var(--spacing-sm);
 }
 
 .login {
@@ -55,10 +79,12 @@
     text-align: start;
     justify-items: start;
     align-content: start;
-    padding: var(--spacing-2xl);
+    padding: var(--spacing-3xl);
+    border-radius: 12px;
+    background-color: var(--color-dark-500);
   }
-  /* 
-  .column:last-child {
-    padding: var(--spacing-2xl);
-  } */
+
+  .information {
+    max-width: 30rem;
+  }
 }

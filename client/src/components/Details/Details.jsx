@@ -49,24 +49,40 @@ const Details = () => {
   return (
     <section className={`container ${styles.grid}`}>
       <div className={styles.column}>
-        <img className={styles.img} src={img} alt={name} />
-        <h2 className="primary-title">{name}</h2>
-        <p className="secondary-title text-accent-primary">{specialized}</p>
-        <div className={styles.stats}>
+        <div className={styles.information}>
+          <img className={styles.img} src={img} alt={name} />
+          <h2 className={styles.name}>{name}</h2>
           <p>
-            <AiOutlineStar className="text-accent-primary" />
-            {ratings}
+            MBBS, MD, D.Litt - Honoris Causa Chariman and Cheif - Cardiology 38
+            Years practice 4 awards
           </p>
-          <p>
-            <BiDollar className="text-accent-primary" />
-            {fees}
-          </p>
-          <p>
-            <FiFlag className="text-accent-primary" />
-            {country}
-          </p>
+          <div className={styles.stats}>
+            <p>
+              <AiOutlineStar className="text-accent-primary" />
+              {ratings}/5
+            </p>
+            <p>
+              <BiDollar className="text-accent-primary" />
+              {fees}
+            </p>
+          </div>
         </div>
-        <p>{description}</p>
+        <div className={styles.appointment}>
+          <h2>Appointment</h2>
+          <div>
+            <p>Fortis Escorts Heart Institute, Okhla Road</p>
+            <p>Okhla Rd, New Friends Colony, New Delhi, Delhi 110025</p>
+            {/* <button className="btn btn-primary">Book Appointment</button> */}
+          </div>
+        </div>
+        <div className={styles.introduction}>
+          <h2>Introduction</h2>
+          <p>{description?.slice(0, 500)}</p>
+        </div>
+        <div className={styles.education}>
+          <h2>Education</h2>
+          <p>{description?.slice(0, 500)}</p>
+        </div>
       </div>
       {user ? (
         <div className={styles.column}>

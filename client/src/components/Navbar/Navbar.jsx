@@ -47,7 +47,7 @@ const Navbar = () => {
                 <li className={styles.menuItem}>
                   <NavLink to="/reviews">My Reviews</NavLink>
                 </li>
-                <li className={styles.menuItem}>
+                {/* <li className={styles.menuItem}>
                   <NavLink className="btn btn-primary" to="/add">
                     Add Service
                   </NavLink>
@@ -56,7 +56,7 @@ const Navbar = () => {
                   <button className="btn btn-ghost" onClick={logOut}>
                     Log Out
                   </button>
-                </li>
+                </li> */}
               </>
             ) : (
               <li className={styles.menuItem}>

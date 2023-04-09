@@ -1,27 +1,27 @@
 .card {
   display: grid;
   gap: var(--spacing-sm);
-  background-color: var(--color-dark-300);
+  background-color: var(--color-dark-500);
   border-radius: var(--border-radius);
-  padding: var(--spacing-2xl);
+  padding: var(--spacing-xl);
   text-align: start;
 }
 
 .img {
-  height: 4rem;
-  width: 4rem;
+  height: 3.5rem;
+  width: 3.5rem;
   border-radius: 50%;
   margin-bottom: var(--spacing-lg);
 }
 
 .name {
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
 }
 
 .email {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  color: var(--color-light-500);
   font-style: italic;
 }
 

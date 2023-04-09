@@ -78,7 +78,9 @@ const Reviews = () => {
   return (
     <section className={styles.grid}>
       <div className={styles.column}>
-        <h2 className="secondary-title text-accent-secondary">Review</h2>
+        <h2 className="secondary-title text-accent-secondary">
+          Patient Feedback
+        </h2>
         <form onSubmit={handleReviewSubmit}>
           <textarea ref={reviewRef} className={styles.textarea}></textarea>
           <button className="btn btn-primary" type="submit">

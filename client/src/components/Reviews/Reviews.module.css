@@ -1,15 +1,20 @@
-.column:last-child {
+.column:first-child {
+  margin-bottom: var(--spacing-4xl);
+}
+
+.column:nth-child(2) {
   display: grid;
   gap: var(--spacing-xl);
 }
 
 .textarea {
-  min-width: 100%;
+  width: 100%;
   min-height: 10rem;
-  background-color: var(--color-dark-300);
+  background-color: var(--color-dark-500);
+  resize: none;
   color: var(--color-light-400);
   border-radius: var(--border-radius);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   padding: var(--spacing-lg);
   margin-block: var(--spacing-xl);
 }

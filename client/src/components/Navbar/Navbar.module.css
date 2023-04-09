@@ -4,7 +4,7 @@
   z-index: 20;
   width: 100%;
   background-color: transparent;
-  transition: background-color 350ms ease-out;
+  transition: background-color 150ms ease-out;
 }
 
 .header[data-scrolled='true'] {
@@ -62,7 +62,7 @@
 
 @media screen and (min-width: 48em) {
   .navbar {
-    padding-block: var(--spacing-xl);
+    padding-block: var(--spacing-lg);
   }
 
   .menu {

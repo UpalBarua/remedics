@@ -22,7 +22,7 @@ const ServiceCard = ({ service }) => {
           <div className={styles.stats}>
             <p>
               <AiOutlineStar className="text-accent-primary" />
-              {ratings}
+              {ratings}/5
             </p>
             <p>
               <BiDollar className="text-accent-primary" />
