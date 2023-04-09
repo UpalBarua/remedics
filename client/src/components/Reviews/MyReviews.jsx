@@ -6,25 +6,23 @@ import styles from './MyReviews.module.css';
 import { useSpinner } from '../../contexts/SpinnerContext';
 import useTitle from '../../hooks/useTitle';
 import { Toaster } from 'react-hot-toast';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 const MyReviews = () => {
   useTitle('My Reviews');
   const { user } = useAuth();
   const { setIsSpinnerVisible } = useSpinner();
-  const [reviewsData, setReviewsData] = useState([]);
 
-  useEffect(() => {
-    setIsSpinnerVisible(true);
-
-    (async () => {
-      const response = await fetch(
+  const { data: myReviews } = useQuery({
+    queryKey: ['myReviews'],
+    queryFn: async () => {
+      const res = await axios.get(
         `http://localhost:3000/reviews/user/${user.email}`
       );
-      const data = await response.json();
-      setReviewsData(data);
-      setIsSpinnerVisible(false);
-    })();
-  }, []);
+      return res.data;
+    },
+  });
 
   const deleteReview = (id) => {
     setReviewsData((prevReviewsData) =>
@@ -46,8 +44,8 @@ const MyReviews = () => {
       <h2 className="secondary-title text-accent-secondary">reviews</h2>
       <p className="primary-title">see all of the reviews that you submitted</p>
       <div className={styles.grid}>
-        {reviewsData.length > 0 ? (
-          reviewsData.map((data) => (
+        {myReviews?.length > 0 ? (
+          myReviews.map((data) => (
             <ReviewCard
               key={data._id}
               data={data}

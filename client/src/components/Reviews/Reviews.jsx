@@ -62,43 +62,6 @@ const Reviews = () => {
     }
   );
 
-  // const handleReviewSubmit = (event) => {
-  //   event.preventDefault();
-  //   setIsSpinnerVisible(true);
-
-  //   const review = {
-  //     service: serviceId,
-  //     name: user.displayName,
-  //     email: user.email,
-  //     review: reviewRef.current.value,
-  //   };
-
-  //   fetch(`http://localhost:3000/reviews/${serviceId}`, {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(review),
-  //   })
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       if (data.acknowledged) {
-  //         setReviewsData((prevReviewsData) => [review, ...prevReviewsData]);
-  //         toast('Review Added', {
-  //           icon: '✅',
-  //           style: {
-  //             borderRadius: '10px',
-  //             background: 'var(--color-dark-500)',
-  //             color: '#fff',
-  //             marginTop: '5rem',
-  //             fontSize: '1.125rem',
-  //           },
-  //         });
-  //       }
-  //       setIsSpinnerVisible(false);
-  //     });
-  // };
-
   const deleteReview = (id) => {
     setReviewsData((prevReviewsData) =>
       prevReviewsData.filter((data) => data._id !== id)

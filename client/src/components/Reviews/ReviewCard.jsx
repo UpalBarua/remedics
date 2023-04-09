@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import styles from './ReviewCard.module.css';
 import { toast } from 'react-hot-toast';
+import axios from 'axios';
 
 const ReviewCard = ({ data, deleteReview, editReview }) => {
   const { _id, name, review, email, img } = data;
@@ -8,9 +9,8 @@ const ReviewCard = ({ data, deleteReview, editReview }) => {
   const reviewRef = useRef();
 
   const handleDelete = () => {
-    fetch(`http://localhost:3000/reviews/${_id}`, {
-      method: 'DELETE',
-    })
+    axios
+      .delete(`http://localhost:3000/reviews/${_id}`)
       .then((response) => response.json())
       .then((data) => {
         if (data.deletedCount > 0) {
@@ -36,13 +36,8 @@ const ReviewCard = ({ data, deleteReview, editReview }) => {
   const handleSave = () => {
     const newReview = reviewRef.current.value;
 
-    fetch(`http://localhost:3000/reviews/${_id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ newReview }),
-    })
+    axios
+      .patch(`http://localhost:3000/reviews/${_id}`, newReview)
       .then((response) => response.json())
       .then((data) => {
         editReview(_id, newReview);

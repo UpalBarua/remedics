@@ -3,21 +3,23 @@ import { Link } from 'react-router-dom';
 import { useSpinner } from '../../contexts/SpinnerContext';
 import ServiceCard from './ServiceCard';
 import styles from './Services.module.css';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 const Services = () => {
-  const [servicesData, setServicesData] = useState([]);
   const { setIsSpinnerVisible } = useSpinner();
 
-  useEffect(() => {
-    setIsSpinnerVisible(true);
-
-    (async () => {
-      const response = await fetch('http://localhost:3000/services?limit=3');
-      const data = await response.json();
-      setServicesData(data);
-      setIsSpinnerVisible(false);
-    })();
-  }, []);
+  const {
+    data: services = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['services'],
+    queryFn: async () => {
+      const res = await axios.get('http://localhost:3000/services?limit=3');
+      return res.data;
+    },
+  });
 
   return (
     <section className={`container ${styles.services}`}>
@@ -25,7 +27,7 @@ const Services = () => {
       <p className="primary-title">Find top doctors for your medical needs. </p>
 
       <div className={styles.grid}>
-        {servicesData.map((service) => (
+        {services.map((service) => (
           <ServiceCard key={service._id} service={service} />
         ))}
       </div>
