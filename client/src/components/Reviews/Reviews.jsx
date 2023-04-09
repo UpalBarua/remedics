@@ -1,64 +1,103 @@
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useSpinner } from '../../contexts/SpinnerContext';
-import { json, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ReviewCard from './ReviewCard';
 import styles from './Reviews.module.css';
 import { toast, Toaster } from 'react-hot-toast';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 
 const Reviews = () => {
+  const queryClient = useQueryClient();
+
   const { user } = useAuth();
   const { setIsSpinnerVisible } = useSpinner();
-  const [reviewsData, setReviewsData] = useState([]);
   const { serviceId } = useParams();
   const reviewRef = useRef();
 
-  useEffect(() => {
-    (async () => {
-      const response = await fetch(
-        `http://localhost:3000/reviews/${serviceId}`
-      );
-      const data = await response.json();
-      setReviewsData(data);
-    })();
-  }, []);
+  const {
+    data: reviews = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['reviews'],
+    queryFn: async () => {
+      const res = await axios.get(`http://localhost:3000/reviews/${serviceId}`);
+      return res.data;
+    },
+  });
 
-  const handleReviewSubmit = (event) => {
-    event.preventDefault();
-    setIsSpinnerVisible(true);
+  const { mutate: handleReviewSubmit } = useMutation(
+    async (event) => {
+      event.preventDefault();
+      setIsSpinnerVisible(true);
 
-    const review = {
-      service: serviceId,
-      name: user.displayName,
-      email: user.email,
-      review: reviewRef.current.value,
-    };
+      const review = {
+        service: serviceId,
+        name: user.displayName,
+        email: user.email,
+        review: reviewRef.current.value,
+      };
 
-    fetch(`http://localhost:3000/reviews/${serviceId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(review),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.acknowledged) {
-          setReviewsData((prevReviewsData) => [review, ...prevReviewsData]);
-          toast('Review Added', {
-            icon: '✅',
-            style: {
-              borderRadius: '10px',
-              background: 'var(--color-dark-500)',
-              color: '#fff',
-              marginTop: '5rem',
-              fontSize: '1.125rem',
-            },
-          });
-        }
-        setIsSpinnerVisible(false);
-      });
-  };
+      const res = await axios.post('http://localhost:3000/reviews/', review);
+
+      if (res.status === 201) {
+        toast('Review Added', {
+          icon: '✅',
+          style: {
+            borderRadius: '10px',
+            background: 'var(--color-dark-500)',
+            color: '#fff',
+            marginTop: '5rem',
+            fontSize: '1.125rem',
+          },
+        });
+      }
+
+      setIsSpinnerVisible(false);
+    },
+    {
+      onSuccess: () => queryClient.invalidateQueries(),
+    }
+  );
+
+  // const handleReviewSubmit = (event) => {
+  //   event.preventDefault();
+  //   setIsSpinnerVisible(true);
+
+  //   const review = {
+  //     service: serviceId,
+  //     name: user.displayName,
+  //     email: user.email,
+  //     review: reviewRef.current.value,
+  //   };
+
+  //   fetch(`http://localhost:3000/reviews/${serviceId}`, {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(review),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       if (data.acknowledged) {
+  //         setReviewsData((prevReviewsData) => [review, ...prevReviewsData]);
+  //         toast('Review Added', {
+  //           icon: '✅',
+  //           style: {
+  //             borderRadius: '10px',
+  //             background: 'var(--color-dark-500)',
+  //             color: '#fff',
+  //             marginTop: '5rem',
+  //             fontSize: '1.125rem',
+  //           },
+  //         });
+  //       }
+  //       setIsSpinnerVisible(false);
+  //     });
+  // };
 
   const deleteReview = (id) => {
     setReviewsData((prevReviewsData) =>
@@ -89,7 +128,7 @@ const Reviews = () => {
         </form>
       </div>
       <div className={styles.column}>
-        {reviewsData.map((data) => (
+        {reviews.map((data) => (
           <ReviewCard
             key={data._id}
             data={data}
