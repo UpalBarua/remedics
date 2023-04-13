@@ -7,6 +7,7 @@ import styles from './Reviews.module.css';
 import { toast, Toaster } from 'react-hot-toast';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { AiFillStar } from 'react-icons/ai';
 
 const Reviews = () => {
   const queryClient = useQueryClient();
@@ -90,7 +91,16 @@ const Reviews = () => {
             placeholder="Enter your feedback"
           />
           <div className={styles.footer}>
-            <button type="submit">Submit</button>
+            <div className={styles.rating}>
+              <AiFillStar />
+              <AiFillStar />
+              <AiFillStar />
+              <AiFillStar />
+              <AiFillStar />
+            </div>
+            <button type="submit" onClick={handleReviewSubmit}>
+              Submit
+            </button>
           </div>
         </form>
       </div>

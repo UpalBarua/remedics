@@ -20,7 +20,8 @@
   border: 0;
   border-radius: 100vmax;
   color: var(--color-light-300);
-  padding: var(--spacing-xs) var(--spacing-lg);
+  padding: var(--spacing-xs) var(--spacing-xl);
+  font-weight: var(--font-weight-semibold);
 }
 
 .textarea {
@@ -38,4 +39,14 @@
 .textarea:hover {
   border-color: var(--color-accent-primary-400);
   outline: 0;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rating {
+  font-size: var(--font-size-lg);
 }
