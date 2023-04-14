@@ -1,0 +1,15 @@
+.modal {
+  background-color: var(--color-dark-500);
+  z-index: 20;
+  margin-top: 5rem;
+}
+
+.appointmentForm {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.timeSlots {
+  display: flex;
+  gap: var(--spacing-md);
+}

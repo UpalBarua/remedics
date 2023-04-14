@@ -1,86 +1,149 @@
 import { useState } from 'react';
 import Modal from 'react-modal';
 import { DayPicker } from 'react-day-picker';
+import { useForm } from 'react-hook-form';
 import styles from './Appointment.module.css';
 
 const DEFAULT_SLOTS = [
   {
     id: 0,
-    from: '9.30 AM',
-    to: '10.30 AM',
+    from: new Date().setHours(9, 30),
+    to: new Date().setHours(10, 30),
   },
   {
     id: 1,
-    from: '10.30 AM',
-    to: '11.30 AM',
+    from: new Date().setHours(10, 30),
+    to: new Date().setHours(11, 30),
   },
   {
     id: 2,
-    from: '11.30 AM',
-    to: '12.30 PM',
+    from: new Date().setHours(11, 30),
+    to: new Date().setHours(12, 30),
   },
   {
     id: 3,
-    from: '12.30 PM',
-    to: '1.30 PM',
+    from: new Date().setHours(12, 30),
+    to: new Date().setHours(13, 30),
   },
   {
     id: 4,
-    from: '1.30 PM',
-    to: '2.30 PM',
+    from: new Date().setHours(13, 30),
+    to: new Date().setHours(14, 30),
   },
   {
     id: 5,
-    from: '4.30 PM',
-    to: '5.30 PM',
+    from: new Date().setHours(16, 30),
+    to: new Date().setHours(17, 30),
   },
   {
     id: 6,
-    from: '5.30 AM',
-    to: '6.30 AM',
+    from: new Date().setHours(5, 30),
+    to: new Date().setHours(6, 30),
   },
 ];
 
-function Appointment({ isModalOpen, setIsModalOpen }) {
-  const newAppointment = {
-    doctorsId: '',
-    patientsId: '',
-    appointmentDate: '',
-    appointmentTimeSlot: '',
-    reasonsForVisit: '',
-    appointmentStatus: '',
+function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
+  const [appointmentDate, setAppointmentDate] = useState(null);
+  const [appointmentTimeSlot, setAppointmentTimeSlot] = useState(null);
+
+  const { register, handleSubmit } = useForm();
+
+  const handleNewAppointment = async ({
+    name,
+    age,
+    gender,
+    phone,
+    reasonsForVisit,
+  }) => {
+    const newAppointment = {
+      doctorId,
+      patient: {
+        id: '',
+        name,
+        age,
+        gender,
+        phone,
+      },
+      appointmentDate,
+      appointmentTimeSlot,
+      reasonsForVisit,
+      appointmentStatus: 'pending',
+    };
+
+    console.log(newAppointment);
   };
 
   return (
     <Modal isOpen={isModalOpen} className={styles.modal}>
-      <form>
+      <form
+        className={styles.appointmentForm}
+        onSubmit={handleSubmit(handleNewAppointment)}>
         <div>
           <div>
             <label>Name</label>
-            <input type="text" />
+            <input
+              type="text"
+              {...register('name', {
+                required: { value: true, message: 'Name is required' },
+              })}
+            />
           </div>
           <div>
             <label>Age</label>
-            <input type="number" />
+            <input
+              type="number"
+              {...register('age', {
+                required: { value: true, message: 'Name is required' },
+              })}
+            />
           </div>
           <div>
             <label>Gender</label>
-            <input type="text" />
+            <input
+              type="text"
+              {...register('gender', {
+                required: { value: true, message: 'Name is required' },
+              })}
+            />
           </div>
           <div>
             <label>Phone</label>
-            <input type="number" />
+            <input
+              type="number"
+              {...register('phone', {
+                required: { value: true, message: 'Name is required' },
+              })}
+            />
           </div>
           <div>
             <label>Reasons For Visit</label>
-            <textarea type="text" />
+            <textarea
+              type="text"
+              {...register('reasonsForVisit', {
+                required: { value: true, message: 'Name is required' },
+              })}
+            />
           </div>
         </div>
         <div>
-          <DayPicker />
-          {DEFAULT_SLOTS.map(({ id, from, to }) => (
-            <p key={id}>{from + ' - ' + to}</p>
-          ))}
+          <DayPicker
+            mode="single"
+            selected={appointmentDate}
+            onSelect={setAppointmentDate}
+          />
+          <div>
+            {DEFAULT_SLOTS.map((slot) => (
+              <label key={slot.id}>
+                <input
+                  type="radio"
+                  name="timeSlot"
+                  value={slot}
+                  onChange={() => setAppointmentTimeSlot(slot)}
+                />
+                {slot.to + ' ' + slot.from}
+              </label>
+            ))}
+          </div>
         </div>
         <button type="submit">Book</button>
         <button onClick={() => setIsModalOpen(false)}>close</button>

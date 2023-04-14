@@ -45,8 +45,16 @@ const Details = () => {
     );
   }
 
-  const { name, img, description, ratings, fees, specialized, country } =
-    serviceData;
+  const {
+    _id: doctorId,
+    name,
+    img,
+    description,
+    ratings,
+    fees,
+    specialized,
+    country,
+  } = serviceData;
 
   return (
     <section className={`container ${styles.grid}`}>
@@ -99,7 +107,11 @@ const Details = () => {
           to add review!
         </h2>
       )}
-      <Appointment isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <Appointment
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        doctorId={doctorId}
+      />
     </section>
   );
 };
