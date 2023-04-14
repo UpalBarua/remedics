@@ -9,13 +9,11 @@ import { BiDollar } from 'react-icons/bi';
 import { FiFlag } from 'react-icons/fi';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
-import Appointment from '../Appointment/Appointment';
 
 const Details = () => {
   const { user } = useAuth();
   const { setIsSpinnerVisible } = useSpinner();
   const { serviceId } = useParams();
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
     data: serviceData = {},
@@ -76,7 +74,6 @@ const Details = () => {
             <p>Okhla Rd, New Friends Colony, New Delhi, Delhi 110025</p>
             {/* <button className="btn btn-primary">Book Appointment</button> */}
           </div>
-          <button onClick={() => setIsModalOpen(true)}>Click Me</button>
         </div>
         <div className={styles.introduction}>
           <h2>Introduction</h2>
@@ -99,7 +96,6 @@ const Details = () => {
           to add review!
         </h2>
       )}
-      <Appointment isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
     </section>
   );
 };
