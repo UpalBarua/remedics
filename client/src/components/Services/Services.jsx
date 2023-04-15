@@ -4,7 +4,7 @@ import { useSpinner } from '../../contexts/SpinnerContext';
 import ServiceCard from './ServiceCard';
 import styles from './Services.module.css';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import axios from '../../api/axios';
 
 const Services = () => {
   const { setIsSpinnerVisible } = useSpinner();
@@ -16,7 +16,7 @@ const Services = () => {
   } = useQuery({
     queryKey: ['services'],
     queryFn: async () => {
-      const res = await axios.get('http://localhost:3000/services?limit=3');
+      const res = await axios.get('/services?limit=3');
       return res.data;
     },
   });

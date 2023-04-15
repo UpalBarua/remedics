@@ -4,7 +4,9 @@ import App from './components/App/App';
 import './assets/index.css';
 import './assets/utilities.css';
 import 'react-photo-view/dist/react-photo-view.css';
+import Modal from 'react-modal';
 
+Modal.setAppElement('#root');
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />

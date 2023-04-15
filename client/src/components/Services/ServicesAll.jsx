@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import ServiceCard from './ServiceCard';
 import { useSpinner } from '../../contexts/SpinnerContext';
-import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import styles from './Services.module.css';
+import axios from '../../api/axios';
 
 const ServicesAll = () => {
   const { setIsSpinnerVisible } = useSpinner();
@@ -15,7 +15,7 @@ const ServicesAll = () => {
   } = useQuery({
     queryKey: ['allServices'],
     queryFn: async () => {
-      const res = await axios.get('http://localhost:3000/services');
+      const res = await axios.get('/services');
       return res.data;
     },
   });

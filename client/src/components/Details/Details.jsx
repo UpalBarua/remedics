@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useSpinner } from '../../contexts/SpinnerContext';
@@ -6,10 +6,9 @@ import Reviews from '../Reviews/Reviews';
 import styles from './Details.module.css';
 import { AiOutlineStar } from 'react-icons/ai';
 import { BiDollar } from 'react-icons/bi';
-import { FiFlag } from 'react-icons/fi';
-import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import Appointment from '../Appointment/Appointment';
+import axios from '../../api/axios';
 
 const Details = () => {
   const { user } = useAuth();
@@ -24,9 +23,7 @@ const Details = () => {
   } = useQuery({
     queryKey: ['serviceDetails'],
     queryFn: async () => {
-      const res = await axios.get(
-        `http://localhost:3000/services/${serviceId}`
-      );
+      const res = await axios.get(`/services/${serviceId}`);
       return res.data;
     },
   });

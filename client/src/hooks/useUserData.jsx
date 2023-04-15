@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../contexts/AuthContext';
-import axios from 'axios';
+import axios from '../api/axios';
 
 const useUserData = () => {
   const { user } = useAuth();
@@ -15,9 +15,7 @@ const useUserData = () => {
     queryKey: ['userData'],
     queryFn: async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:3000/user/?email=${user?.email}`
-        );
+        const { data } = await axios.get(`/user/?email=${user?.email}`);
         return data;
       } catch (error) {
         console.log(error);

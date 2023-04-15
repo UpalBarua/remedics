@@ -1,8 +1,8 @@
-import axios from 'axios';
+import axios from '../api/axios';
 
 const createNewUser = async (newUserData) => {
   try {
-    const res = await axios.post('http://localhost:3000/user/', newUserData);
+    const res = await axios.post('/user', newUserData);
 
     return res.data;
   } catch (error) {

@@ -5,22 +5,18 @@ import ReviewCard from './ReviewCard';
 import styles from './MyReviews.module.css';
 import { useSpinner } from '../../contexts/SpinnerContext';
 import useTitle from '../../hooks/useTitle';
-import { Toaster } from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import axios from '../../api/axios';
 
 const MyReviews = () => {
   useTitle('My Reviews');
   const { user } = useAuth();
-  const { setIsSpinnerVisible } = useSpinner();
 
   const { data: myReviews } = useQuery({
     queryKey: ['myReviews'],
     queryFn: async () => {
-      const res = await axios.get(
-        `http://localhost:3000/reviews/user/${user.email}`
-      );
-      return res.data;
+      const { data } = await axios.get(`/reviews/user/${user.email}`);
+      return data;
     },
   });
 

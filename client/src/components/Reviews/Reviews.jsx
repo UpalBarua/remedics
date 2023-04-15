@@ -6,8 +6,8 @@ import ReviewCard from './ReviewCard';
 import styles from './Reviews.module.css';
 import { toast, Toaster } from 'react-hot-toast';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import { AiFillStar } from 'react-icons/ai';
+import axios from '../../api/axios';
 
 const Reviews = () => {
   const queryClient = useQueryClient();
@@ -24,7 +24,7 @@ const Reviews = () => {
   } = useQuery({
     queryKey: ['reviews'],
     queryFn: async () => {
-      const res = await axios.get(`http://localhost:3000/reviews/${serviceId}`);
+      const res = await axios.get(`/reviews/${serviceId}`);
       return res.data;
     },
   });
