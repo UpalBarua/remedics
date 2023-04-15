@@ -1,56 +1,21 @@
 import { useAuth } from '../../contexts/AuthContext';
-import { useSpinner } from '../../contexts/SpinnerContext';
-import { AiOutlineUser } from 'react-icons/ai';
 import { useForm } from 'react-hook-form';
 import styles from './Form.module.css';
 import { useState } from 'react';
-import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import createNewUser from '../../utils/createNewUser';
+import uploadImage from '../../utils/uploadImage';
 
 const SignupForm = ({ setAuthError }) => {
-  const { signUp, updateUserProfile } = useAuth();
-  const { setIsSpinnerVisible } = useSpinner();
+  const { signUp } = useAuth();
   const [userImg, setUserImg] = useState();
+  const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
-  const uploadImage = async (imageData) => {
-    if (!imageData) {
-      throw new Error('No imageData provided to the uploadImage() function.');
-    }
-
-    const formData = new FormData();
-    formData.append('image', imageData);
-
-    try {
-      const response = await axios.post(
-        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`,
-        formData
-      );
-
-      if (response.data.data.display_url) {
-        console.log(response);
-        return response.data.data.display_url;
-      }
-
-      throw new Error('Failed to upload image: No display URL returned.');
-    } catch (error) {
-      throw new Error(`Failed to upload image: ${error.message}`);
-    }
-  };
-
-  const createNewUser = async (newUserData) => {
-    try {
-      const res = await axios.post('http://localhost:3000/user/', newUserData);
-
-      return res.data;
-    } catch (error) {
-      throw new Error(`Failed to create new user: ${error.message}`);
-    }
-  };
 
   const handleSignup = async ({ name, email, password }) => {
     const imageURL = await uploadImage(userImg);
@@ -64,8 +29,7 @@ const SignupForm = ({ setAuthError }) => {
           email: email,
           picture: imageURL,
         });
-
-        console.log(newUser);
+        navigate('/');
       }
     } catch (error) {
       const errorCode = error.code;

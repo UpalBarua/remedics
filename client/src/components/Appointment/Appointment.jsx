@@ -2,6 +2,10 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 import { DayPicker } from 'react-day-picker';
 import { useForm } from 'react-hook-form';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useAuth } from '../../contexts/AuthContext';
+import useUserData from '../../hooks/useUserData';
 import styles from './Appointment.module.css';
 
 const DEFAULT_SLOTS = [
@@ -46,6 +50,8 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
   const [appointmentDate, setAppointmentDate] = useState(null);
   const [appointmentTimeSlot, setAppointmentTimeSlot] = useState(null);
 
+  const { userData } = useUserData();
+
   const { register, handleSubmit } = useForm();
 
   const handleNewAppointment = async ({
@@ -83,6 +89,7 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
             <label>Name</label>
             <input
               type="text"
+              defaultValue={userData?.userName}
               {...register('name', {
                 required: { value: true, message: 'Name is required' },
               })}

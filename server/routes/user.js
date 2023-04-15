@@ -3,6 +3,22 @@ import User from '../models/User.js';
 
 const router = express.Router();
 
+router.get('/', async (req, res) => {
+  const { email } = req.query;
+
+  try {
+    const result = await User.findOne({ email: email });
+
+    if (!result) {
+      res.status(404).json({ message: 'No user found.' });
+    }
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 router.post('/', async (req, res) => {
   const { body } = req;
 

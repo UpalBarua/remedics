@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import styles from './Form.module.css';
-import { useSpinner } from '../../contexts/SpinnerContext';
 import { useForm } from 'react-hook-form';
+import styles from './Form.module.css';
 
 const LoginForm = ({ setAuthError }) => {
-  const { setIsSpinnerVisible } = useSpinner();
   const navigate = useNavigate();
 
   const {
@@ -18,8 +16,6 @@ const LoginForm = ({ setAuthError }) => {
   const { logIn } = useAuth();
 
   const handleLogIn = async ({ email, password }) => {
-    setIsSpinnerVisible(true);
-
     try {
       const res = await logIn(email, password);
 
@@ -31,8 +27,6 @@ const LoginForm = ({ setAuthError }) => {
       console.log(`Login failed with error code: ${errorCode}`);
 
       setAuthError(errorCode);
-    } finally {
-      setIsSpinnerVisible(false);
     }
   };
 
