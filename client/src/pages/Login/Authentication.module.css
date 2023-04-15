@@ -1,4 +1,4 @@
-.loginContainer {
+.container {
   display: grid;
   background-color: var(--color-dark-500);
   background-position: center;
@@ -6,7 +6,7 @@
   min-height: 100vh;
 }
 
-.loginContainer::after {
+.container::after {
   content: '';
   display: block;
   position: fixed;
@@ -31,39 +31,28 @@
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
   text-transform: capitalize;
+  letter-spacing: 1px;
+  padding-bottom: var(--spacing-lg);
 }
 
 .text {
-  font-size: var(--font-size-400);
   color: rgba(255, 255, 255, 0.75);
   width: 80%;
   margin-inline: auto;
   padding-bottom: var(--spacing-md);
 }
 
-.altLoginText {
-  padding-top: var(--spacing-2xl);
-  padding-bottom: var(--spacing-lg);
-}
-
-.buttonGroup {
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing-lg);
-  padding-bottom: var(--spacing-2xl);
-}
-
 .altLoginButton {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: var(--spacing-sm);
   background-color: transparent;
   color: var(--color-light-300);
   border: 2px solid rgba(255, 255, 255, 0.35);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-semibold);
   padding: var(--spacing-md) var(--spacing-2xl);
-  border-radius: var(--border-radius);
+  border-radius: 100vmax;
 }
 
 .registerText > button {
@@ -72,6 +61,7 @@
   background-color: transparent;
   border: 0;
   cursor: pointer;
+  margin-top: var(--spacing-xl);
 }
 
 .errorMessage {
@@ -84,7 +74,7 @@
 }
 
 @media screen and (min-width: 22em) {
-  .loginContainer {
+  .container {
     place-content: center;
     background-image: url('../../assets/images/login-bg.jpg');
     background-color: var(--color-dark-500);
@@ -93,5 +83,6 @@
   .login {
     max-width: 30rem;
     padding: var(--spacing-5xl) var(--spacing-5xl);
+    margin-bottom: var(--spacing-6xl);
   }
 }

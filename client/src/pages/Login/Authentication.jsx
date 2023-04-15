@@ -1,9 +1,9 @@
 import LoginForm from '../../components/Forms/LoginForm';
 import SignupForm from '../../components/Forms/SignupForm';
 import { AiOutlineGoogle } from 'react-icons/ai';
-import styles from './Login.module.css';
 import { useAuth } from '../../contexts/AuthContext';
 import { useState } from 'react';
+import styles from './Authentication.module.css';
 
 const ERROR_MESSAGES = {
   'auth/wrong-password':
@@ -60,17 +60,11 @@ const Authentication = () => {
   };
 
   return (
-    <section className={styles.loginContainer}>
+    <section className={styles.container}>
       <div className={styles.login}>
         <h2 className={styles.title}>
-          User {authPage === 'signup' ? 'Sign Up' : 'Login'}
+          {authPage === 'signup' ? 'Sign Up' : 'Login'}
         </h2>
-        <p className={styles.text}>
-          Hey, Enter your details to{' '}
-          {authPage === 'signup'
-            ? 'create a new account.'
-            : 'login to your account.'}
-        </p>
         {authPage === 'signup' ? (
           <SignupForm setAuthError={setAuthError} />
         ) : (
@@ -81,19 +75,10 @@ const Authentication = () => {
             {ERROR_MESSAGES[authError] || ERROR_MESSAGES.UNKNOWN}
           </p>
         )}
-        <p className={styles.altLoginText}>Or Sign in with</p>
-        <div className={styles.buttonGroup}>
-          <button
-            className={styles.altLoginButton}
-            onClick={handleGoogleSignIn}>
-            <AiOutlineGoogle />
-            <span>Google</span>
-          </button>
-          <button className={styles.altLoginButton}>
-            <AiOutlineGoogle />
-            <span>Google</span>
-          </button>
-        </div>
+        <button className={styles.altLoginButton} onClick={handleGoogleSignIn}>
+          <AiOutlineGoogle />
+          <span>Google</span>
+        </button>
         <p className={styles.registerText}>
           Don't have an account?{' '}
           <button onClick={handleAuthPageToggle}>

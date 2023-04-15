@@ -80,7 +80,7 @@ body {
   position: relative;
   min-height: 100vh;
   font-family: var(--font-primary);
-  font-size: var(--font-size-400);
+  font-size: var(--font-size-md);
   font-weight: var(--font-weight-regular);
   line-height: 1.6;
   color: var(--color-light-400);

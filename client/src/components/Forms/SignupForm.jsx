@@ -17,40 +17,61 @@ const SignupForm = ({ setAuthError }) => {
     formState: { errors },
   } = useForm();
 
-  const handleSignup = async ({ name, email, password }) => {
-    setIsSpinnerVisible(true);
-    let img = '';
+  const uploadImage = async (imageData) => {
+    if (!imageData) {
+      throw new Error('No imageData provided to the uploadImage() function.');
+    }
 
     const formData = new FormData();
-    formData.append('image', userImg);
+    formData.append('image', imageData);
 
     try {
-      const res = await axios.post(
+      const response = await axios.post(
         `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMGBB_KEY}`,
         formData
       );
 
-      if (res.data.data.display_url) {
-        img = res.data.data.display_url;
+      if (response.data.data.display_url) {
+        console.log(response);
+        return response.data.data.display_url;
       }
+
+      throw new Error('Failed to upload image: No display URL returned.');
     } catch (error) {
-      console.log(error);
+      throw new Error(`Failed to upload image: ${error.message}`);
     }
+  };
+
+  const createNewUser = async (newUserData) => {
+    try {
+      const res = await axios.post('http://localhost:3000/user/', newUserData);
+
+      return res.data;
+    } catch (error) {
+      throw new Error(`Failed to create new user: ${error.message}`);
+    }
+  };
+
+  const handleSignup = async ({ name, email, password }) => {
+    const imageURL = await uploadImage(userImg);
 
     try {
-      const res = await signUp(email, password);
+      const response = await signUp(email, password);
 
-      if (res?.user?.uid) {
-        updateUserProfile(name, img);
-        navigate(-1);
+      if (response?.user?.uid) {
+        const newUser = await createNewUser({
+          userName: name,
+          email: email,
+          picture: imageURL,
+        });
+
+        console.log(newUser);
       }
     } catch (error) {
       const errorCode = error.code;
       console.log(`Login failed with error code: ${errorCode}`);
 
       setAuthError(errorCode);
-    } finally {
-      setIsSpinnerVisible(false);
     }
   };
 
