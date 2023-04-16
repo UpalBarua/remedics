@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
     const result = await User.findOne({ email: email });
 
     if (!result) {
-      res.status(404).json({ message: 'No user found.' });
+      return res.status(404).json({ message: 'No user found.' });
     }
 
     res.status(200).json(result);
@@ -22,7 +22,9 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   const { body } = req;
 
-  if (!body) res.status(400).json({ message: 'Body not provided.' });
+  if (!body) {
+    return res.status(400).json({ message: 'Body not provided.' });
+  }
 
   try {
     const response = await User.create(body);

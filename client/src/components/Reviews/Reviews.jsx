@@ -8,6 +8,7 @@ import { toast, Toaster } from 'react-hot-toast';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { AiFillStar } from 'react-icons/ai';
 import axios from '../../api/axios';
+import useUserData from '../../hooks/useUserData';
 
 const Reviews = () => {
   const queryClient = useQueryClient();
@@ -17,6 +18,8 @@ const Reviews = () => {
   const { serviceId } = useParams();
   const reviewRef = useRef();
 
+  const { userData } = useUserData();
+
   const {
     data: reviews = [],
     isLoading,
@@ -24,39 +27,32 @@ const Reviews = () => {
   } = useQuery({
     queryKey: ['reviews'],
     queryFn: async () => {
-      const res = await axios.get(`/reviews/${serviceId}`);
-      return res.data;
+      const { data } = await axios.get(`/reviews/${serviceId}`);
+      return data;
     },
   });
 
   const { mutate: handleReviewSubmit } = useMutation(
     async (event) => {
       event.preventDefault();
-      setIsSpinnerVisible(true);
 
-      const review = {
-        service: serviceId,
-        name: user.displayName,
-        email: user.email,
-        review: reviewRef.current.value,
+      const newReview = {
+        serviceId,
+        userName: userData?.userName,
+        email: userData?.email,
+        description: reviewRef.current.value,
+        userImgUrl: userData?.picture,
       };
 
-      const res = await axios.post('http://localhost:3000/reviews/', review);
+      try {
+        const res = await axios.post('/reviews', newReview);
 
-      if (res.status === 201) {
-        toast('Review Added', {
-          icon: '✅',
-          style: {
-            borderRadius: '10px',
-            background: 'var(--color-dark-500)',
-            color: '#fff',
-            marginTop: '5rem',
-            fontSize: '1.125rem',
-          },
-        });
+        if (res.status === 201) {
+          toast.success('Review Added');
+        }
+      } catch (error) {
+        console.log(error);
       }
-
-      setIsSpinnerVisible(false);
     },
     {
       onSuccess: () => queryClient.invalidateQueries(),
@@ -105,12 +101,12 @@ const Reviews = () => {
         </form>
       </div>
       <div className={styles.column}>
-        {reviews.map((data) => (
+        {reviews.map((review) => (
           <ReviewCard
-            key={data._id}
-            data={data}
+            key={review._id}
             deleteReview={deleteReview}
             editReview={editReview}
+            {...review}
           />
         ))}
       </div>

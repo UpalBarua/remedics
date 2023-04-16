@@ -17,14 +17,14 @@ const Details = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
-    data: serviceData = {},
+    data: serviceDetails = {},
     isLoading,
     isError,
   } = useQuery({
     queryKey: ['serviceDetails'],
     queryFn: async () => {
-      const res = await axios.get(`/services/${serviceId}`);
-      return res.data;
+      const { data } = await axios.get(`/services/${serviceId}`);
+      return data;
     },
   });
 
@@ -51,7 +51,7 @@ const Details = () => {
     fees,
     specialized,
     country,
-  } = serviceData;
+  } = serviceDetails;
 
   return (
     <section className={`container ${styles.grid}`}>

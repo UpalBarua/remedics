@@ -2,11 +2,11 @@ import mongoose from 'mongoose';
 
 const ReviewSchema = new mongoose.Schema(
   {
-    service: {
+    serviceId: {
       type: String,
       required: true,
     },
-    name: {
+    userName: {
       type: String,
       required: true,
     },
@@ -14,7 +14,11 @@ const ReviewSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    review: {
+    description: {
+      type: String,
+      required: true,
+    },
+    userImgUrl: {
       type: String,
       required: true,
     },

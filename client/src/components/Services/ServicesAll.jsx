@@ -1,9 +1,8 @@
-import { useState, useEffect } from 'react';
 import ServiceCard from './ServiceCard';
 import { useSpinner } from '../../contexts/SpinnerContext';
 import { useQuery } from '@tanstack/react-query';
-import styles from './Services.module.css';
 import axios from '../../api/axios';
+import styles from './Services.module.css';
 
 const ServicesAll = () => {
   const { setIsSpinnerVisible } = useSpinner();

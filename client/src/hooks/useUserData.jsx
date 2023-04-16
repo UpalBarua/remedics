@@ -18,7 +18,6 @@ const useUserData = () => {
         const { data } = await axios.get(`/user/?email=${user?.email}`);
         return data;
       } catch (error) {
-        console.log(error);
         throw new Error('Failed to fetch data.');
       }
     },

@@ -3,8 +3,15 @@ import styles from './ReviewCard.module.css';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 
-const ReviewCard = ({ data, deleteReview, editReview }) => {
-  const { _id, name, review, email, img } = data;
+const ReviewCard = ({
+  _id,
+  userName,
+  email,
+  userImgUrl,
+  description,
+  deleteReview,
+  editReview,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
   const reviewRef = useRef();
 
@@ -61,9 +68,9 @@ const ReviewCard = ({ data, deleteReview, editReview }) => {
   return (
     <div className={styles.card}>
       <div className={styles.user}>
-        <img className={styles.img} src={img} alt={name} />
+        <img className={styles.img} src={userImgUrl} alt={userName} />
         <div>
-          <h3 className={styles.name}>{name}</h3>
+          <h3 className={styles.name}>{userName}</h3>
           <p className={styles.email}>{email}</p>
         </div>
       </div>
@@ -71,9 +78,9 @@ const ReviewCard = ({ data, deleteReview, editReview }) => {
         <textarea
           className={styles.textarea}
           ref={reviewRef}
-          defaultValue={review}></textarea>
+          defaultValue={description}></textarea>
       ) : (
-        <p>{review}</p>
+        <p>{description}</p>
       )}
       <div className={styles.btnGroup}>
         {isEditing ? (
