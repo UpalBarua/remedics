@@ -50,7 +50,6 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
   const [appointmentTimeSlot, setAppointmentTimeSlot] = useState(null);
 
   const { userData } = useUserData();
-  // let userData = { userName: 'upal' };
 
   const { register, handleSubmit } = useForm();
 
