@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
-import { useSpinner } from '../../contexts/SpinnerContext';
 import Reviews from '../Reviews/Reviews';
 import styles from './Details.module.css';
 import { AiOutlineStar } from 'react-icons/ai';
@@ -12,7 +11,6 @@ import axios from '../../api/axios';
 
 const Details = () => {
   const { user } = useAuth();
-  const { setIsSpinnerVisible } = useSpinner();
   const { serviceId } = useParams();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -29,9 +27,11 @@ const Details = () => {
   });
 
   if (isLoading) {
-    setIsSpinnerVisible(true);
-  } else {
-    setIsSpinnerVisible(false);
+    return (
+      <div>
+        <p>Loading data...</p>
+      </div>
+    );
   }
 
   if (isError) {

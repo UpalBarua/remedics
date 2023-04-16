@@ -2,8 +2,6 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 import { DayPicker } from 'react-day-picker';
 import { useForm } from 'react-hook-form';
-import { useQuery } from '@tanstack/react-query';
-import { useAuth } from '../../contexts/AuthContext';
 import useUserData from '../../hooks/useUserData';
 import styles from './Appointment.module.css';
 

@@ -1,11 +1,7 @@
-import { Toaster } from 'react-hot-toast';
 import AddServiceForm from '../Forms/AddServiceForm';
 import styles from './AddService.module.css';
-import useTitle from '../../hooks/useTitle';
 
 const AddService = () => {
-  useTitle('Add Service');
-
   return (
     <section className={`container ${styles.grid}`}>
       <div className={styles.text}>

@@ -4,12 +4,10 @@ import { useAuth } from '../../contexts/AuthContext';
 import ReviewCard from './ReviewCard';
 import styles from './MyReviews.module.css';
 import { useSpinner } from '../../contexts/SpinnerContext';
-import useTitle from '../../hooks/useTitle';
 import { useQuery } from '@tanstack/react-query';
 import axios from '../../api/axios';
 
 const MyReviews = () => {
-  useTitle('My Reviews');
   const { user } = useAuth();
 
   const { data: myReviews } = useQuery({

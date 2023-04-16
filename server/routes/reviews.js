@@ -7,7 +7,9 @@ const router = express.Router();
 router.post('/', async (req, res) => {
   const { body } = req;
 
-  if (!body) res.status(400).json({ message: 'Body not provided.' });
+  if (!body) {
+    return res.status(400).json({ message: 'Body not provided.' });
+  }
 
   try {
     const response = await Review.create(body);

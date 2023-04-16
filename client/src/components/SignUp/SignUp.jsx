@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import SignupForm from '../Forms/SignupForm';
-import useTitle from '../../hooks/useTitle';
 import styles from './SignUp.module.css';
 import img from '../../assets/signup.svg';
 
 const SignUp = () => {
-  useTitle('TITLE | Sign Up');
-
   return (
     <section className={`container ${styles.grid}`}>
       <div className={styles.column}>

@@ -7,8 +7,8 @@ import createNewUser from '../../utils/createNewUser';
 import uploadImage from '../../utils/uploadImage';
 
 const SignupForm = ({ setAuthError }) => {
-  const { signUp } = useAuth();
   const [userImg, setUserImg] = useState();
+  const { signUp } = useAuth();
   const navigate = useNavigate();
 
   const {

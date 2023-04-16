@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useForm } from 'react-hook-form';
@@ -6,6 +5,7 @@ import styles from './Form.module.css';
 
 const LoginForm = ({ setAuthError }) => {
   const navigate = useNavigate();
+  const { logIn } = useAuth();
 
   const {
     register,
@@ -13,9 +13,12 @@ const LoginForm = ({ setAuthError }) => {
     formState: { errors },
   } = useForm();
 
-  const { logIn } = useAuth();
-
   const handleLogIn = async ({ email, password }) => {
+    // ! check this
+    if (!email || !password) {
+      throw new Error('Email or password missing.');
+    }
+
     try {
       const res = await logIn(email, password);
 
