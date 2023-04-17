@@ -1,5 +1,6 @@
 import express from 'express';
 import Appointment from '../models/Appointment.js';
+import { defaultTimeSlots } from '../data/timeSlots.js';
 
 const router = express.Router();
 
@@ -30,6 +31,29 @@ router.post('/', async (req, res) => {
     res.status(201).json(appointment);
   } catch (error) {
     console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get('/time-slots', async (req, res) => {
+  const { doctorId, appointmentDate } = req.query;
+
+  try {
+    const bookedAppointments = await Appointment.find({
+      doctorId,
+      appointmentDate,
+    });
+
+    const bookedTimeSlots = bookedAppointments.map(
+      (appointment) => appointment.appointmentTimeSlot.id
+    );
+
+    const availableTimeSlots = defaultTimeSlots.filter(
+      (timeSlot) => !bookedTimeSlots.includes(timeSlot.id)
+    );
+
+    res.status(200).json(availableTimeSlots);
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });

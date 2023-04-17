@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Modal from 'react-modal';
 import { DayPicker } from 'react-day-picker';
 import { useForm } from 'react-hook-form';
 import useUserData from '../../hooks/useUserData';
@@ -8,44 +7,7 @@ import styles from './Appointment.module.css';
 import { format } from 'date-fns';
 import axios from '../../api/axios';
 import toast from 'react-hot-toast';
-
-const DEFAULT_SLOTS = [
-  {
-    id: 0,
-    from: new Date().setHours(9, 30),
-    to: new Date().setHours(10, 30),
-  },
-  {
-    id: 1,
-    from: new Date().setHours(10, 30),
-    to: new Date().setHours(11, 30),
-  },
-  {
-    id: 2,
-    from: new Date().setHours(11, 30),
-    to: new Date().setHours(12, 30),
-  },
-  {
-    id: 3,
-    from: new Date().setHours(12, 30),
-    to: new Date().setHours(13, 30),
-  },
-  {
-    id: 4,
-    from: new Date().setHours(13, 30),
-    to: new Date().setHours(14, 30),
-  },
-  {
-    id: 5,
-    from: new Date().setHours(16, 30),
-    to: new Date().setHours(17, 30),
-  },
-  {
-    id: 6,
-    from: new Date().setHours(5, 30),
-    to: new Date().setHours(6, 30),
-  },
-];
+import { useQuery } from '@tanstack/react-query';
 
 function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
   const [appointmentDate, setAppointmentDate] = useState(null);
@@ -53,6 +15,20 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
 
   const { register, handleSubmit } = useForm();
   const { userData } = useUserData();
+
+  const {
+    data: timeSlots = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ['timeSlots', doctorId, appointmentDate],
+    queryFn: async () => {
+      const { data } = await axios.get(
+        `/appointments/time-slots?doctorId=${doctorId}&appointmentDate=${appointmentDate}`
+      );
+      return data;
+    },
+  });
 
   const handleNewAppointment = async ({
     name,
@@ -159,18 +135,22 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
                 onSelect={setAppointmentDate}
               />
               <div className={styles.timeSlotContainer}>
-                {DEFAULT_SLOTS.map((slot) => (
-                  <label key={slot.id} className={styles.timeSlot}>
-                    <input
-                      type="radio"
-                      name="timeSlot"
-                      value={slot}
-                      onChange={() => setAppointmentTimeSlot(slot)}
-                    />
-                    {`${format(slot.to, 'hh.mma')}
+                {isLoading ? (
+                  <p>time slots loading...</p>
+                ) : (
+                  timeSlots.map((slot) => (
+                    <label key={slot.id} className={styles.timeSlot}>
+                      <input
+                        type="radio"
+                        name="timeSlot"
+                        value={slot}
+                        onChange={() => setAppointmentTimeSlot(slot)}
+                      />
+                      {`${format(slot.to, 'hh.mma')}
 `}
-                  </label>
-                ))}
+                    </label>
+                  ))
+                )}
               </div>
             </div>
             <button type="submit">Book</button>
