@@ -1,12 +1,9 @@
 import { useRef } from 'react';
 import styles from './Form.module.css';
 import { toast } from 'react-hot-toast';
-import { useSpinner } from '../../contexts/SpinnerContext';
 import axios from 'axios';
 
 const AddServiceForm = () => {
-  const { setIsSpinnerVisible } = useSpinner();
-
   const nameRef = useRef();
   const ratingsRef = useRef();
   const descriptionRef = useRef();
@@ -17,7 +14,6 @@ const AddServiceForm = () => {
 
   const handleServiceSubmit = (event) => {
     event.preventDefault();
-    setIsSpinnerVisible(true);
 
     const newService = {
       name: nameRef.current.value,
@@ -45,8 +41,6 @@ const AddServiceForm = () => {
             },
           });
         }
-
-        setIsSpinnerVisible(false);
       });
   };
 

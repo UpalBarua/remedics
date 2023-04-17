@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { useSpinner } from '../../contexts/SpinnerContext';
 import { useParams } from 'react-router-dom';
 import ReviewCard from './ReviewCard';
 import styles from './Reviews.module.css';
@@ -14,7 +13,6 @@ const Reviews = () => {
   const queryClient = useQueryClient();
 
   const { user } = useAuth();
-  const { setIsSpinnerVisible } = useSpinner();
   const { serviceId } = useParams();
   const reviewRef = useRef();
 

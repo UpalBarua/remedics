@@ -5,8 +5,6 @@ import axios from '../api/axios';
 const useUserData = () => {
   const { user } = useAuth();
 
-  if (!user) return;
-
   const {
     data: userData = {},
     isLoading,
@@ -15,7 +13,7 @@ const useUserData = () => {
     queryKey: ['userData'],
     queryFn: async () => {
       try {
-        const { data } = await axios.get(`/user/?email=${user?.email}`);
+        const { data } = await axios.get(`/user/?email=${user.email}`);
         return data;
       } catch (error) {
         throw new Error('Failed to fetch data.');

@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSpinner } from '../../contexts/SpinnerContext';
 import ServiceCard from './ServiceCard';
 import styles from './Services.module.css';
 import { useQuery } from '@tanstack/react-query';
 import axios from '../../api/axios';
 
 const Services = () => {
-  const { setIsSpinnerVisible } = useSpinner();
-
   const {
     data: services = [],
     isLoading,

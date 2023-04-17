@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import { servicesRoutes } from './routes/services.js';
 import { reviewsRoutes } from './routes/reviews.js';
 import { userRoutes } from './routes/user.js';
+import { appointmentsRouter } from './routes/appointments.js';
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use('/services', servicesRoutes);
 app.use('/reviews', reviewsRoutes);
 app.use('/user', userRoutes);
+app.use('/appointments', appointmentsRouter);
 
 app.get('/', (req, res) => {
   res.send('server is running...');

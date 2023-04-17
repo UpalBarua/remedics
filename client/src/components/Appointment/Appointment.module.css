@@ -1,12 +1,17 @@
 .modal {
   background-color: var(--color-dark-500);
-  z-index: 20;
+  z-index: 5;
   margin-top: 5rem;
 }
 
 .appointmentForm {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
+}
+
+.appointmentForm > .column:first-child {
+  display: grid;
+  gap: var(--spacing-lg);
 }
 
 .timeSlots {
@@ -14,5 +19,137 @@
   gap: var(--spacing-md);
 }
 
-.overlay {
+.modalRoot {
+  background-color: red;
+}
+
+.fieldset {
+  border: 0;
+}
+
+/* reset */
+/* button,
+fieldset,
+input {
+  all: unset;
+} */
+
+.dialogOverlay {
+  background-color: var(--color-dark-300);
+  opacity: 0.9;
+  position: fixed;
+  inset: 0;
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 5;
+}
+
+.dialogContent {
+  background-color: var(--color-dark-500);
+  border-radius: 12px;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
+    hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: var(--spacing-xl);
+  z-index: 5;
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 80%;
+  width: 95%;
+  overflow-x: scroll;
+}
+
+.dialogContent:focus {
+  outline: none;
+}
+
+.dialogTitle {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-lg);
+}
+
+@keyframes overlayShow {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes contentShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.fieldset {
+  display: grid;
+  gap: var(--spacing-md);
+}
+
+.label {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-md);
+}
+
+.input {
+  color: var(--color-light-400);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  background-color: var(--color-dark-400);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  width: 100%;
+}
+
+.input:hover,
+.input:focus {
+  outline: 0;
+  border-color: var(--color-accent-primary-400);
+}
+
+.message {
+  color: rgba(255, 0, 0, 0.9);
+  font-size: var(--font-size-sm);
+}
+
+.textarea {
+  min-width: 100%;
+  min-height: 10rem;
+  background-color: var(--color-dark-400);
+  color: var(--color-light-400);
+  border-radius: var(--border-radius);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: var(--spacing-lg);
+  margin-block: var(--spacing-xl);
+}
+
+.textarea:focus,
+.textarea:hover {
+  border-color: var(--color-accent-primary-400);
+  outline: 0;
+}
+
+.timeSlot {
+  background-color: var(--color-dark-300);
+  padding: var(--spacing-md);
+  border-radius: 6px;
+  /* background-color: lime; */
+}
+
+.timeSlotContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-lg);
+}
+
+.timeSlot > input {
+  /* display: none; */
 }

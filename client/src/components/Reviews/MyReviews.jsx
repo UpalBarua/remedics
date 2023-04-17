@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import ReviewCard from './ReviewCard';
 import styles from './MyReviews.module.css';
-import { useSpinner } from '../../contexts/SpinnerContext';
 import { useQuery } from '@tanstack/react-query';
 import axios from '../../api/axios';
 

@@ -1,12 +1,9 @@
 import ServiceCard from './ServiceCard';
-import { useSpinner } from '../../contexts/SpinnerContext';
 import { useQuery } from '@tanstack/react-query';
 import axios from '../../api/axios';
 import styles from './Services.module.css';
 
 const ServicesAll = () => {
-  const { setIsSpinnerVisible } = useSpinner();
-
   const {
     data: allServices = [],
     isLoading,
@@ -20,9 +17,11 @@ const ServicesAll = () => {
   });
 
   if (isLoading) {
-    setIsSpinnerVisible(true);
-  } else {
-    setIsSpinnerVisible(false);
+    return (
+      <div>
+        <p>Loading...</p>
+      </div>
+    );
   }
 
   if (isError) {

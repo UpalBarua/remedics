@@ -25,7 +25,9 @@ router.get('/:id', async (req, res) => {
   try {
     const reviews = await Review.find({ serviceId: id });
 
-    if (!reviews) res.status(400).json({ message: 'Reviews not found.' });
+    if (reviews.length <= 0) {
+      return res.status(400).json({ message: 'Reviews not found.' });
+    }
 
     res.status(200).json(reviews);
   } catch (error) {
