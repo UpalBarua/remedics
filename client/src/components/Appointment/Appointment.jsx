@@ -5,9 +5,9 @@ import useUserData from '../../hooks/useUserData';
 import * as Dialog from '@radix-ui/react-dialog';
 import styles from './Appointment.module.css';
 import { format } from 'date-fns';
-import axios from '../../api/axios';
 import toast from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
+import axios from '../../api/axios';
 
 function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
   const [appointmentDate, setAppointmentDate] = useState(null);
@@ -24,8 +24,11 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
     queryKey: ['timeSlots', doctorId, appointmentDate],
     queryFn: async () => {
       const { data } = await axios.get(
-        `/appointments/time-slots?doctorId=${doctorId}&appointmentDate=${appointmentDate}`
+        `/appointments/time-slots?doctorId=${doctorId}&appointmentDate=${new Date(
+          appointmentDate
+        ).toISOString()}`
       );
+
       return data;
     },
   });
@@ -46,7 +49,7 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
         gender,
         phone,
       },
-      appointmentDate,
+      appointmentDate: new Date(appointmentDate).toISOString(),
       appointmentTimeSlot,
       reasonsForVisit,
       appointmentStatus: 'booked',
