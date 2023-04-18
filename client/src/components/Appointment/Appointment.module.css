@@ -6,7 +6,7 @@
 
 .appointmentForm {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
 }
 
 .appointmentForm > .column:first-child {
@@ -35,8 +35,8 @@ input {
 } */
 
 .dialogOverlay {
-  background-color: var(--color-dark-300);
-  opacity: 0.9;
+  background-color: var(--color-dark-500);
+  opacity: 0.8;
   position: fixed;
   inset: 0;
   animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -57,7 +57,7 @@ input {
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
   max-height: 80%;
   width: 95%;
-  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 .dialogContent:focus {
@@ -144,12 +144,12 @@ input {
   /* background-color: lime; */
 }
 
+.timeSlot > input[type='radio'] {
+  appearance: none;
+}
+
 .timeSlotContainer {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-lg);
-}
-
-.timeSlot > input {
-  /* display: none; */
 }

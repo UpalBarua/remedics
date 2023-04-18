@@ -3,11 +3,12 @@ import { DayPicker } from 'react-day-picker';
 import { useForm } from 'react-hook-form';
 import useUserData from '../../hooks/useUserData';
 import * as Dialog from '@radix-ui/react-dialog';
-import styles from './Appointment.module.css';
 import { format } from 'date-fns';
 import toast from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
 import axios from '../../api/axios';
+import 'react-day-picker/dist/style.css';
+import styles from './Appointment.module.css';
 
 function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
   const [appointmentDate, setAppointmentDate] = useState(null);
@@ -71,9 +72,14 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
       <Dialog.Portal>
         <Dialog.Overlay className={styles.dialogOverlay} />
         <Dialog.Content className={styles.dialogContent}>
-          <Dialog.Title className={styles.dialogTitle}>
-            New Appointment
-          </Dialog.Title>
+          <div>
+            <Dialog.Title className={styles.dialogTitle}>
+              New Appointment
+            </Dialog.Title>
+            <Dialog.Close asChild>
+              <button>Save changes</button>
+            </Dialog.Close>
+          </div>
           <form
             className={styles.appointmentForm}
             onSubmit={handleSubmit(handleNewAppointment)}>
@@ -131,12 +137,12 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
               </fieldset>
             </div>
             <div className={styles.column}>
-              <DayPicker
+              {/* <DayPicker
                 className={styles.dayPicker}
                 mode="single"
                 selected={appointmentDate}
                 onSelect={setAppointmentDate}
-              />
+              /> */}
               <div className={styles.timeSlotContainer}>
                 {isLoading ? (
                   <p>time slots loading...</p>
@@ -149,19 +155,14 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
                         value={slot}
                         onChange={() => setAppointmentTimeSlot(slot)}
                       />
-                      {`${format(slot.to, 'hh.mma')}
-`}
+                      {`${format(slot.to, 'hh.mma')}`}
                     </label>
                   ))
                 )}
               </div>
             </div>
             <button type="submit">Book</button>
-            <button onClick={() => setIsModalOpen(false)}>close</button>
           </form>
-          <Dialog.Close asChild>
-            <button>Save changes</button>
-          </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>

@@ -5,6 +5,7 @@ import { FiFlag } from 'react-icons/fi';
 import styles from './ServiceCard.module.css';
 import { PhotoProvider, PhotoView } from 'react-photo-view';
 import { AiOutlineCalendar } from 'react-icons/ai';
+import Button from '../../components/UI/Button/Button';
 
 const ServiceCard = ({ service }) => {
   const { _id, name, img, ratings, fees, description, country, specialized } =
@@ -31,9 +32,9 @@ const ServiceCard = ({ service }) => {
           </div>
           <p className={styles.text}>{description.slice(0, 150) + '...'}</p>
           <div className={styles.actions}>
-            <Link className={styles.profile} to={`/details/${_id}`}>
+            <Button to={`/details/${_id}`} isLink style={{ width: '100%' }}>
               View Profile
-            </Link>
+            </Button>
             <button className={styles.book}>
               <AiOutlineCalendar />
             </button>

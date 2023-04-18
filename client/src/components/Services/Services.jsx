@@ -5,6 +5,8 @@ import styles from './Services.module.css';
 import { useQuery } from '@tanstack/react-query';
 import axios from '../../api/axios';
 
+import Button from '../UI/Button/Button';
+
 const Services = () => {
   const {
     data: services = [],
