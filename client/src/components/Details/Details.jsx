@@ -88,6 +88,7 @@ const Details = () => {
               className={styles.appointmentBtn}
               onClick={() => setIsModalOpen(true)}>
               <AiOutlineCalendar />
+              <span>Book Appointment</span>
             </button>
           </div>
         </div>

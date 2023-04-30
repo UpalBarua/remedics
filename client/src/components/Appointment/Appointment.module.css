@@ -74,7 +74,12 @@
 .form > div:first-child {
   display: grid;
   gap: var(--spacing-lg);
-  justify-content: start;
+  align-content: start;
+}
+
+.form > div:last-child {
+  display: grid;
+  align-content: start;
 }
 
 .form fieldset {
@@ -103,20 +108,23 @@
   border-color: var(--color-accent-primary-400);
 }
 
+.form fieldset:last-child > input {
+  height: 10rem;
+}
+
+.form button {
+  margin-top: var(--spacing-lg);
+}
+
 .message {
   color: rgba(255, 0, 0, 0.9);
   font-size: var(--font-size-sm);
 }
 
 .title {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
   text-transform: capitalize;
-}
-
-.form > div:last-child {
-  display: grid;
-  gap: var(--spacing-lg);
 }
 
 @media screen and (min-width: 48em) {
@@ -124,14 +132,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* max-height: 95%; */
-    width: 45rem;
-    /* padding: var(--spacing-xl); */
-
-    padding: var(--spacing-xl);
+    width: 50rem;
+    height: 90%;
+    padding: var(--spacing-3xl);
   }
 
   .form {
     grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-3xl);
   }
 }

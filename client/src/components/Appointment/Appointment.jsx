@@ -3,9 +3,7 @@ import { DayPicker } from 'react-day-picker';
 import { useForm } from 'react-hook-form';
 import useUserData from '../../hooks/useUserData';
 import * as Dialog from '@radix-ui/react-dialog';
-import { format } from 'date-fns';
 import toast from 'react-hot-toast';
-import { useQuery } from '@tanstack/react-query';
 import axios from '../../api/axios';
 import 'react-day-picker/dist/style.css';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -17,7 +15,12 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
   const [appointmentDate, setAppointmentDate] = useState(null);
   const [appointmentTimeSlot, setAppointmentTimeSlot] = useState(null);
 
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
   const { userData } = useUserData();
 
   const handleNewAppointment = async ({
@@ -45,6 +48,8 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
     try {
       const res = await axios.post('/appointments', newAppointment);
       if (res.status === 201) {
+        reset();
+        setIsModalOpen(false);
         toast.success('Appointment booked!');
       }
     } catch (error) {
@@ -57,7 +62,7 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
     <Dialog.Root open={isModalOpen} onOpenChange={() => setIsModalOpen(false)}>
       <Dialog.Portal>
         <Dialog.Overlay className={styles.overlay} />
-        <Dialog.Content className={styles.content}>
+        <Dialog.Content className={styles.content} onCloseAutoFocus={reset}>
           <div className={styles.header}>
             <Dialog.Title className={styles.modalTitle}>
               New Appointment
@@ -78,9 +83,28 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
                   type="text"
                   defaultValue={userData?.userName}
                   {...register('name', {
-                    required: { value: true, message: 'Name is required' },
+                    required: {
+                      value: true,
+                      message: 'Name is required.',
+                    },
+                    pattern: {
+                      value: /^[a-z ,.'-]+$/i,
+                      message: 'Not a valid name',
+                    },
+                    maxLength: {
+                      value: 50,
+                      message: 'Name is too long',
+                    },
+                    minLength: {
+                      value: 2,
+                      message: 'Name is too short',
+                    },
+                    type: 'string',
                   })}
                 />
+                {errors.name && (
+                  <p className={styles.message}>{errors.name.message}</p>
+                )}
               </fieldset>
               <fieldset>
                 <label>Age</label>
@@ -90,46 +114,83 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
                   max={120}
                   {...register('age', {
                     required: { value: true, message: 'Age is required' },
+                    min: {
+                      value: 1,
+                      message: 'You must be at least 1 years old',
+                    },
+                    max: {
+                      value: 120,
+                      message: 'You cannot be older than 120 years',
+                    },
                   })}
                 />
+                {errors.age && (
+                  <p className={styles.message}>{errors.age.message}</p>
+                )}
               </fieldset>
               <fieldset>
                 <label>Gender</label>
                 <input
                   type="text"
                   {...register('gender', {
-                    required: { value: true, message: 'Name is required' },
+                    required: { value: true, message: 'Gender is required' },
                   })}
                 />
+                {errors.gender && (
+                  <p className={styles.message}>{errors.gender.message}</p>
+                )}
               </fieldset>
               <fieldset>
                 <label>Phone</label>
                 <input
-                  type="number"
+                  type="tel"
                   {...register('phone', {
-                    required: { value: true, message: 'Name is required' },
+                    required: 'Phone number is required',
+                    pattern: {
+                      value: /^[0-9 ()+-]+$/,
+                      message: 'Invalid phone number format',
+                    },
+                    minLength: {
+                      value: 10,
+                      message: 'Phone number must be at least 10 digits long',
+                    },
+                    maxLength: {
+                      value: 15,
+                      message:
+                        'Phone number cannot be more than 15 digits long',
+                    },
                   })}
                 />
+                {errors.phone && (
+                  <p className={styles.message}>{errors.phone.message}</p>
+                )}
               </fieldset>
               <fieldset>
                 <label>Reasons For Visit</label>
                 <input
                   type="text"
                   {...register('reasonsForVisit', {
-                    required: { value: true, message: 'Name is required' },
+                    required: {
+                      value: true,
+                      message: 'Reasons for visit is required',
+                    },
                   })}
                 />
+                {errors.reasonsForVisit && (
+                  <p className={styles.message}>
+                    {errors.reasonsForVisit.message}
+                  </p>
+                )}
               </fieldset>
             </div>
             <div>
-              <h2 className={styles.title}>Select Date</h2>
+              <h2 className={styles.title}>Select Date And Time</h2>
               <DayPicker
                 className={styles.dayPicker}
                 mode="single"
                 selected={appointmentDate}
                 onSelect={setAppointmentDate}
               />
-              <h2 className={styles.title}>Select Time Slot</h2>
               <TimeSlots
                 doctorId={doctorId}
                 appointmentDate={appointmentDate}

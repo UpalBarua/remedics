@@ -14,14 +14,17 @@
   background-color: var(--color-dark-300);
   padding: var(--spacing-sm) var(--spacing-lg);
   border-radius: 100vmin;
+  border: 2px solid rgba(255, 255, 255, 0.15);
 }
 
 .slot > input[type='radio'] {
+  cursor: pointer;
   appearance: none;
   opacity: 0;
   position: absolute;
 }
 
 .slot > input[type='radio']:checked + label {
-  background-color: var(--color-accent-primary-300);
+  background-color: var(--color-accent-primary-400);
+  border-color: var(--color-accent-primary-400);
 }
