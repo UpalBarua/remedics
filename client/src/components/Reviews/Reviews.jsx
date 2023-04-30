@@ -8,6 +8,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { AiFillStar } from 'react-icons/ai';
 import axios from '../../api/axios';
 import useUserData from '../../hooks/useUserData';
+import Button from '../../components/UI/Button/Button';
 
 const Reviews = () => {
   const queryClient = useQueryClient();
@@ -92,9 +93,7 @@ const Reviews = () => {
               <AiFillStar />
               <AiFillStar />
             </div>
-            <button type="submit" onClick={handleReviewSubmit}>
-              Submit
-            </button>
+            <Button onClick={handleReviewSubmit}>Submit</Button>
           </div>
         </form>
       </div>

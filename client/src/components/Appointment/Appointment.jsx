@@ -8,7 +8,10 @@ import toast from 'react-hot-toast';
 import { useQuery } from '@tanstack/react-query';
 import axios from '../../api/axios';
 import 'react-day-picker/dist/style.css';
+import { AiOutlineClose } from 'react-icons/ai';
 import styles from './Appointment.module.css';
+import Button from '../../components/UI/Button/Button';
+import TimeSlots from './TimeSlots';
 
 function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
   const [appointmentDate, setAppointmentDate] = useState(null);
@@ -16,23 +19,6 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
 
   const { register, handleSubmit } = useForm();
   const { userData } = useUserData();
-
-  const {
-    data: timeSlots = [],
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ['timeSlots', doctorId, appointmentDate],
-    queryFn: async () => {
-      const { data } = await axios.get(
-        `/appointments/time-slots?doctorId=${doctorId}&appointmentDate=${new Date(
-          appointmentDate
-        ).toISOString()}`
-      );
-
-      return data;
-    },
-  });
 
   const handleNewAppointment = async ({
     name,
@@ -70,24 +56,25 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
   return (
     <Dialog.Root open={isModalOpen} onOpenChange={() => setIsModalOpen(false)}>
       <Dialog.Portal>
-        <Dialog.Overlay className={styles.dialogOverlay} />
-        <Dialog.Content className={styles.dialogContent}>
-          <div>
-            <Dialog.Title className={styles.dialogTitle}>
+        <Dialog.Overlay className={styles.overlay} />
+        <Dialog.Content className={styles.content}>
+          <div className={styles.header}>
+            <Dialog.Title className={styles.modalTitle}>
               New Appointment
             </Dialog.Title>
-            <Dialog.Close asChild>
-              <button>Save changes</button>
+            <Dialog.Close className={styles.closeBtn} asChild>
+              <button>
+                <AiOutlineClose />
+              </button>
             </Dialog.Close>
           </div>
           <form
-            className={styles.appointmentForm}
+            className={styles.form}
             onSubmit={handleSubmit(handleNewAppointment)}>
-            <div className={styles.column}>
-              <fieldset className={styles.fieldset}>
-                <label className={styles.label}>Name</label>
+            <div>
+              <fieldset>
+                <label>Name</label>
                 <input
-                  className={styles.input}
                   type="text"
                   defaultValue={userData?.userName}
                   {...register('name', {
@@ -95,40 +82,38 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
                   })}
                 />
               </fieldset>
-              <fieldset className={styles.fieldset}>
-                <label className={styles.label}>Age</label>
+              <fieldset>
+                <label>Age</label>
                 <input
-                  className={styles.input}
                   type="number"
+                  min={1}
+                  max={120}
                   {...register('age', {
-                    required: { value: true, message: 'Name is required' },
+                    required: { value: true, message: 'Age is required' },
                   })}
                 />
               </fieldset>
-              <fieldset className={styles.fieldset}>
-                <label className={styles.label}>Gender</label>
+              <fieldset>
+                <label>Gender</label>
                 <input
-                  className={styles.input}
                   type="text"
                   {...register('gender', {
                     required: { value: true, message: 'Name is required' },
                   })}
                 />
               </fieldset>
-              <fieldset className={styles.fieldset}>
-                <label className={styles.label}>Phone</label>
+              <fieldset>
+                <label>Phone</label>
                 <input
-                  className={styles.input}
                   type="number"
                   {...register('phone', {
                     required: { value: true, message: 'Name is required' },
                   })}
                 />
               </fieldset>
-              <fieldset className={styles.fieldset}>
-                <label className={styles.label}>Reasons For Visit</label>
+              <fieldset>
+                <label>Reasons For Visit</label>
                 <input
-                  className={styles.input}
                   type="text"
                   {...register('reasonsForVisit', {
                     required: { value: true, message: 'Name is required' },
@@ -136,32 +121,22 @@ function Appointment({ isModalOpen, setIsModalOpen, doctorId }) {
                 />
               </fieldset>
             </div>
-            <div className={styles.column}>
-              {/* <DayPicker
+            <div>
+              <h2 className={styles.title}>Select Date</h2>
+              <DayPicker
                 className={styles.dayPicker}
                 mode="single"
                 selected={appointmentDate}
                 onSelect={setAppointmentDate}
-              /> */}
-              <div className={styles.timeSlotContainer}>
-                {isLoading ? (
-                  <p>time slots loading...</p>
-                ) : (
-                  timeSlots.map((slot) => (
-                    <label key={slot.id} className={styles.timeSlot}>
-                      <input
-                        type="radio"
-                        name="timeSlot"
-                        value={slot}
-                        onChange={() => setAppointmentTimeSlot(slot)}
-                      />
-                      {`${format(slot.to, 'hh.mma')}`}
-                    </label>
-                  ))
-                )}
-              </div>
+              />
+              <h2 className={styles.title}>Select Time Slot</h2>
+              <TimeSlots
+                doctorId={doctorId}
+                appointmentDate={appointmentDate}
+                setAppointmentTimeSlot={setAppointmentTimeSlot}
+              />
+              <Button>book</Button>
             </div>
-            <button type="submit">Book</button>
           </form>
         </Dialog.Content>
       </Dialog.Portal>

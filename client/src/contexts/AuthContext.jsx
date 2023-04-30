@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { createContext } from 'react';
 import { auth, googleAuth } from '../firebase/firebase.config';
 import {
@@ -54,5 +54,6 @@ export const AuthProvider = ({ children }) => {
     logIn,
     updateUserProfile,
   };
+
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

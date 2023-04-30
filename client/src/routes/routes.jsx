@@ -6,7 +6,7 @@ import MyReviews from '../components/Reviews/MyReviews';
 import AddService from '../components/AddService/AddService';
 import Home from '../pages/Home';
 import RootLayout from '../layouts/RootLayout';
-import Authentication from '../pages/Login/Authentication';
+import Authentication from '../pages/Authentication/Authentication';
 
 const router = createBrowserRouter([
   {

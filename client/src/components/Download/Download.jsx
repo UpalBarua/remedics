@@ -1,6 +1,7 @@
 import React from 'react';
-import styles from './Download.module.css';
 import img from '../../assets/download.svg';
+import Button from '../../components/UI/Button/Button';
+import styles from './Download.module.css';
 
 const Download = () => {
   return (
@@ -15,7 +16,7 @@ const Download = () => {
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam, in?
           Lorem, ipsum dolor
         </p>
-        <button className="btn btn-primary">download</button>
+        <Button>Download</Button>
       </div>
     </section>
   );

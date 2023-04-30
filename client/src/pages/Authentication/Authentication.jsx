@@ -1,8 +1,11 @@
 import LoginForm from '../../components/Forms/LoginForm';
 import SignupForm from '../../components/Forms/SignupForm';
+import Button from '../../components/UI/Button/Button';
+
 import { AiOutlineGoogle } from 'react-icons/ai';
 import { useAuth } from '../../contexts/AuthContext';
 import { useState } from 'react';
+
 import styles from './Authentication.module.css';
 
 const ERROR_MESSAGES = {
@@ -31,60 +34,59 @@ const ERROR_MESSAGES = {
 };
 
 const Authentication = () => {
-  const [authPage, setAuthPage] = useState('login');
   const { googleSignIn } = useAuth();
+  const [isSignup, setIsSignup] = useState(false);
   const [authError, setAuthError] = useState('');
 
-  const handleAuthPageToggle = () => {
-    setAuthPage((prevAuthPage) =>
-      prevAuthPage === 'login' ? 'signup' : 'login'
-    );
+  const handleSignupToggle = () => {
+    setIsSignup((prevAuthPage) => !prevAuthPage);
     setAuthError('');
   };
 
   const handleGoogleSignIn = async () => {
     try {
-      const res = await googleSignIn();
+      const response = await googleSignIn();
 
-      console.log(res.user.uid);
-
-      if (res?.user?.uid) {
+      if (response?.user?.uid) {
         navigate('/');
       }
     } catch (error) {
-      const errorCode = error.code;
-      console.log(`Login failed with error code: ${errorCode}`);
+      const authErrorCode = error.code;
+      console.log(`Login failed with error code: ${authErrorCode}`);
 
-      setAuthError(errorCode);
+      setAuthError(authErrorCode);
     }
   };
 
   return (
     <section className={styles.container}>
       <div className={styles.login}>
-        <h2 className={styles.title}>
-          {authPage === 'signup' ? 'Sign Up' : 'Login'}
-        </h2>
-        {authPage === 'signup' ? (
+        <h2 className={styles.title}>{isSignup ? 'Sign Up' : 'Login'}</h2>
+        {isSignup ? (
           <SignupForm setAuthError={setAuthError} />
         ) : (
           <LoginForm setAuthError={setAuthError} />
         )}
+        <Button className={styles.altLoginButton} onClick={handleGoogleSignIn}>
+          <AiOutlineGoogle />
+          <span>Google</span>
+        </Button>
         {authError && (
           <p className={styles.errorMessage}>
             {ERROR_MESSAGES[authError] || ERROR_MESSAGES.UNKNOWN}
           </p>
         )}
-        <button className={styles.altLoginButton} onClick={handleGoogleSignIn}>
-          <AiOutlineGoogle />
-          <span>Google</span>
-        </button>
-        <p className={styles.registerText}>
-          Don't have an account?{' '}
-          <button onClick={handleAuthPageToggle}>
-            {authPage === 'signup' ? 'Login' : 'Signup'}
-          </button>
-        </p>
+        {isSignup ? (
+          <p className={styles.registerText}>
+            Don't have an account?{' '}
+            <button onClick={handleSignupToggle}>Signup</button>
+          </p>
+        ) : (
+          <p className={styles.registerText}>
+            Already have an account?{' '}
+            <button onClick={handleSignupToggle}>Login</button>
+          </p>
+        )}
       </div>
     </section>
   );

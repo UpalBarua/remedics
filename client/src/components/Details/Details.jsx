@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import axios from '../../api/axios';
+
 import { useAuth } from '../../contexts/AuthContext';
 import Reviews from '../Reviews/Reviews';
-import styles from './Details.module.css';
-import { AiOutlineStar } from 'react-icons/ai';
-import { BiDollar } from 'react-icons/bi';
-import { useQuery } from '@tanstack/react-query';
 import Appointment from '../Appointment/Appointment';
-import axios from '../../api/axios';
+
+import { AiOutlineStar, AiOutlineCalendar } from 'react-icons/ai';
+import { BiDollar } from 'react-icons/bi';
+
+import styles from './Details.module.css';
 
 const Details = () => {
   const { user } = useAuth();
@@ -76,12 +79,17 @@ const Details = () => {
         </div>
         <div className={styles.appointment}>
           <h2>Appointment</h2>
-          <div>
-            <p>Fortis Escorts Heart Institute, Okhla Road</p>
-            <p>Okhla Rd, New Friends Colony, New Delhi, Delhi 110025</p>
-            {/* <button className="btn btn-primary">Book Appointment</button> */}
+          <div className={styles.appointmentGrid}>
+            <div>
+              <p>Fortis Escorts Heart Institute, Okhla Road</p>
+              <p>Okhla Rd, New Friends Colony, New Delhi, Delhi 110025</p>
+            </div>
+            <button
+              className={styles.appointmentBtn}
+              onClick={() => setIsModalOpen(true)}>
+              <AiOutlineCalendar />
+            </button>
           </div>
-          <button onClick={() => setIsModalOpen(true)}>Click Me</button>
         </div>
         <div className={styles.introduction}>
           <h2>Introduction</h2>

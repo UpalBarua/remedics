@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '../contexts/AuthContext';
+
 import axios from '../api/axios';
 
 const useUserData = () => {

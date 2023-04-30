@@ -1,0 +1,27 @@
+.timeSlots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-lg);
+  padding-block: var(--spacing-md);
+}
+
+.slot {
+  position: relative;
+  margin-block: var(--spacing-sm);
+}
+
+.slot > label {
+  background-color: var(--color-dark-300);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: 100vmin;
+}
+
+.slot > input[type='radio'] {
+  appearance: none;
+  opacity: 0;
+  position: absolute;
+}
+
+.slot > input[type='radio']:checked + label {
+  background-color: var(--color-accent-primary-300);
+}

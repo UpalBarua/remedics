@@ -69,6 +69,24 @@
   color: var(--color-accent-primary-400);
 }
 
+.appointmentBtn {
+  font-size: var(--font-size-2xl);
+  display: flex;
+  background-color: var(--color-accent-primary-400);
+  color: var(--color-light-400);
+  border-radius: 50%;
+  border: 0;
+  padding: var(--spacing-md);
+  cursor: pointer;
+  outline: 0;
+}
+
+.appointmentBtn:hover,
+.appointmentBtn:focus {
+  background-color: var(--color-accent-primary-500);
+  color: var(--color-light-500);
+}
+
 @media screen and (min-width: 48em) {
   .grid {
     grid-template-columns: 8fr 4fr;

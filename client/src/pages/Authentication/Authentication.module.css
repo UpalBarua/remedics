@@ -1,18 +1,18 @@
 .container {
   display: grid;
+  min-height: 100vh;
   background-color: var(--color-dark-500);
   background-position: center;
   background-size: cover;
-  min-height: 100vh;
 }
 
 .container::after {
   content: '';
-  display: block;
   position: fixed;
-  background: var(--background-gradient);
+  display: block;
   height: 100%;
   width: 100%;
+  background: var(--background-gradient);
 }
 
 .login {

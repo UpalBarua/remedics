@@ -1,106 +1,94 @@
-.modal {
-  background-color: var(--color-dark-500);
-  z-index: 5;
-  margin-top: 5rem;
-}
-
-.appointmentForm {
-  display: grid;
-  grid-template-columns: 1fr;
-}
-
-.appointmentForm > .column:first-child {
-  display: grid;
-  gap: var(--spacing-lg);
-}
-
-.timeSlots {
-  display: flex;
-  gap: var(--spacing-md);
-}
-
-.modalRoot {
-  background-color: red;
-}
-
-.fieldset {
-  border: 0;
-}
-
-/* reset */
-/* button,
-fieldset,
-input {
-  all: unset;
-} */
-
-.dialogOverlay {
-  background-color: var(--color-dark-500);
-  opacity: 0.8;
+.overlay {
   position: fixed;
   inset: 0;
-  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 5;
+  opacity: 0.8;
+  background-color: var(--color-dark-400);
 }
 
-.dialogContent {
-  background-color: var(--color-dark-500);
-  border-radius: 12px;
-  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px,
-    hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+.content {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: var(--spacing-xl);
+  bottom: 0;
   z-index: 5;
-  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
-  max-height: 80%;
-  width: 95%;
   overflow-y: scroll;
+  max-height: 95%;
+  border-radius: 12px;
+  background-color: var(--color-dark-500);
+  padding: var(--spacing-xl);
 }
 
-.dialogContent:focus {
+.content::-webkit-scrollbar {
+  display: none;
+}
+
+.modalTitle {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-xl);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--spacing-lg);
+
+  /* border: 2px solid lime; */
+
+  /* position: sticky;
+  width: 100%;
+  background-color: var(--color-dark-500);
+  border-radius: 12px 12px 0 0;
+  top: 0; */
+}
+
+.closeBtn {
+  display: grid;
+  padding: var(--spacing-sm);
+  border: 0;
+  outline: 0;
+  border-radius: 50%;
+  background-color: transparent;
+  font-size: var(--font-size-2xl);
+  color: var(--color-light-500);
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+.closeBtn:hover,
+.closeBtn:focus {
+  background-color: var(--color-dark-300);
+  color: var(--color-light-300);
+}
+
+.content:focus {
   outline: none;
 }
 
-.dialogTitle {
-  font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-xl);
-  margin-bottom: var(--spacing-lg);
+.form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+
+  /* padding-top: var(--spacing-6xl); */
 }
 
-@keyframes overlayShow {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.form > div:first-child {
+  display: grid;
+  gap: var(--spacing-lg);
+  justify-content: start;
 }
 
-@keyframes contentShow {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -48%) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-}
-
-.fieldset {
+.form fieldset {
+  border: 0;
   display: grid;
   gap: var(--spacing-md);
 }
 
-.label {
+.form label {
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-md);
 }
 
-.input {
+.form input {
   color: var(--color-light-400);
   padding: var(--spacing-md);
   border-radius: var(--border-radius);
@@ -109,8 +97,8 @@ input {
   width: 100%;
 }
 
-.input:hover,
-.input:focus {
+.form input:hover,
+.form input:focus {
   outline: 0;
   border-color: var(--color-accent-primary-400);
 }
@@ -120,36 +108,30 @@ input {
   font-size: var(--font-size-sm);
 }
 
-.textarea {
-  min-width: 100%;
-  min-height: 10rem;
-  background-color: var(--color-dark-400);
-  color: var(--color-light-400);
-  border-radius: var(--border-radius);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  padding: var(--spacing-lg);
-  margin-block: var(--spacing-xl);
+.title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  text-transform: capitalize;
 }
 
-.textarea:focus,
-.textarea:hover {
-  border-color: var(--color-accent-primary-400);
-  outline: 0;
-}
-
-.timeSlot {
-  background-color: var(--color-dark-300);
-  padding: var(--spacing-md);
-  border-radius: 6px;
-  /* background-color: lime; */
-}
-
-.timeSlot > input[type='radio'] {
-  appearance: none;
-}
-
-.timeSlotContainer {
-  display: flex;
-  flex-wrap: wrap;
+.form > div:last-child {
+  display: grid;
   gap: var(--spacing-lg);
+}
+
+@media screen and (min-width: 48em) {
+  .content {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* max-height: 95%; */
+    width: 45rem;
+    /* padding: var(--spacing-xl); */
+
+    padding: var(--spacing-xl);
+  }
+
+  .form {
+    grid-template-columns: 1fr 1fr;
+  }
 }
