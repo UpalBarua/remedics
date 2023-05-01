@@ -5,10 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import createNewUser from '../../utils/createNewUser';
 import uploadImage from '../../utils/uploadImage';
 import Button from '../UI/Button/Button';
-import { BiImageAdd } from 'react-icons/bi';
 import styles from './Form.module.css';
 
-const SignupForm = ({ setAuthError }) => {
+const SignupForm = ({ setAuthError, setIsLoading }) => {
   const [userImg, setUserImg] = useState(null);
   const [imgPreview, setImgPreview] = useState(null);
   const { signUp } = useAuth();
@@ -32,6 +31,7 @@ const SignupForm = ({ setAuthError }) => {
   } = useForm();
 
   const handleSignup = async ({ name, email, password }) => {
+    setIsLoading(true);
     const imageURL = await uploadImage(userImg);
 
     try {
@@ -51,6 +51,8 @@ const SignupForm = ({ setAuthError }) => {
       console.log(`Login failed with error code: ${errorCode}`);
 
       setAuthError(errorCode);
+    } finally {
+      setIsLoading(false);
     }
   };
 

@@ -16,18 +16,19 @@
 }
 
 .container {
-  margin-top: var(--spacing-6xl);
+  margin-top: calc(var(--spacing-6xl) + 3rem);
   display: grid;
   align-content: center;
-  gap: var(--spacing-md);
+  gap: var(--spacing-lg);
   text-align: center;
   background-color: var(--color-dark-500);
   padding: var(--spacing-3xl) var(--spacing-xl);
   border-radius: 12px;
   z-index: 5;
+  position: relative;
 }
 
-.title {
+.container .title {
   font-size: var(--font-size-3xl);
   font-weight: var(--font-weight-bold);
   text-transform: capitalize;
@@ -42,7 +43,7 @@
   padding-bottom: var(--spacing-md);
 }
 
-.googleLoginBtn {
+/* .googleLoginBtn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,7 +54,7 @@
   font-weight: var(--font-weight-semibold);
   padding: var(--spacing-md) var(--spacing-2xl);
   border-radius: 100vmax;
-}
+} */
 
 .registerText > button {
   font-weight: var(--font-weight-bold);
@@ -62,6 +63,7 @@
   border: 0;
   cursor: pointer;
   margin-top: var(--spacing-xl);
+  outline: 0;
 }
 
 .errorMessage {
@@ -73,6 +75,18 @@
   margin-top: var(--spacing-lg);
 }
 
+.spinnerOverlay {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  display: grid;
+  place-content: center;
+  background-color: hsla(0, 0%, 5%, 70%);
+  border-radius: 12px;
+}
+
 @media screen and (min-width: 22em) {
   .authentication {
     place-content: center;
@@ -81,7 +95,7 @@
   }
 
   .container {
-    max-width: 30rem;
+    width: 26rem;
     padding: var(--spacing-3xl);
     margin-bottom: var(--spacing-6xl);
   }

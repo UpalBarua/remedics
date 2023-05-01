@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import Button from '../UI/Button/Button';
 import styles from './Form.module.css';
 
-const LoginForm = ({ setAuthError }) => {
+const LoginForm = ({ setAuthError, setIsLoading }) => {
   const navigate = useNavigate();
   const { logIn } = useAuth();
 
@@ -15,10 +15,7 @@ const LoginForm = ({ setAuthError }) => {
   } = useForm();
 
   const handleLogIn = async ({ email, password }) => {
-    // ! check this
-    if (!email || !password) {
-      throw new Error('Email or password missing.');
-    }
+    setIsLoading(true);
 
     try {
       const res = await logIn(email, password);
@@ -31,6 +28,8 @@ const LoginForm = ({ setAuthError }) => {
       console.log(`Login failed with error code: ${errorCode}`);
 
       setAuthError(errorCode);
+    } finally {
+      setIsLoading(false);
     }
   };
 

@@ -8,6 +8,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import createNewUser from '../../utils/createNewUser';
 import styles from './Authentication.module.css';
 import { useNavigate } from 'react-router-dom';
+import { Ring } from '@uiball/loaders';
 
 const ERROR_MESSAGES = {
   'auth/wrong-password':
@@ -35,11 +36,16 @@ const ERROR_MESSAGES = {
 };
 
 const Authentication = () => {
-  const { googleSignIn } = useAuth();
+  const { googleSignIn, user } = useAuth();
   const [isSignup, setIsSignup] = useState(false);
   const [authError, setAuthError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  if (user?.uid) {
+    return navigate('/');
+  }
 
   const handleSignupToggle = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
@@ -47,6 +53,8 @@ const Authentication = () => {
   };
 
   const handleGoogleSignIn = async () => {
+    setIsLoading(true);
+
     try {
       const { user } = await googleSignIn();
 
@@ -64,6 +72,8 @@ const Authentication = () => {
       console.log(`Login failed with error code: ${authErrorCode}`);
 
       setAuthError(authErrorCode);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -72,12 +82,12 @@ const Authentication = () => {
       <div className={styles.container}>
         <h2 className={styles.title}>{isSignup ? 'Sign Up' : 'Login'}</h2>
         {isSignup ? (
-          <SignupForm setAuthError={setAuthError} />
+          <SignupForm setAuthError={setAuthError} setIsLoading={setIsLoading} />
         ) : (
-          <LoginForm setAuthError={setAuthError} />
+          <LoginForm setAuthError={setAuthError} setIsLoading={setIsLoading} />
         )}
-        <Button className={styles.googleLoginBtn} onClick={handleGoogleSignIn}>
-          <AiOutlineGoogle />
+        <Button type={'outlined'} onClick={handleGoogleSignIn}>
+          <AiOutlineGoogle size={22} />
           <span>Google</span>
         </Button>
         {authError && (
@@ -91,6 +101,11 @@ const Authentication = () => {
             {isSignup ? 'Login' : 'Sign Up'}
           </button>
         </p>
+        {isLoading && (
+          <div className={styles.spinnerOverlay}>
+            <Ring size={65} color="hsl(260, 69%, 47%)" />
+          </div>
+        )}
       </div>
     </section>
   );
