@@ -1,16 +1,29 @@
+import { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import createNewUser from '../../utils/createNewUser';
 import uploadImage from '../../utils/uploadImage';
 import Button from '../UI/Button/Button';
+import { BiImageAdd } from 'react-icons/bi';
 import styles from './Form.module.css';
 
 const SignupForm = ({ setAuthError }) => {
-  const [userImg, setUserImg] = useState();
+  const [userImg, setUserImg] = useState(null);
+  const [imgPreview, setImgPreview] = useState(null);
   const { signUp } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userImg) {
+      return setImgPreview(null);
+    }
+
+    const objectURL = URL.createObjectURL(userImg);
+    setImgPreview(objectURL);
+
+    return () => URL.revokeObjectURL(objectURL);
+  }, [userImg]);
 
   const {
     register,
@@ -43,10 +56,20 @@ const SignupForm = ({ setAuthError }) => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(handleSignup)}>
-      <input
-        type="file"
-        onChange={(event) => setUserImg(event.target.files[0])}
-      />
+      <div className={styles.imgUpload}>
+        <img
+          className={styles.imgPreview}
+          src={
+            imgPreview
+              ? imgPreview
+              : 'https://freesvg.org/img/abstract-user-flat-4.png'
+          }
+        />
+        <input
+          type="file"
+          onChange={(event) => setUserImg(event.target.files[0])}
+        />
+      </div>
       <div className={styles.field}>
         <label className={styles.label}>Name</label>
         <input

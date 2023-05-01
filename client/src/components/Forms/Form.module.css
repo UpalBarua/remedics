@@ -64,7 +64,33 @@
   margin-inline: auto;
 }
 
-.form > input[type='file'] {
-  display: flex;
-  flex-direction: column;
+.imgUpload {
+  position: relative;
+}
+
+.imgUpload > input[type='file']::-webkit-file-upload-button {
+  display: none;
+}
+
+.imgUpload > input[type='file'] {
+  position: absolute;
+  top: 0;
+  right: 50%;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  transform: translateX(50%);
+  opacity: 0;
+  cursor: pointer;
+}
+
+.imgPreview {
+  width: 8rem;
+  height: 8rem;
+  margin-inline: auto;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  object-fit: cover;
+  object-position: center;
 }
