@@ -1,12 +1,13 @@
+import { useState } from 'react';
 import LoginForm from '../../components/Forms/LoginForm';
 import SignupForm from '../../components/Forms/SignupForm';
 import Button from '../../components/UI/Button/Button';
 
 import { AiOutlineGoogle } from 'react-icons/ai';
 import { useAuth } from '../../contexts/AuthContext';
-import { useState } from 'react';
-
+import createNewUser from '../../utils/createNewUser';
 import styles from './Authentication.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const ERROR_MESSAGES = {
   'auth/wrong-password':
@@ -38,18 +39,26 @@ const Authentication = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [authError, setAuthError] = useState('');
 
+  const navigate = useNavigate();
+
   const handleSignupToggle = () => {
-    setIsSignup((prevAuthPage) => !prevAuthPage);
+    setIsSignup((prevIsSignup) => !prevIsSignup);
     setAuthError('');
   };
 
   const handleGoogleSignIn = async () => {
     try {
-      const response = await googleSignIn();
+      const { user } = await googleSignIn();
 
-      if (response?.user?.uid) {
-        navigate('/');
+      if (user?.uid) {
+        await createNewUser({
+          userName: user?.displayName,
+          email: user?.email,
+          picture: user?.photoURL,
+        });
       }
+
+      navigate('/');
     } catch (error) {
       const authErrorCode = error.code;
       console.log(`Login failed with error code: ${authErrorCode}`);
@@ -59,15 +68,15 @@ const Authentication = () => {
   };
 
   return (
-    <section className={styles.container}>
-      <div className={styles.login}>
+    <section className={styles.authentication}>
+      <div className={styles.container}>
         <h2 className={styles.title}>{isSignup ? 'Sign Up' : 'Login'}</h2>
         {isSignup ? (
           <SignupForm setAuthError={setAuthError} />
         ) : (
           <LoginForm setAuthError={setAuthError} />
         )}
-        <Button className={styles.altLoginButton} onClick={handleGoogleSignIn}>
+        <Button className={styles.googleLoginBtn} onClick={handleGoogleSignIn}>
           <AiOutlineGoogle />
           <span>Google</span>
         </Button>
@@ -76,17 +85,12 @@ const Authentication = () => {
             {ERROR_MESSAGES[authError] || ERROR_MESSAGES.UNKNOWN}
           </p>
         )}
-        {isSignup ? (
-          <p className={styles.registerText}>
-            Don't have an account?{' '}
-            <button onClick={handleSignupToggle}>Signup</button>
-          </p>
-        ) : (
-          <p className={styles.registerText}>
-            Already have an account?{' '}
-            <button onClick={handleSignupToggle}>Login</button>
-          </p>
-        )}
+        <p className={styles.registerText}>
+          {isSignup ? 'Already have an account?' : "Don't have an account?"}{' '}
+          <button onClick={handleSignupToggle}>
+            {isSignup ? 'Login' : 'Sign Up'}
+          </button>
+        </p>
       </div>
     </section>
   );

@@ -63,3 +63,8 @@
   padding: var(--spacing-lg);
   margin-inline: auto;
 }
+
+.form > input[type='file'] {
+  display: flex;
+  flex-direction: column;
+}

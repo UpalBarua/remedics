@@ -39,7 +39,7 @@ const DoctorCard = ({
             </li>
             <li>
               <AiFillClockCircle className={styles.icon} />
-              <span>{fees}</span>
+              <span>4 yrs</span>
             </li>
           </ul>
           <p className={styles.description}>

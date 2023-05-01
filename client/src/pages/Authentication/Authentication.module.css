@@ -1,4 +1,4 @@
-.container {
+.authentication {
   display: grid;
   min-height: 100vh;
   background-color: var(--color-dark-500);
@@ -6,7 +6,7 @@
   background-size: cover;
 }
 
-.container::after {
+.authentication::after {
   content: '';
   position: fixed;
   display: block;
@@ -15,7 +15,7 @@
   background: var(--background-gradient);
 }
 
-.login {
+.container {
   margin-top: var(--spacing-6xl);
   display: grid;
   align-content: center;
@@ -32,7 +32,7 @@
   font-weight: var(--font-weight-bold);
   text-transform: capitalize;
   letter-spacing: 1px;
-  padding-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
 }
 
 .text {
@@ -42,7 +42,7 @@
   padding-bottom: var(--spacing-md);
 }
 
-.altLoginButton {
+.googleLoginBtn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -74,15 +74,15 @@
 }
 
 @media screen and (min-width: 22em) {
-  .container {
+  .authentication {
     place-content: center;
     background-image: url('../../assets/images/login-bg.jpg');
     background-color: var(--color-dark-500);
   }
 
-  .login {
+  .container {
     max-width: 30rem;
-    padding: var(--spacing-5xl) var(--spacing-5xl);
+    padding: var(--spacing-3xl);
     margin-bottom: var(--spacing-6xl);
   }
 }

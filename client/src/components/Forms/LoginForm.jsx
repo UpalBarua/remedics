@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { useForm } from 'react-hook-form';
+import Button from '../UI/Button/Button';
 import styles from './Form.module.css';
 
 const LoginForm = ({ setAuthError }) => {
@@ -70,9 +71,7 @@ const LoginForm = ({ setAuthError }) => {
         />
         <p className={styles.message}>{errors.password?.message || ''}</p>
       </div>
-      <button className="btn btn-primary" type="submit">
-        Log In
-      </button>
+      <Button>Log In</Button>
     </form>
   );
 };

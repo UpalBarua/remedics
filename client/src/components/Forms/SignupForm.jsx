@@ -1,10 +1,11 @@
 import { useAuth } from '../../contexts/AuthContext';
 import { useForm } from 'react-hook-form';
-import styles from './Form.module.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import createNewUser from '../../utils/createNewUser';
 import uploadImage from '../../utils/uploadImage';
+import Button from '../UI/Button/Button';
+import styles from './Form.module.css';
 
 const SignupForm = ({ setAuthError }) => {
   const [userImg, setUserImg] = useState();
@@ -24,13 +25,14 @@ const SignupForm = ({ setAuthError }) => {
       const response = await signUp(email, password);
 
       if (response?.user?.uid) {
-        const newUser = await createNewUser({
+        await createNewUser({
           userName: name,
           email: email,
           picture: imageURL,
         });
-        navigate('/');
       }
+
+      navigate('/');
     } catch (error) {
       const errorCode = error.code;
       console.log(`Login failed with error code: ${errorCode}`);
@@ -132,9 +134,7 @@ const SignupForm = ({ setAuthError }) => {
           <p className={styles.message}>{errors.password.message}</p>
         )}
       </div>
-      <button className="btn btn-primary" type="submit">
-        Sign Up
-      </button>
+      <Button>Sign Up</Button>
     </form>
   );
 };
