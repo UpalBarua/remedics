@@ -1,7 +1,7 @@
-import ServiceCard from './ServiceCard';
+import ServiceCard from './DoctorsCard';
 import { useQuery } from '@tanstack/react-query';
 import axios from '../../api/axios';
-import styles from './Services.module.css';
+import styles from './Doctors.module.css';
 
 const ServicesAll = () => {
   const {

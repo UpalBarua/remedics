@@ -1,23 +1,17 @@
-.card {
-  background-color: var(--color-dark-500);
-  border-radius: 12px;
-  text-align: start;
+.doctorsCard {
   padding-bottom: var(--spacing-lg);
+  border-radius: 12px;
+  background-color: var(--color-dark-500);
+  text-align: start;
 }
 
 .body {
-  padding: var(--spacing-md);
   display: grid;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
 }
 
-.titleSm {
-  font-weight: var(--font-weight-semibold);
-  text-transform: capitalize;
-  color: var(--color-accent-secondary-300);
-}
-
-.img {
+.image {
   border-radius: 12px 12px 0 0;
   width: 100%;
   height: 20rem;
@@ -25,12 +19,18 @@
   object-position: center;
 }
 
-.title {
+.specialized {
+  font-weight: var(--font-weight-semibold);
+  text-transform: capitalize;
+  color: var(--color-accent-secondary-300);
+}
+
+.name {
   font-size: var(--font-size-2xl);
   font-weight: var(--font-weight-bold);
 }
 
-.text {
+.description {
   color: var(--color-light-500);
 }
 
@@ -42,13 +42,13 @@
   width: 100%;
 }
 
-.stats > p {
+.stats > li {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
 }
 
-.actions {
+.btnGroup {
   display: flex;
   align-items: center;
   gap: var(--spacing-md);
@@ -62,12 +62,12 @@
   aspect-ratio: 1;
   border-radius: 50%;
   font-size: var(--font-size-xl);
-  background-color: var(--color-accent-primary-300);
+  background-color: var(--color-accent-primary-400);
   color: var(--color-light-300);
   border: 0;
 }
 
-.profile {
+/* .profile {
   background-color: transparent;
   display: flex;
   align-items: center;
@@ -79,4 +79,4 @@
   border-radius: 100vmax;
   border: 2px solid var(--color-accent-primary-400);
   color: var(--color-accent-primary-400);
-}
+} */

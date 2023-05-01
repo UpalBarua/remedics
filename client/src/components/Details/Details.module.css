@@ -35,10 +35,15 @@
 }
 
 .stats {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
   display: flex;
   gap: var(--spacing-xl);
+}
+
+.icon {
+  font-size: var(--font-size-2xl);
+  color: var(--color-accent-primary-400);
 }
 
 .stats > p {

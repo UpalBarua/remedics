@@ -8,7 +8,7 @@ import Reviews from '../Reviews/Reviews';
 import Appointment from '../Appointment/Appointment';
 
 import { AiOutlineStar, AiOutlineCalendar } from 'react-icons/ai';
-import { BiDollar } from 'react-icons/bi';
+import { BiDollar, BiTime } from 'react-icons/bi';
 
 import styles from './Details.module.css';
 
@@ -68,12 +68,15 @@ const Details = () => {
           </p>
           <div className={styles.stats}>
             <p>
-              <AiOutlineStar className="text-accent-primary" />
+              <AiOutlineStar className={styles.icon} />
               {ratings}/5
             </p>
             <p>
-              <BiDollar className="text-accent-primary" />
+              <BiDollar className={styles.icon} />
               {fees}
+            </p>
+            <p>
+              <BiTime className={styles.icon} />4 years
             </p>
           </div>
         </div>

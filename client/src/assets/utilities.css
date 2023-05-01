@@ -5,3 +5,34 @@
   max-width: min(75rem, 100% - 2rem);
   margin-inline: auto;
 }
+
+.title--primary {
+  padding-bottom: var(--spacing-sm);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+  color: var(--color-accent-secondary-400);
+}
+
+.title--secondary {
+  max-width: 20rem;
+  margin-inline: auto;
+  padding-bottom: var(--spacing-md);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+}
+
+@media screen and (min-width: 48em) {
+  .title--primary {
+    font-size: var(--font-size-lg);
+  }
+
+  .title--secondary {
+    max-width: 22rem;
+    font-size: var(--font-size-2xl);
+  }
+}
