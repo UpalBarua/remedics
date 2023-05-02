@@ -5,6 +5,7 @@ import axios from 'axios';
 import { AiFillStar } from 'react-icons/ai';
 import { BsThreeDots } from 'react-icons/bs';
 import { format } from 'date-fns';
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 
 const ReviewCard = ({
   _id,
@@ -78,9 +79,24 @@ const ReviewCard = ({
           <h3 className={styles.name}>{userName}</h3>
           <time>{format(new Date(createdAt), 'do MMM yyyy')}</time>
         </div>
-        <button>
-          <BsThreeDots size={25} />
-        </button>
+        <DropdownMenu.Root>
+          <DropdownMenu.Trigger asChild>
+            <button>
+              <BsThreeDots size={25} />
+            </button>
+          </DropdownMenu.Trigger>
+
+          <DropdownMenu.Portal>
+            <DropdownMenu.Content className={styles.dropdown}>
+              <DropdownMenu.Item className={styles.dropdownItem}>
+                <button>Edit</button>
+              </DropdownMenu.Item>
+              <DropdownMenu.Item className={styles.dropdownItem}>
+                <button onClick={handleDelete}>Delete</button>
+              </DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </DropdownMenu.Portal>
+        </DropdownMenu.Root>
       </div>
       {isEditing ? (
         <textarea
