@@ -62,7 +62,7 @@ const Authentication = () => {
         await createNewUser({
           userName: user?.displayName,
           email: user?.email,
-          picture: user?.photoURL,
+          imageUrl: user?.photoURL,
         });
       }
 

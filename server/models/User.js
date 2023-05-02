@@ -7,17 +7,19 @@ const UserSchema = new mongoose.Schema(
       required: true,
       minLength: 3,
       maxLength: 50,
+      trim: true,
     },
     email: {
       type: String,
       required: true,
       unique: true,
       lowercase: true,
+      trim: true,
     },
     phone: {
       type: String,
     },
-    picture: {
+    imageUrl: {
       type: String,
     },
     gender: {

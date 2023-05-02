@@ -32,7 +32,7 @@ const SignupForm = ({ setAuthError, setIsLoading }) => {
 
   const handleSignup = async ({ name, email, password }) => {
     setIsLoading(true);
-    const imageURL = await uploadImage(userImg);
+    const imageUrl = await uploadImage(userImg);
 
     try {
       const response = await signUp(email, password);
@@ -40,8 +40,8 @@ const SignupForm = ({ setAuthError, setIsLoading }) => {
       if (response?.user?.uid) {
         await createNewUser({
           userName: name,
-          email: email,
-          picture: imageURL,
+          email,
+          imageUrl,
         });
       }
 

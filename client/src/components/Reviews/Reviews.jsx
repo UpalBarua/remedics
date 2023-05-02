@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useParams } from 'react-router-dom';
 import ReviewCard from './ReviewCard';
@@ -9,15 +9,10 @@ import { AiFillStar } from 'react-icons/ai';
 import axios from '../../api/axios';
 import useUserData from '../../hooks/useUserData';
 import Button from '../../components/UI/Button/Button';
+import AddReview from './AddReview';
 
 const Reviews = () => {
-  const queryClient = useQueryClient();
-
-  const { user } = useAuth();
   const { serviceId } = useParams();
-  const reviewRef = useRef();
-
-  const { userData } = useUserData();
 
   const {
     data: reviews = [],
@@ -30,33 +25,6 @@ const Reviews = () => {
       return data;
     },
   });
-
-  const { mutate: handleReviewSubmit } = useMutation(
-    async (event) => {
-      event.preventDefault();
-
-      const newReview = {
-        serviceId,
-        userName: userData?.userName,
-        email: userData?.email,
-        description: reviewRef.current.value,
-        userImgUrl: userData?.picture,
-      };
-
-      try {
-        const res = await axios.post('/reviews', newReview);
-
-        if (res.status === 201) {
-          toast.success('Review Added');
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    {
-      onSuccess: () => queryClient.invalidateQueries(),
-    }
-  );
 
   const deleteReview = (id) => {
     setReviewsData((prevReviewsData) =>
@@ -79,23 +47,7 @@ const Reviews = () => {
         <h2 className="secondary-title text-accent-secondary">
           Patient Feedback
         </h2>
-        <form className={styles.newReview} onSubmit={handleReviewSubmit}>
-          <textarea
-            ref={reviewRef}
-            className={styles.textarea}
-            placeholder="Enter your feedback"
-          />
-          <div className={styles.footer}>
-            <div className={styles.rating}>
-              <AiFillStar />
-              <AiFillStar />
-              <AiFillStar />
-              <AiFillStar />
-              <AiFillStar />
-            </div>
-            <Button onClick={handleReviewSubmit}>Submit</Button>
-          </div>
-        </form>
+        <AddReview serviceId={serviceId} />
       </div>
       <div className={styles.column}>
         {reviews.map((review) => (
