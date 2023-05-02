@@ -4,6 +4,8 @@ import useUserData from '../../hooks/useUserData';
 import { AiFillStar } from 'react-icons/ai';
 import Button from '../UI/Button/Button';
 import axios from '../../api/axios';
+import { toast } from 'react-hot-toast';
+import { MdAdd } from 'react-icons/md';
 import styles from './AddReview.module.css';
 
 const AddReview = ({ serviceId }) => {
@@ -32,8 +34,11 @@ const AddReview = ({ serviceId }) => {
 
         if (res.status === 201) {
           toast.success('Review Added');
+          setDescription('');
+          setRatings(0);
         }
       } catch (error) {
+        toast.error(error.message);
         console.log(error);
       }
     },
@@ -47,6 +52,7 @@ const AddReview = ({ serviceId }) => {
       <textarea
         className={styles.textarea}
         placeholder="Enter your feedback"
+        value={description}
         onChange={(event) => setDescription(event.target.value)}
       />
       <div className={styles.footer}>
@@ -55,6 +61,8 @@ const AddReview = ({ serviceId }) => {
             index += 1;
             return (
               <button
+                type="button"
+                key={index}
                 className={styles.ratingBtn}
                 data-marked={index <= ratings}
                 onClick={() => setRatings(index)}>
@@ -63,10 +71,9 @@ const AddReview = ({ serviceId }) => {
             );
           })}
         </div>
-        <Button
-          onClick={handleReviewSubmit}
-          disabled={!(description.length > 0 && ratings > 0)}>
-          Submit
+        <Button disabled={!(description.length > 0 && ratings > 0)}>
+          <MdAdd size={22} />
+          <span>Add</span>
         </Button>
       </div>
     </form>

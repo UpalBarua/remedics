@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 const ReviewSchema = new mongoose.Schema(
   {
     serviceId: {
-      type: String,
+      type: mongoose.Types.ObjectId,
+      ref: 'Service',
       required: true,
     },
     userName: {
@@ -17,10 +18,16 @@ const ReviewSchema = new mongoose.Schema(
     description: {
       type: String,
       required: true,
+      trim: true,
     },
     userImgUrl: {
       type: String,
       required: true,
+    },
+    ratings: {
+      type: Number,
+      required: true,
+      enum: [1, 2, 3, 4, 5],
     },
   },
   {

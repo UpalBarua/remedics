@@ -1,45 +1,33 @@
 .addReview {
   margin-block: var(--spacing-xl);
-  background-color: var(--color-dark-500);
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 12px;
-  padding: var(--spacing-md);
-}
-
-.addReview > button {
-  background-color: var(--color-accent-primary-300);
-  border: 0;
-  border-radius: 100vmax;
-  color: var(--color-light-300);
-  padding: var(--spacing-xs) var(--spacing-xl);
-  font-weight: var(--font-weight-semibold);
 }
 
 .textarea {
   width: 100%;
-  min-height: 10rem;
+  min-height: 12rem;
   background-color: var(--color-dark-500);
+  border-radius: 12px;
   resize: none;
   color: var(--color-light-400);
-  border-radius: var(--border-radius);
   padding: var(--spacing-lg);
-  border: 0;
+  outline: 0;
+  border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .textarea:focus,
 .textarea:hover {
-  border-color: var(--color-accent-primary-400);
-  outline: 0;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  /* border-color: var(--color-accent-primary-400); */
 }
 
 .footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: var(--spacing-sm);
 }
 
 .rating {
-  font-size: var(--font-size-lg);
   display: flex;
   align-items: center;
   gap: var(--spacing-xs);
@@ -51,7 +39,7 @@
   border: 0;
   outline: 0;
   background-color: transparent;
-  color: var(--color-light-400);
+  color: var(--color-light-500);
   font-size: var(--font-size-2xl);
   cursor: pointer;
 }
@@ -60,6 +48,6 @@
   color: hsl(52, 100%, 60%);
 }
 
-button:disabled {
-  opacity: 0.8;
+.addReview button:disabled {
+  opacity: 0.85;
 }
