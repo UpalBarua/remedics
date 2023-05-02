@@ -1,17 +1,36 @@
-.card {
+.reviewCard {
   display: grid;
   gap: var(--spacing-sm);
   background-color: var(--color-dark-500);
-  border-radius: var(--border-radius);
+  border-radius: 12px;
   padding: var(--spacing-xl);
   text-align: start;
 }
 
-.img {
-  height: 3.5rem;
-  width: 3.5rem;
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding-bottom: var(--spacing-xl);
+}
+
+.header > button {
+  margin-left: auto;
+  display: flex;
+  background-color: var(--color-dark-300);
+  color: var(--color-light-300);
+  border: 0;
+  outline: 0;
   border-radius: 50%;
-  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-sm);
+  cursor: pointer;
+}
+
+.img {
+  height: 3.25rem;
+  width: 3.25rem;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .name {
@@ -19,30 +38,9 @@
   font-weight: var(--font-weight-bold);
 }
 
-.email {
+.header time {
   font-size: var(--font-size-sm);
   color: var(--color-light-500);
-  font-style: italic;
-}
-
-.btnGroup {
-  margin-left: auto;
-}
-
-.btn {
-  background-color: transparent;
-  border: 0;
-  font-weight: var(--font-weight-bold);
-  padding: var(--spacing-lg);
-  cursor: pointer;
-}
-
-.btn:first-child {
-  color: var(--color-success-400);
-}
-
-.btn:last-child {
-  color: var(--color-warning-400);
 }
 
 .textarea {
@@ -51,16 +49,26 @@
   padding: var(--spacing-sm);
   border-radius: var(--border-radius);
   border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.textarea:hover,
-.textarea:focus {
   outline: 0;
 }
 
-.user {
+.rating {
   display: flex;
   align-items: center;
-  gap: var(--spacing-xl);
-  margin-bottom: var(--spacing-lg);
+  gap: var(--spacing-xs);
+}
+
+.ratingBtn {
+  display: flex;
+  border-radius: 50%;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  color: var(--color-light-500);
+  font-size: var(--font-size-xl);
+  cursor: pointer;
+}
+
+.ratingBtn[data-marked='true'] {
+  color: hsl(52, 100%, 60%);
 }

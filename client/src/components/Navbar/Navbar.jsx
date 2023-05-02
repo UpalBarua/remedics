@@ -48,7 +48,7 @@ const Navbar = () => {
                 <li className={styles.menuItem}>
                   <NavLink to="/reviews">My Reviews</NavLink>
                 </li>
-                <li className={styles.menuItem}>
+                {/* <li className={styles.menuItem}>
                   <Button to="/add" isLink>
                     Add Service
                   </Button>
@@ -57,7 +57,7 @@ const Navbar = () => {
                   <Button type="outlined" onClick={logOut}>
                     Log Out
                   </Button>
-                </li>
+                </li> */}
               </>
             ) : (
               <li className={styles.menuItem}>

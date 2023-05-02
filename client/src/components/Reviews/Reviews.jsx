@@ -44,12 +44,11 @@ const Reviews = () => {
   return (
     <section className={styles.grid}>
       <div className={styles.column}>
-        <h2 className="secondary-title text-accent-secondary">
-          Patient Feedback
-        </h2>
+        <h2 className={styles.title}>Add Your Review</h2>
         <AddReview serviceId={serviceId} />
       </div>
       <div className={styles.column}>
+        <h2 className={styles.title}>Patient Reviews</h2>
         {reviews.map((review) => (
           <ReviewCard
             key={review._id}

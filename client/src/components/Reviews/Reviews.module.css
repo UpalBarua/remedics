@@ -4,5 +4,13 @@
 
 .column:nth-child(2) {
   display: grid;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-md);
+}
+
+.title {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  text-transform: capitalize;
+  padding: var(--spacing-xs);
 }

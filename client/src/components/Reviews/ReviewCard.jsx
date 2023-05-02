@@ -2,6 +2,9 @@ import { useState, useRef } from 'react';
 import styles from './ReviewCard.module.css';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import { AiFillStar } from 'react-icons/ai';
+import { BsThreeDots } from 'react-icons/bs';
+import { format } from 'date-fns';
 
 const ReviewCard = ({
   _id,
@@ -11,6 +14,8 @@ const ReviewCard = ({
   description,
   deleteReview,
   editReview,
+  ratings,
+  createdAt,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const reviewRef = useRef();
@@ -66,13 +71,16 @@ const ReviewCard = ({
   };
 
   return (
-    <div className={styles.card}>
-      <div className={styles.user}>
+    <div className={styles.reviewCard}>
+      <div className={styles.header}>
         <img className={styles.img} src={userImgUrl} alt={userName} />
         <div>
           <h3 className={styles.name}>{userName}</h3>
-          <p className={styles.email}>{email}</p>
+          <time>{format(new Date(createdAt), 'do MMM yyyy')}</time>
         </div>
+        <button>
+          <BsThreeDots size={25} />
+        </button>
       </div>
       {isEditing ? (
         <textarea
@@ -80,9 +88,25 @@ const ReviewCard = ({
           ref={reviewRef}
           defaultValue={description}></textarea>
       ) : (
-        <p>{description}</p>
+        <>
+          <div className={styles.rating}>
+            {[...Array(5)].map((star = 5, index) => {
+              index += 1;
+              return (
+                <button
+                  type="button"
+                  key={index}
+                  className={styles.ratingBtn}
+                  data-marked={index <= ratings}>
+                  <AiFillStar key={index} />
+                </button>
+              );
+            })}
+          </div>
+          <p>{description}</p>
+        </>
       )}
-      <div className={styles.btnGroup}>
+      {/* <div className={styles.btnGroup}>
         {isEditing ? (
           <button className={styles.btn} onClick={handleSave}>
             save
@@ -95,7 +119,7 @@ const ReviewCard = ({
         <button className={styles.btn} onClick={handleDelete}>
           Delete
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };
