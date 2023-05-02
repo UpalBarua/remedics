@@ -1,75 +1,58 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import styles from './ReviewCard.module.css';
 import { toast } from 'react-hot-toast';
-import axios from 'axios';
 import { AiFillStar } from 'react-icons/ai';
-import { BsThreeDots } from 'react-icons/bs';
+import { BsThreeDots, BsCheckLg } from 'react-icons/bs';
 import { format } from 'date-fns';
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from '../../api/axios';
 
 const ReviewCard = ({
   _id,
   userName,
-  email,
   userImgUrl,
   description,
-  deleteReview,
-  editReview,
   ratings,
   createdAt,
 }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const reviewRef = useRef();
+  const [updateDescription, setUpdatedDescription] = useState(description);
 
-  const handleDelete = () => {
-    axios
-      .delete(`http://localhost:3000/reviews/${_id}`)
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.deletedCount > 0) {
-          deleteReview(_id);
-          toast('Review Deleted', {
-            icon: '✅',
-            style: {
-              borderRadius: '10px',
-              background: 'var(--color-dark-500)',
-              color: '#fff',
-              marginTop: '5rem',
-              fontSize: '1.125rem',
-            },
-          });
+  const queryClient = useQueryClient();
+
+  const { mutate: handleDelete } = useMutation({
+    mutationFn: async () => {
+      try {
+        const { data } = await axios.delete(`/reviews/${_id}`);
+        if (data?.deletedCount > 0) {
+          toast.success('Review deleted');
         }
-      });
-  };
+      } catch (error) {
+        toast.error(error.message);
+      }
+    },
+    onSuccess: () => queryClient.invalidateQueries('reviews'),
+  });
 
-  const handleEdit = () => {
-    setIsEditing(true);
-  };
+  const { mutate: handleSave } = useMutation({
+    mutationFn: async () => {
+      try {
+        const { data } = await axios.patch(`/reviews/${_id}`, {
+          updateDescription,
+        });
 
-  const handleSave = () => {
-    const newReview = reviewRef.current.value;
-
-    axios
-      .patch(`http://localhost:3000/reviews/${_id}`, newReview)
-      .then((response) => response.json())
-      .then((data) => {
-        editReview(_id, newReview);
-        if (data.modifiedCount > 0) {
-          toast('Review Edited', {
-            icon: '✅',
-            style: {
-              borderRadius: '10px',
-              background: 'var(--color-dark-500)',
-              color: '#fff',
-              marginTop: '5rem',
-              fontSize: '1.125rem',
-            },
-          });
+        if (data?.modifiedCount > 0) {
+          toast.success('Review updated');
         }
-      });
-
-    setIsEditing(false);
-  };
+      } catch (error) {
+        toast.error(error.message);
+      } finally {
+        setIsEditing(false);
+      }
+    },
+    onSuccess: () => queryClient.invalidateQueries('reviews'),
+  });
 
   return (
     <div className={styles.reviewCard}>
@@ -80,16 +63,21 @@ const ReviewCard = ({
           <time>{format(new Date(createdAt), 'do MMM yyyy')}</time>
         </div>
         <DropdownMenu.Root>
-          <DropdownMenu.Trigger asChild>
-            <button>
-              <BsThreeDots size={25} />
+          {isEditing ? (
+            <button onClick={handleSave}>
+              <BsCheckLg size={25} />
             </button>
-          </DropdownMenu.Trigger>
-
+          ) : (
+            <DropdownMenu.Trigger asChild>
+              <button>
+                <BsThreeDots size={25} />
+              </button>
+            </DropdownMenu.Trigger>
+          )}
           <DropdownMenu.Portal>
             <DropdownMenu.Content className={styles.dropdown}>
               <DropdownMenu.Item className={styles.dropdownItem}>
-                <button>Edit</button>
+                <button onClick={() => setIsEditing(true)}>Edit</button>
               </DropdownMenu.Item>
               <DropdownMenu.Item className={styles.dropdownItem}>
                 <button onClick={handleDelete}>Delete</button>
@@ -101,8 +89,9 @@ const ReviewCard = ({
       {isEditing ? (
         <textarea
           className={styles.textarea}
-          ref={reviewRef}
-          defaultValue={description}></textarea>
+          onChange={(event) => setUpdatedDescription(event.target.value)}
+          value={updateDescription}
+        />
       ) : (
         <>
           <div className={styles.rating}>
@@ -122,20 +111,6 @@ const ReviewCard = ({
           <p>{description}</p>
         </>
       )}
-      {/* <div className={styles.btnGroup}>
-        {isEditing ? (
-          <button className={styles.btn} onClick={handleSave}>
-            save
-          </button>
-        ) : (
-          <button className={styles.btn} onClick={handleEdit}>
-            Edit
-          </button>
-        )}
-        <button className={styles.btn} onClick={handleDelete}>
-          Delete
-        </button>
-      </div> */}
     </div>
   );
 };

@@ -65,13 +65,14 @@ router.get('/user/:email', async (req, res) => {
 
 router.patch('/:id', async (req, res) => {
   const { id } = req.params;
+  const { updateDescription } = req.body;
 
   try {
     const response = await Review.updateOne(
       { _id: ObjectId(id) },
       {
         $set: {
-          review: req.body.newReview,
+          description: updateDescription,
         },
       },
       {

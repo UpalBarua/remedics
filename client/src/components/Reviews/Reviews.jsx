@@ -1,14 +1,8 @@
-import { useRef, useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
 import { useParams } from 'react-router-dom';
 import ReviewCard from './ReviewCard';
 import styles from './Reviews.module.css';
-import { toast, Toaster } from 'react-hot-toast';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { AiFillStar } from 'react-icons/ai';
+import { useQuery } from '@tanstack/react-query';
 import axios from '../../api/axios';
-import useUserData from '../../hooks/useUserData';
-import Button from '../../components/UI/Button/Button';
 import AddReview from './AddReview';
 
 const Reviews = () => {
@@ -19,27 +13,12 @@ const Reviews = () => {
     isLoading,
     isError,
   } = useQuery({
-    queryKey: ['reviews'],
+    queryKey: ['reviews', serviceId],
     queryFn: async () => {
       const { data } = await axios.get(`/reviews/${serviceId}`);
       return data;
     },
   });
-
-  const deleteReview = (id) => {
-    setReviewsData((prevReviewsData) =>
-      prevReviewsData.filter((data) => data._id !== id)
-    );
-  };
-
-  const editReview = (id, review) => {
-    setReviewsData((prevReviewsData) => {
-      const remaining = prevReviewsData.filter((data) => data._id !== id);
-      const modified = prevReviewsData.find((data) => data._id === id);
-      modified.review = review;
-      return [modified, ...remaining];
-    });
-  };
 
   return (
     <section className={styles.grid}>
@@ -50,12 +29,7 @@ const Reviews = () => {
       <div className={styles.column}>
         <h2 className={styles.title}>Patient Reviews</h2>
         {reviews.map((review) => (
-          <ReviewCard
-            key={review._id}
-            deleteReview={deleteReview}
-            editReview={editReview}
-            {...review}
-          />
+          <ReviewCard key={review._id} {...review} />
         ))}
       </div>
     </section>
