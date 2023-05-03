@@ -23,7 +23,9 @@ router.get('/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const reviews = await Review.find({ serviceId: id });
+    const reviews = await Review.find({ serviceId: id }).sort({
+      createdAt: -1,
+    });
 
     if (reviews.length <= 0) {
       return res.status(400).json({ message: 'Reviews not found.' });

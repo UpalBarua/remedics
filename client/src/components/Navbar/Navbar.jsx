@@ -43,6 +43,9 @@ const Navbar = () => {
             <li className={styles.menuItem}>
               <NavLink to="/">Home</NavLink>
             </li>
+            <li className={styles.menuItem}>
+              <NavLink to="/doctors">Doctors</NavLink>
+            </li>
             {user ? (
               <>
                 <li className={styles.menuItem}>

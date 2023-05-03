@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import ServicesAll from '../components/Doctors/ServicesAll';
+import DoctorsAll from '../pages/DoctorsAll/DoctorsAll';
 import Details from '../components/Details/Details';
 import PrivateRoute from './PrivateRoute';
 import MyReviews from '../components/Reviews/MyReviews';
@@ -17,10 +17,10 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
-      // {
-      //   path: '/services',
-      //   element: <ServicesAll />,
-      // },
+      {
+        path: '/doctors',
+        element: <DoctorsAll />,
+      },
       {
         path: '/details/:serviceId',
         element: <Details />,

@@ -1,0 +1,22 @@
+.doctors {
+  padding-block: var(--spacing-6xl);
+}
+
+.doctorsCards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-xl);
+  padding-block: var(--spacing-lg);
+}
+
+@media screen and (min-width: 48em) {
+  .doctorsCards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 64em) {
+  .doctorsCards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
