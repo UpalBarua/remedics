@@ -1,0 +1,21 @@
+.dropdown {
+  background-color: var(--color-dark-300);
+  display: grid;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  border-radius: 8px;
+  transform: translateX(-40%);
+}
+
+.dropdownItem {
+  outline: 0;
+}
+
+.dropdownItem > button {
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  color: var(--color-light-500);
+  width: 100%;
+  text-align: start;
+}

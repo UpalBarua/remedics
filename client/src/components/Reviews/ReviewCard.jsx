@@ -2,11 +2,10 @@ import { useState } from 'react';
 import styles from './ReviewCard.module.css';
 import { toast } from 'react-hot-toast';
 import { AiFillStar } from 'react-icons/ai';
-import { BsThreeDots, BsCheckLg } from 'react-icons/bs';
 import { format } from 'date-fns';
-import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from '../../api/axios';
+import ReviewCardDropdown from './ReviewCardDropdown';
 
 const ReviewCard = ({
   _id,
@@ -25,6 +24,7 @@ const ReviewCard = ({
     mutationFn: async () => {
       try {
         const { data } = await axios.delete(`/reviews/${_id}`);
+
         if (data?.deletedCount > 0) {
           toast.success('Review deleted');
         }
@@ -62,29 +62,12 @@ const ReviewCard = ({
           <h3 className={styles.name}>{userName}</h3>
           <time>{format(new Date(createdAt), 'do MMM yyyy')}</time>
         </div>
-        <DropdownMenu.Root>
-          {isEditing ? (
-            <button onClick={handleSave}>
-              <BsCheckLg size={25} />
-            </button>
-          ) : (
-            <DropdownMenu.Trigger asChild>
-              <button>
-                <BsThreeDots size={25} />
-              </button>
-            </DropdownMenu.Trigger>
-          )}
-          <DropdownMenu.Portal>
-            <DropdownMenu.Content className={styles.dropdown}>
-              <DropdownMenu.Item className={styles.dropdownItem}>
-                <button onClick={() => setIsEditing(true)}>Edit</button>
-              </DropdownMenu.Item>
-              <DropdownMenu.Item className={styles.dropdownItem}>
-                <button onClick={handleDelete}>Delete</button>
-              </DropdownMenu.Item>
-            </DropdownMenu.Content>
-          </DropdownMenu.Portal>
-        </DropdownMenu.Root>
+        <ReviewCardDropdown
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+          handleSave={handleSave}
+          handleDelete={handleDelete}
+        />
       </div>
       {isEditing ? (
         <textarea
